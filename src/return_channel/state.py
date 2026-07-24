@@ -48,9 +48,7 @@ def build(project: str | Path, wav: str | Path, symbolic: dict | None = None,
     measured = analyze.measure(wav)
     measure_s = time.monotonic() - started
 
-    started = time.monotonic()
     embedded = analyze.embed(wav, checkpoint) if embedding else None
-    embed_s = time.monotonic() - started
 
     return {
         "meta": {
@@ -67,7 +65,9 @@ def build(project: str | Path, wav: str | Path, symbolic: dict | None = None,
             "render": render_info,
             "timing": {
                 "measure_s": round(measure_s, 3),
-                "embed_s": round(embed_s, 3) if embedding else None,
+                # Split so a one-time model load never reads as per-leaf cost.
+                "clap_load_s": round(embedded["load_s"], 3) if embedded else None,
+                "clap_inference_s": round(embedded["inference_s"], 3) if embedded else None,
             },
         },
         "symbolic": symbolic,

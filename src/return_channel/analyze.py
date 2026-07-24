@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import time
 from pathlib import Path
 
 import librosa
@@ -18,7 +19,15 @@ TRUE_PEAK_OVERSAMPLE = 4
 
 CLAP_SR = 48000
 CLAP_WINDOW_S = 10.0
-CLAP_HOP_S = 10.0
+# Half-overlap. exp1 used hop == window, which on an 18s leaf yields a single
+# window and leaves 44% of the node unembedded — the steering signal cannot be
+# blind to half of each node. Must match whatever built the reference envelopes.
+CLAP_HOP_S = 5.0
+CLAP_AMODEL = "HTSAT-tiny"
+
+# Loading CLAP costs far more than embedding with it, and a batch embeds many
+# leaves per process, so the model is cached rather than rebuilt per call.
+_MODELS: dict[tuple[str, str], object] = {}
 
 
 def _db(x: float) -> float | None:
@@ -91,25 +100,49 @@ def measure(wav_path: str | Path) -> dict:
     }
 
 
-def embed(wav_path: str | Path, checkpoint: str | None = None) -> dict:
-    """CLAP embedding, reproducing experiments/exp1/exp1_separability.py exactly.
+def windows(audio: np.ndarray, width: int, hop: int) -> list[np.ndarray]:
+    """Slice audio into fixed-width windows, anchoring a final one to the end.
 
-    Imported lazily: the checkpoint is a ~2GB download, and everything else in the
-    return channel works without it.
+    Without the tail anchor the last partial segment is dropped: an 18s file at
+    width 10s / hop 5s would otherwise cover only 0-15s.
     """
-    import laion_clap
-
-    audio, _ = librosa.load(str(wav_path), sr=CLAP_SR, mono=True)
-    width, hop = int(CLAP_WINDOW_S * CLAP_SR), int(CLAP_HOP_S * CLAP_SR)
     if len(audio) < width:
         audio = np.pad(audio, (0, width - len(audio)))
-    windows = [audio[i:i + width] for i in range(0, len(audio) - width + 1, hop)]
+    starts = list(range(0, len(audio) - width + 1, hop))
+    if starts[-1] + width < len(audio):
+        starts.append(len(audio) - width)
+    return [audio[s:s + width] for s in starts]
 
-    model = laion_clap.CLAP_Module(enable_fusion=False, amodel="HTSAT-tiny")
-    model.load_ckpt(checkpoint) if checkpoint else model.load_ckpt()
 
+def _load_model(checkpoint: str | None, amodel: str):
+    import laion_clap
+
+    key = (checkpoint or "default", amodel)
+    if key not in _MODELS:
+        model = laion_clap.CLAP_Module(enable_fusion=False, amodel=amodel)
+        model.load_ckpt(checkpoint) if checkpoint else model.load_ckpt()
+        _MODELS[key] = model
+    return _MODELS[key]
+
+
+def embed(wav_path: str | Path, checkpoint: str | None = None,
+          amodel: str = CLAP_AMODEL) -> dict:
+    """CLAP embedding, following experiments/exp1/exp1_separability.py.
+
+    laion_clap is imported lazily: the checkpoint is a ~2GB download, and
+    everything else in the return channel works without it.
+    """
+    audio, _ = librosa.load(str(wav_path), sr=CLAP_SR, mono=True)
+    batch = windows(audio, int(CLAP_WINDOW_S * CLAP_SR), int(CLAP_HOP_S * CLAP_SR))
+
+    # Timed separately: a one-time model load must not read as per-leaf cost.
+    started = time.monotonic()
+    model = _load_model(checkpoint, amodel)
+    load_s = time.monotonic() - started
+
+    started = time.monotonic()
     vectors = np.asarray(
-        model.get_audio_embedding_from_data(x=np.stack(windows).astype(np.float32),
+        model.get_audio_embedding_from_data(x=np.stack(batch).astype(np.float32),
                                             use_tensor=False),
         dtype=np.float32,
     )
@@ -119,13 +152,15 @@ def embed(wav_path: str | Path, checkpoint: str | None = None) -> dict:
 
     return {
         "vector": pooled.tolist(),
+        "load_s": load_s,
+        "inference_s": time.monotonic() - started,
         "meta": {
             "model": "laion_clap CLAP_Module",
-            "amodel": "HTSAT-tiny",
+            "amodel": amodel,
             "enable_fusion": False,
             "checkpoint": checkpoint or "default",
             "dim": int(pooled.shape[0]),
-            "n_windows": len(windows),
+            "n_windows": len(batch),
             "window_s": CLAP_WINDOW_S,
             "hop_s": CLAP_HOP_S,
             "pooling": "mean+l2",

@@ -87,5 +87,43 @@ class TestMeasure(unittest.TestCase):
         self.assertEqual(m["audio"]["channels"], 2)
 
 
+class TestWindows(unittest.TestCase):
+    """The one part of the embedding path testable without the checkpoint."""
+
+    def starts(self, seconds, width=10, hop=5):
+        audio = np.arange(int(seconds * SR), dtype=np.float32)
+        wins = analyze.windows(audio, width * SR, hop * SR)
+        # Each window's first sample is its start index, so it reads back directly.
+        return [int(w[0]) // SR for w in wins], wins
+
+    def test_eighteen_seconds_is_fully_covered(self):
+        starts, wins = self.starts(18)
+        # 0-10 and 5-15 from the hop, then a tail window anchored to the end.
+        self.assertEqual(starts, [0, 5, 8])
+        self.assertEqual(starts[-1] + 10, 18)
+        self.assertTrue(all(len(w) == 10 * SR for w in wins))
+
+    def test_no_tail_window_when_the_hop_lands_on_the_end(self):
+        starts, _ = self.starts(25)
+        self.assertEqual(starts, [0, 5, 10, 15])
+
+    def test_exactly_one_window(self):
+        starts, _ = self.starts(10)
+        self.assertEqual(starts, [0])
+
+    def test_short_file_is_padded_to_one_window(self):
+        _, wins = self.starts(5)
+        self.assertEqual(len(wins), 1)
+        self.assertEqual(len(wins[0]), 10 * SR)
+        self.assertEqual(wins[0][-1], 0.0)  # zero-padded tail
+
+    def test_every_sample_is_covered(self):
+        _, wins = self.starts(18)
+        covered = set()
+        for w in wins:
+            covered.update(range(int(w[0]), int(w[0]) + len(w)))
+        self.assertEqual(len(covered), 18 * SR)
+
+
 if __name__ == "__main__":
     unittest.main()

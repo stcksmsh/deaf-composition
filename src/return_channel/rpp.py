@@ -43,6 +43,9 @@ class Block:
     args: list[str] = field(default_factory=list)
     entries: list[tuple[str, list[str]]] = field(default_factory=list)
     children: list["Block"] = field(default_factory=list)
+    # entries and children as one interleaved sequence. Document order is
+    # load-bearing in places: a BYPASS line binds to the FX block after it.
+    body: list[tuple[str, object]] = field(default_factory=list)
 
     def find(self, name: str) -> "Block | None":
         return next((c for c in self.children if c.name == name), None)
@@ -71,10 +74,13 @@ def parse(text: str) -> Block:
             tokens = tokenize(line[1:])
             block = Block(tokens[0], tokens[1:])
             stack[-1].children.append(block)
+            stack[-1].body.append(("block", block))
             stack.append(block)
         else:
             tokens = tokenize(line)
-            stack[-1].entries.append((tokens[0], tokens[1:]))
+            entry = (tokens[0], tokens[1:])
+            stack[-1].entries.append(entry)
+            stack[-1].body.append(("entry", entry))
     return root
 
 
@@ -154,27 +160,35 @@ def _js_params(block: Block) -> list[float | None]:
     return params
 
 
+FX_BLOCKS = ("VST", "AU", "CLAP", "JS")
+
+
 def extract_fx(chain: Block) -> list[dict]:
-    """Plugins in an `<FXCHAIN>` / `<MASTERFXLIST>`, with params where readable."""
+    """Plugins in an `<FXCHAIN>` / `<MASTERFXLIST>`, with params where readable.
+
+    Walks the chain in document order: each `BYPASS` line applies to the FX block
+    that follows it, so a bypassed plugin is in the project but shapes no audio.
+    """
     fx = []
-    for slot, child in enumerate(chain.children):
-        if child.name in ("VST", "AU", "CLAP"):
-            fx.append({
-                "slot": slot,
-                "type": child.name,
-                "name": child.args[0] if child.args else "",
-                "binary": child.args[1] if len(child.args) > 1 else "",
-                # VST state is an opaque base64 chunk; params are unreadable by design.
-                "params": None,
-            })
-        elif child.name == "JS":
-            fx.append({
-                "slot": slot,
-                "type": "JS",
-                "name": child.args[0] if child.args else "",
-                "binary": "",
-                "params": _js_params(child),
-            })
+    bypassed = False
+    for kind, item in chain.body:
+        if kind == "entry":
+            if item[0] == "BYPASS":
+                bypassed = item[1][0] != "0"
+            continue
+        if item.name not in FX_BLOCKS:
+            continue
+        is_js = item.name == "JS"
+        fx.append({
+            "slot": len(fx),
+            "type": item.name,
+            "name": item.args[0] if item.args else "",
+            "binary": "" if is_js else (item.args[1] if len(item.args) > 1 else ""),
+            # VST state is an opaque base64 chunk; params are unreadable by design.
+            "params": _js_params(item) if is_js else None,
+            "bypassed": bypassed,
+        })
+        bypassed = False
     return fx
 
 

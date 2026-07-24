@@ -106,6 +106,28 @@ class TestNativeShort(unittest.TestCase):
         self.assertEqual(master, ["VST: ReaEQ (Cockos)", "loser/Saturation",
                                   "utility/volume", "sstillwell/eventhorizon2"])
 
+    def test_bypassed_fx_are_flagged(self):
+        # BYPASS binds forward to the FX block after it. A bypassed plugin is in
+        # the project but shapes no audio, so reporting it as active would make
+        # the fold reconcile spec against measurement wrongly.
+        bypassed = [(f["track"], f["name"]) for f in self.s["fx"] if f["bypassed"]]
+        self.assertEqual(bypassed, [
+            ("Mid", "loser/Saturation"),
+            ("BASS", "VST: ReaComp (Cockos)"),
+            ("MAIN SYNTH", "loser/Saturation"),
+            ("SECONDARY SYNTH/CHRONOS", "loser/Saturation"),
+        ])
+
+    def test_bypass_does_not_leak_along_a_chain(self):
+        mid = [(f["name"], f["bypassed"]) for f in self.s["fx"] if f["track"] == "Mid"]
+        self.assertEqual(mid, [
+            ("VST: ReaEQ (Cockos)", False),
+            ("guitar/distortion", False),
+            ("loser/Saturation", True),
+            ("VST: ReaEQ (Cockos)", False),
+            ("loser/TransientController", False),
+        ])
+
     def test_js_params_are_readable(self):
         js = {f["name"]: f["params"] for f in self.s["fx"] if f["type"] == "JS"}
         self.assertEqual(js["utility/volume"], [-6.0, 0.0])
