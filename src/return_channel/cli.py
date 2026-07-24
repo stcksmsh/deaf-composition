@@ -28,17 +28,20 @@ def main(argv: list[str] | None = None) -> int:
     regions = {r["name"]: r for r in symbolic["bounds"]["regions"] if r["end"] is not None}
 
     if args.wav:
-        rendered = {args.wav.stem: args.wav}
+        rendered, render_info = {args.wav.stem: args.wav}, None
     else:
         render_dir = args.render_dir or args.out / "render"
-        rendered = render.render(args.project, render_dir, batch=args.batch)
-        print(f"rendered {len(rendered)} file(s) to {render_dir}")
+        result = render.render(args.project, render_dir, batch=args.batch)
+        rendered, render_info = result.wavs, result.summary()
+        print(f"rendered {len(rendered)} file(s) to {render_dir} "
+              f"in {result.wall_s:.2f}s ({result.per_output_s:.2f}s per output)")
 
     args.out.mkdir(parents=True, exist_ok=True)
     for stem, wav in sorted(rendered.items()):
         node = state.build(
             args.project, wav, symbolic=symbolic, region=regions.get(stem),
             embedding=not args.no_embedding, checkpoint=args.checkpoint,
+            render_info=render_info,
         )
         path = state.write(node, args.out / f"{node['meta']['node_id']}.state.json")
         measured = node["measured"]

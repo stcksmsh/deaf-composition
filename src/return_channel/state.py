@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -35,7 +36,7 @@ def _slice_symbolic(symbolic: dict, region: dict) -> dict:
 
 def build(project: str | Path, wav: str | Path, symbolic: dict | None = None,
           region: dict | None = None, embedding: bool = True,
-          checkpoint: str | None = None) -> dict:
+          checkpoint: str | None = None, render_info: dict | None = None) -> dict:
     """One node's state: what was specified, what came out, and where it sits."""
     project, wav = Path(project), Path(wav)
     if symbolic is None:
@@ -43,7 +44,13 @@ def build(project: str | Path, wav: str | Path, symbolic: dict | None = None,
     if region is not None:
         symbolic = _slice_symbolic(symbolic, region)
 
+    started = time.monotonic()
+    measured = analyze.measure(wav)
+    measure_s = time.monotonic() - started
+
+    started = time.monotonic()
     embedded = analyze.embed(wav, checkpoint) if embedding else None
+    embed_s = time.monotonic() - started
 
     return {
         "meta": {
@@ -57,9 +64,14 @@ def build(project: str | Path, wav: str | Path, symbolic: dict | None = None,
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "versions": _versions(),
             "embedding": embedded["meta"] if embedded else None,
+            "render": render_info,
+            "timing": {
+                "measure_s": round(measure_s, 3),
+                "embed_s": round(embed_s, 3) if embedding else None,
+            },
         },
         "symbolic": symbolic,
-        "measured": analyze.measure(wav),
+        "measured": measured,
         "embedding": embedded["vector"] if embedded else None,
     }
 

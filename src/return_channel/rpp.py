@@ -208,22 +208,27 @@ def extract_symbolic(project: Block) -> dict:
     if master is not None:
         fx += [dict(plugin, track="<master>") for plugin in extract_fx(master)]
 
+    folder_depth = 0
     for track_index, track in enumerate(project.find_all("TRACK")):
         name_args = track.get("NAME")
         name = name_args[0] if name_args else ""
         mutesolo = track.get("MUTESOLO") or ["0", "0"]
+        isbus = track.get("ISBUS") or ["0", "0"]
         tracks.append({
             "index": track_index,
             "guid": track.args[0] if track.args else "",
             "name": name,
-            "is_bus": (track.get("ISBUS") or ["0"])[0] != "0",
+            "is_folder": isbus[0] == "1",
+            "folder_depth": folder_depth,
             "channels": int((track.get("NCHAN") or ["2"])[0]),
             "volume": _floats(track.get("VOLPAN"), 2),
             "muted": mutesolo[0] != "0",
-            # A track with MAINSEND 0 contributes no audio to the render, so its
-            # notes are symbolically present but inaudible.
-            "sends_to_master": (track.get("MAINSEND") or ["1"])[0] != "0",
+            # MAINSEND 0 only disables the *direct* send to master. A track
+            # nested in a folder still reaches master through its parent bus,
+            # so this alone does not mean the track is inaudible.
+            "main_send": (track.get("MAINSEND") or ["1"])[0] != "0",
         })
+        folder_depth += int(isbus[1]) if len(isbus) > 1 else 0
 
         chain = track.find("FXCHAIN")
         if chain is not None:

@@ -7,6 +7,8 @@ import re
 import shutil
 import subprocess
 import tempfile
+import time
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from . import rpp
@@ -20,6 +22,33 @@ _RENDER_PATTERN = re.compile(r"^(\s*)RENDER_PATTERN\s.*$")
 
 class RenderFailed(RuntimeError):
     pass
+
+
+@dataclass
+class RenderResult:
+    """One Reaper invocation. Timing is recorded because render economics are
+    the basis of generate-and-select: exp2 modelled a batch as O + N*r, and
+    that only stays true if it keeps being measured."""
+
+    wavs: dict[str, Path] = field(default_factory=dict)
+    wall_s: float = 0.0
+    returncode: int = 0
+    batched: bool = False
+    invocation: list[str] = field(default_factory=list)
+
+    @property
+    def per_output_s(self) -> float:
+        return self.wall_s / len(self.wavs) if self.wavs else 0.0
+
+    def summary(self) -> dict:
+        return {
+            "wall_s": round(self.wall_s, 3),
+            "n_outputs": len(self.wavs),
+            "per_output_s": round(self.per_output_s, 3),
+            "batched": self.batched,
+            "returncode": self.returncode,
+            "invocation": self.invocation,
+        }
 
 
 def enable_region_batch_render(text: str, pattern: str = "$region") -> str:
@@ -45,11 +74,11 @@ def enable_region_batch_render(text: str, pattern: str = "$region") -> str:
     return "".join(lines)
 
 
-def _invoke(project: Path, timeout: int) -> subprocess.CompletedProcess:
-    return subprocess.run(
-        ["xvfb-run", "-a", REAPER_BIN, "-renderproject", str(project)],
-        capture_output=True, text=True, timeout=timeout,
-    )
+def _invoke(project: Path, timeout: int) -> tuple[subprocess.CompletedProcess, float, list[str]]:
+    argv = ["xvfb-run", "-a", REAPER_BIN, "-renderproject", str(project)]
+    started = time.monotonic()
+    result = subprocess.run(argv, capture_output=True, text=True, timeout=timeout)
+    return result, time.monotonic() - started, argv
 
 
 def warm_up(project: Path) -> None:
@@ -61,8 +90,8 @@ def warm_up(project: Path) -> None:
 
 
 def render(project: str | Path, out_dir: str | Path, batch: bool = False,
-           timeout: int = RENDER_TIMEOUT_S) -> dict[str, Path]:
-    """Render a project headless; return {output stem: wav path}.
+           timeout: int = RENDER_TIMEOUT_S) -> RenderResult:
+    """Render a project headless.
 
     Renders a copy so repeated runs never churn Backups/ or stray wavs into the
     fixture directory, and so enabling batch mode cannot mutate the real project.
@@ -81,7 +110,7 @@ def render(project: str | Path, out_dir: str | Path, batch: bool = False,
     staged.write_text(text, encoding="utf-8")
 
     before = {p: p.stat().st_mtime for p in out_dir.glob("*.wav")}
-    result = _invoke(staged, timeout)
+    result, wall_s, argv = _invoke(staged, timeout)
     produced = sorted(
         p for p in out_dir.glob("*.wav")
         if p not in before or p.stat().st_mtime > before[p]
@@ -92,4 +121,7 @@ def render(project: str | Path, out_dir: str | Path, batch: bool = False,
             f"reaper exited {result.returncode} and produced no wav in {out_dir}\n"
             f"stdout: {result.stdout.strip()}\nstderr: {result.stderr.strip()}"
         )
-    return {p.stem: p for p in produced}
+    return RenderResult(
+        wavs={p.stem: p for p in produced}, wall_s=wall_s,
+        returncode=result.returncode, batched=batch, invocation=argv,
+    )

@@ -73,10 +73,27 @@ class TestNativeShort(unittest.TestCase):
         self.assertEqual([n["velocity"] for n in notes], [127] * 4)
         self.assertEqual(len(self.s["notes"]), 16)
 
-    def test_generator_does_not_reach_the_master_mix(self):
+    def test_main_send_alone_does_not_mean_inaudible(self):
+        # Generator has MAINSEND 0, but it sits inside the KICK BUSS folder
+        # (ISBUS 1 1 opens, Click's ISBUS 2 -1 closes), so its audio still
+        # reaches master through the parent bus. Routing needs both fields.
         by_name = {t["name"]: t for t in self.s["tracks"]}
-        self.assertFalse(by_name["Generator"]["sends_to_master"])
-        self.assertTrue(by_name["NativeSynth"]["sends_to_master"])
+        self.assertFalse(by_name["Generator"]["main_send"])
+        self.assertEqual(by_name["Generator"]["folder_depth"], 1)
+
+        self.assertTrue(by_name["KICK BUSS"]["is_folder"])
+        self.assertEqual(by_name["KICK BUSS"]["folder_depth"], 0)
+
+        # NativeSynth is top-level with a direct send: unambiguously audible.
+        self.assertTrue(by_name["NativeSynth"]["main_send"])
+        self.assertEqual(by_name["NativeSynth"]["folder_depth"], 0)
+
+    def test_folder_depth_closes_correctly(self):
+        by_name = {t["name"]: t for t in self.s["tracks"]}
+        for inside in ("Generator", "Low", "Mid", "Click"):
+            self.assertEqual(by_name[inside]["folder_depth"], 1, inside)
+        # Click closes the folder, so the next track is back at top level.
+        self.assertEqual(by_name["DRUM BUSS"]["folder_depth"], 0)
 
     def test_fx_extraction(self):
         native = [f for f in self.s["fx"] if f["track"] == "NativeSynth"]
