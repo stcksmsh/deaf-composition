@@ -1,0 +1,19 @@
+# Return channel dependencies.
+#
+# *** REQUIRES PYTHON 3.11. *** See experiments/exp1/requirements.txt for why
+# (laion-clap hard-pins numpy==1.23.5, which has no cp312 wheel).
+#
+#   uv venv --python 3.11 && source .venv/bin/activate
+#   uv pip install -r requirements.txt
+#
+# The parser and the audio metrics need only the bottom block. laion-clap and
+# torch are needed solely for the CLAP embedding; `--no-embedding` skips them.
+
+-r experiments/exp1/requirements.txt
+
+# torchvision is listed as a key pin in PROJECT_BRIEF.md §2 but is absent from
+# the exp1 file. laion-clap imports it undeclared, so a fresh install without it
+# hits exactly the breakage the brief describes as already solved.
+torchvision==0.17.2
+
+pyloudnorm==0.1.1  # LUFS (BS.1770); needs only numpy + scipy, no pin conflicts
