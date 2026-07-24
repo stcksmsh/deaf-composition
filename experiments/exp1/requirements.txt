@@ -1,0 +1,28 @@
+# Experiment 1 - fingerprint separability kill-check
+#
+# *** REQUIRES PYTHON 3.11 (or 3.10). DO NOT use 3.12+. ***
+# laion-clap 1.1.6 hard-pins numpy==1.23.5, which has NO cp312 wheel, so on
+# 3.12 pip tries to compile numpy from source and dies (3.12 removed distutils).
+# On 3.11 numpy 1.23.5 installs as a wheel and everything below just works.
+#
+# Recommended setup (no system changes):
+#   curl -LsSf https://astral.sh/uv/install.sh | sh
+#   uv venv --python 3.11 && source .venv/bin/activate
+#   uv pip install -r requirements.txt
+#
+# ffmpeg is a SYSTEM package (needed for mp3/m4a decode), not pip:
+#   sudo apt install ffmpeg
+#
+# If torch resolution is slow/awkward, install it first from the CPU index:
+#   uv pip install torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu
+
+laion-clap==1.1.6
+numpy==1.23.5          # pinned by laion-clap; do not change (this is why 3.11)
+torch==2.2.2           # CPU build fine; has 3.11 wheels
+transformers==4.30.2   # pin: newer transformers require torch>=2.4 and disable the torch backend on 2.2
+huggingface_hub==0.15.1 # pin: transformers 4.30.2 imports cached_download, removed from hub >=0.26
+tokenizers==0.13.3     # pin: matches transformers 4.30.2
+librosa==0.10.2
+soundfile==0.12.1
+scikit-learn==1.4.2
+matplotlib==3.8.4

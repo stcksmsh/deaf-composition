@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+references/
+*.wav
+Backups/
+*.rpp-bak

@@ -1,0 +1,993 @@
+Starting experiment 2b (v2) at Fri Jul 24 08:23:09 PM CEST 2026
+REAPER_BIN=reaper  RUNS_PER_CONFIG=3
+
+=== Baseline (xvfb, native-only) (native_short.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 7.99s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 7.89s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 7.85s
+  -> median: 7.89s
+
+=== Non-headless (real X display) (native_short.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 7.78s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 7.80s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 7.79s
+  -> median: 7.79s
+
+=== Native-only short leaf (xvfb) (native_short.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 7.90s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 7.89s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 7.88s
+  -> median: 7.89s
+
+NOTE: run this at least twice if you can - first run may include a
+one-time yabridge cache/bridge-negotiation cost (~4s extra seen previously).
+
+=== Wine/yabridge short leaf (xvfb) (wine_short.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+20:24:27 [Pigments-4DMXZgir] Initializing yabridge version 5.1.1
+20:24:27 [Pigments-4DMXZgir] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+20:24:27 [Pigments-4DMXZgir] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+20:24:27 [Pigments-4DMXZgir] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+20:24:27 [Pigments-4DMXZgir] plugin type:   'VST3'
+20:24:27 [Pigments-4DMXZgir] realtime:      'no'
+20:24:27 [Pigments-4DMXZgir] sockets:       '/run/user/1000/yabridge-Pigments-4DMXZgir'
+20:24:27 [Pigments-4DMXZgir] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+20:24:27 [Pigments-4DMXZgir] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+20:24:27 [Pigments-4DMXZgir] 
+20:24:27 [Pigments-4DMXZgir] config from:   '<defaults>'
+20:24:27 [Pigments-4DMXZgir] hosting mode:  'individually, 64-bit'
+20:24:27 [Pigments-4DMXZgir] other options: '<none>'
+20:24:27 [Pigments-4DMXZgir] 
+20:24:27 [Pigments-4DMXZgir] Enabled features:
+20:24:27 [Pigments-4DMXZgir] - bitbridge support
+20:24:27 [Pigments-4DMXZgir] - CLAP support
+20:24:27 [Pigments-4DMXZgir] - VST3 support
+20:24:27 [Pigments-4DMXZgir] 
+20:24:28 [Pigments-4DMXZgir] [Wine STDERR] 0074:err:ntoskrnl:ZwLoadDriver failed to create driver L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\winebth": c0000135
+20:24:28 [Pigments-4DMXZgir] [Wine STDERR] Initializing yabridge host version 5.1.1
+20:24:28 [Pigments-4DMXZgir] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+20:24:28 [Pigments-4DMXZgir] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+20:24:28 [Pigments-4DMXZgir] [Wine STDERR] 0144:err:ole:apartment_getclassobject DllGetClassObject returned error 0x80040111 for dll L"C:\\windows\\system32\\ieframe.dll"
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 10.81s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+20:24:38 [Pigments-278dlpqx] Initializing yabridge version 5.1.1
+20:24:38 [Pigments-278dlpqx] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+20:24:38 [Pigments-278dlpqx] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+20:24:38 [Pigments-278dlpqx] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+20:24:38 [Pigments-278dlpqx] plugin type:   'VST3'
+20:24:38 [Pigments-278dlpqx] realtime:      'no'
+20:24:38 [Pigments-278dlpqx] sockets:       '/run/user/1000/yabridge-Pigments-278dlpqx'
+20:24:38 [Pigments-278dlpqx] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+20:24:38 [Pigments-278dlpqx] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+20:24:38 [Pigments-278dlpqx] 
+20:24:38 [Pigments-278dlpqx] config from:   '<defaults>'
+20:24:38 [Pigments-278dlpqx] hosting mode:  'individually, 64-bit'
+20:24:38 [Pigments-278dlpqx] other options: '<none>'
+20:24:38 [Pigments-278dlpqx] 
+20:24:38 [Pigments-278dlpqx] Enabled features:
+20:24:38 [Pigments-278dlpqx] - bitbridge support
+20:24:38 [Pigments-278dlpqx] - CLAP support
+20:24:38 [Pigments-278dlpqx] - VST3 support
+20:24:38 [Pigments-278dlpqx] 
+20:24:38 [Pigments-278dlpqx] [Wine STDERR] 0074:err:ntoskrnl:ZwLoadDriver failed to create driver L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\winebth": c0000135
+20:24:39 [Pigments-278dlpqx] [Wine STDERR] Initializing yabridge host version 5.1.1
+20:24:39 [Pigments-278dlpqx] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+20:24:39 [Pigments-278dlpqx] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+20:24:39 [Pigments-278dlpqx] [Wine STDERR] 0144:err:ole:apartment_getclassobject DllGetClassObject returned error 0x80040111 for dll L"C:\\windows\\system32\\ieframe.dll"
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 10.81s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+20:24:49 [Pigments-EGHRfgrt] Initializing yabridge version 5.1.1
+20:24:49 [Pigments-EGHRfgrt] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+20:24:49 [Pigments-EGHRfgrt] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+20:24:49 [Pigments-EGHRfgrt] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+20:24:49 [Pigments-EGHRfgrt] plugin type:   'VST3'
+20:24:49 [Pigments-EGHRfgrt] realtime:      'no'
+20:24:49 [Pigments-EGHRfgrt] sockets:       '/run/user/1000/yabridge-Pigments-EGHRfgrt'
+20:24:49 [Pigments-EGHRfgrt] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+20:24:49 [Pigments-EGHRfgrt] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+20:24:49 [Pigments-EGHRfgrt] 
+20:24:49 [Pigments-EGHRfgrt] config from:   '<defaults>'
+20:24:49 [Pigments-EGHRfgrt] hosting mode:  'individually, 64-bit'
+20:24:49 [Pigments-EGHRfgrt] other options: '<none>'
+20:24:49 [Pigments-EGHRfgrt] 
+20:24:49 [Pigments-EGHRfgrt] Enabled features:
+20:24:49 [Pigments-EGHRfgrt] - bitbridge support
+20:24:49 [Pigments-EGHRfgrt] - CLAP support
+20:24:49 [Pigments-EGHRfgrt] - VST3 support
+20:24:49 [Pigments-EGHRfgrt] 
+20:24:49 [Pigments-EGHRfgrt] [Wine STDERR] 0074:err:ntoskrnl:ZwLoadDriver failed to create driver L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\winebth": c0000135
+20:24:50 [Pigments-EGHRfgrt] [Wine STDERR] Initializing yabridge host version 5.1.1
+20:24:50 [Pigments-EGHRfgrt] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+20:24:50 [Pigments-EGHRfgrt] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+20:24:50 [Pigments-EGHRfgrt] [Wine STDERR] 0144:err:ole:apartment_getclassobject DllGetClassObject returned error 0x80040111 for dll L"C:\\windows\\system32\\ieframe.dll"
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 16.77s
+  -> median: 10.81s
+
+=== Setting CPU governor to performance ===
+Setting cpu: 0
+Setting cpu: 1
+Setting cpu: 2
+Setting cpu: 3
+Setting cpu: 4
+Setting cpu: 5
+Setting cpu: 6
+Setting cpu: 7
+Setting cpu: 8
+Setting cpu: 9
+Setting cpu: 10
+Setting cpu: 11
+Setting cpu: 12
+Setting cpu: 13
+Setting cpu: 14
+Setting cpu: 15
+Setting cpu: 16
+Setting cpu: 17
+Setting cpu: 18
+Setting cpu: 19
+
+=== Native-only short leaf (performance governor) (native_short.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 7.84s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 7.89s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 7.89s
+  -> median: 7.89s
+=== Restoring CPU governor (adjust if this isn't your default) ===
+Setting cpu: 0
+Error setting new values. Common errors:
+- Do you have proper administration rights? (super-user?)
+- Is the governor you requested available and modprobed?
+- Trying to set an invalid policy?
+- Trying to set a specific frequency, but userspace governor is not available,
+   for example because of hardware which cannot be set to a specific frequency
+   or because the userspace governor isn't loaded?
+Setting cpu: 0
+Setting cpu: 1
+Setting cpu: 2
+Setting cpu: 3
+Setting cpu: 4
+Setting cpu: 5
+Setting cpu: 6
+Setting cpu: 7
+Setting cpu: 8
+Setting cpu: 9
+Setting cpu: 10
+Setting cpu: 11
+Setting cpu: 12
+Setting cpu: 13
+Setting cpu: 14
+Setting cpu: 15
+Setting cpu: 16
+Setting cpu: 17
+Setting cpu: 18
+Setting cpu: 19
+
+=== Pinned to cores 0-11 (assumed P-cores - verify with lscpu -e) ===
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  single run: 7.84s
+
+=== Batched region render, N=5 ===
+REQUIRES: render-regions-as-separate-files already set + saved in the project.
+Verify the output folder has 5 files after this run, not 1.
+
+=== Batched: 5 regions, 1 invocation (batch_regions.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 8.40s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 8.39s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 8.39s
+  -> median: 8.39s
+
+=== Batched region render, N=20 ===
+REQUIRES: same render-regions setup as N=5, done separately for this project.
+Verify the output folder has 20 files after this run, not 1.
+
+=== Batched: 20 regions, 1 invocation (batch_regions_20.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 10.66s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 10.64s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 10.39s
+  -> median: 10.64s
+
+=== Heavy patch short leaf ===
+Check build_test_projects_2.lua's console output to confirm which synth
+was actually used (Surge XT / Vital / fallback ReaSynth) before trusting this.
+
+=== Heavy patch short leaf (xvfb) (heavy_patch_short.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 11.35s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 11.34s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 11.50s
+  -> median: 11.35s
+
+Done. Results table written to ./exp2b_results_v2.md
+Raw log in ./exp2b_raw_v2.log

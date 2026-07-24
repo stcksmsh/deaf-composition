@@ -1,0 +1,806 @@
+  run 2: 9.01s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+18:17:02 [Pigments-3FHIZptw] Initializing yabridge version 5.1.1
+18:17:02 [Pigments-3FHIZptw] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+18:17:02 [Pigments-3FHIZptw] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+18:17:02 [Pigments-3FHIZptw] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:17:02 [Pigments-3FHIZptw] plugin type:   'VST3'
+18:17:02 [Pigments-3FHIZptw] realtime:      'no'
+18:17:02 [Pigments-3FHIZptw] sockets:       '/run/user/1000/yabridge-Pigments-3FHIZptw'
+18:17:02 [Pigments-3FHIZptw] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+18:17:02 [Pigments-3FHIZptw] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+18:17:02 [Pigments-3FHIZptw] 
+18:17:02 [Pigments-3FHIZptw] config from:   '<defaults>'
+18:17:02 [Pigments-3FHIZptw] hosting mode:  'individually, 64-bit'
+18:17:02 [Pigments-3FHIZptw] other options: '<none>'
+18:17:02 [Pigments-3FHIZptw] 
+18:17:02 [Pigments-3FHIZptw] Enabled features:
+18:17:02 [Pigments-3FHIZptw] - bitbridge support
+18:17:02 [Pigments-3FHIZptw] - CLAP support
+18:17:02 [Pigments-3FHIZptw] - VST3 support
+18:17:02 [Pigments-3FHIZptw] 
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR] 01d8:err:xrandr:xrandr_get_screen_resources Failed to get screen resources.
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR] 01d8:err:xrandr:xrandr14_get_gpus Failed to get gpus
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR] 01c8:err:xrandr:xrandr_get_screen_resources Failed to get screen resources.
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR] 01c8:err:xrandr:xrandr14_get_gpus Failed to get gpus
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR] Initializing yabridge host version 5.1.1
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR] X Error of failed request:  BadWindow (invalid Window parameter)
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR]   Major opcode of failed request:  1 (X_CreateWindow)
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR]   Resource id in failed request:  0x5600009
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR]   Serial number of failed request:  53
+18:17:02 [Pigments-3FHIZptw] [Wine STDERR]   Current serial number in output stream:  57
+terminate called after throwing an instance of 'std::system_error'
+  what():  read: End of file
+Aborted (core dumped)
+  run 3: 9.01s
+  -> median: 9.01s
+
+=== Non-headless (real X display) (/home/stcksmsh/Music/Albums/MAXIMAVELIANISM/A1-INDUCTION/INDUCTION.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+18:17:11 [Pigments-8INObdeh] Initializing yabridge version 5.1.1
+18:17:11 [Pigments-8INObdeh] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+18:17:11 [Pigments-8INObdeh] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+18:17:11 [Pigments-8INObdeh] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:17:11 [Pigments-8INObdeh] plugin type:   'VST3'
+18:17:11 [Pigments-8INObdeh] realtime:      'no'
+18:17:11 [Pigments-8INObdeh] sockets:       '/run/user/1000/yabridge-Pigments-8INObdeh'
+18:17:11 [Pigments-8INObdeh] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+18:17:11 [Pigments-8INObdeh] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+18:17:11 [Pigments-8INObdeh] 
+18:17:11 [Pigments-8INObdeh] config from:   '<defaults>'
+18:17:11 [Pigments-8INObdeh] hosting mode:  'individually, 64-bit'
+18:17:11 [Pigments-8INObdeh] other options: '<none>'
+18:17:11 [Pigments-8INObdeh] 
+18:17:11 [Pigments-8INObdeh] Enabled features:
+18:17:11 [Pigments-8INObdeh] - bitbridge support
+18:17:11 [Pigments-8INObdeh] - CLAP support
+18:17:11 [Pigments-8INObdeh] - VST3 support
+18:17:11 [Pigments-8INObdeh] 
+18:17:11 [Pigments-8INObdeh] [Wine STDERR] Initializing yabridge host version 5.1.1
+18:17:11 [Pigments-8INObdeh] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:17:11 [Pigments-8INObdeh] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 24.18s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+18:17:35 [Pigments-7DOQRYet] Initializing yabridge version 5.1.1
+18:17:35 [Pigments-7DOQRYet] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+18:17:35 [Pigments-7DOQRYet] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+18:17:35 [Pigments-7DOQRYet] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:17:35 [Pigments-7DOQRYet] plugin type:   'VST3'
+18:17:35 [Pigments-7DOQRYet] realtime:      'no'
+18:17:35 [Pigments-7DOQRYet] sockets:       '/run/user/1000/yabridge-Pigments-7DOQRYet'
+18:17:35 [Pigments-7DOQRYet] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+18:17:35 [Pigments-7DOQRYet] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+18:17:35 [Pigments-7DOQRYet] 
+18:17:35 [Pigments-7DOQRYet] config from:   '<defaults>'
+18:17:35 [Pigments-7DOQRYet] hosting mode:  'individually, 64-bit'
+18:17:35 [Pigments-7DOQRYet] other options: '<none>'
+18:17:35 [Pigments-7DOQRYet] 
+18:17:35 [Pigments-7DOQRYet] Enabled features:
+18:17:35 [Pigments-7DOQRYet] - bitbridge support
+18:17:35 [Pigments-7DOQRYet] - CLAP support
+18:17:35 [Pigments-7DOQRYet] - VST3 support
+18:17:35 [Pigments-7DOQRYet] 
+18:17:35 [Pigments-7DOQRYet] [Wine STDERR] Initializing yabridge host version 5.1.1
+18:17:35 [Pigments-7DOQRYet] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:17:35 [Pigments-7DOQRYet] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 24.04s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+18:17:59 [Pigments-17Xagimy] Initializing yabridge version 5.1.1
+18:17:59 [Pigments-17Xagimy] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+18:17:59 [Pigments-17Xagimy] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+18:17:59 [Pigments-17Xagimy] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:17:59 [Pigments-17Xagimy] plugin type:   'VST3'
+18:17:59 [Pigments-17Xagimy] realtime:      'no'
+18:17:59 [Pigments-17Xagimy] sockets:       '/run/user/1000/yabridge-Pigments-17Xagimy'
+18:17:59 [Pigments-17Xagimy] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+18:17:59 [Pigments-17Xagimy] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+18:17:59 [Pigments-17Xagimy] 
+18:17:59 [Pigments-17Xagimy] config from:   '<defaults>'
+18:17:59 [Pigments-17Xagimy] hosting mode:  'individually, 64-bit'
+18:17:59 [Pigments-17Xagimy] other options: '<none>'
+18:17:59 [Pigments-17Xagimy] 
+18:17:59 [Pigments-17Xagimy] Enabled features:
+18:17:59 [Pigments-17Xagimy] - bitbridge support
+18:17:59 [Pigments-17Xagimy] - CLAP support
+18:17:59 [Pigments-17Xagimy] - VST3 support
+18:17:59 [Pigments-17Xagimy] 
+18:17:59 [Pigments-17Xagimy] [Wine STDERR] Initializing yabridge host version 5.1.1
+18:17:59 [Pigments-17Xagimy] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:17:59 [Pigments-17Xagimy] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 24.09s
+  -> median: 24.09s
+
+=== Native-only short leaf (xvfb) (native_short.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 7.99s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 7.97s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 7.96s
+  -> median: 7.97s
+
+=== Wine/yabridge short leaf (xvfb) (wine_short.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+18:18:47 [Pigments-0RSWZmwy] Initializing yabridge version 5.1.1
+18:18:47 [Pigments-0RSWZmwy] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+18:18:47 [Pigments-0RSWZmwy] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+18:18:47 [Pigments-0RSWZmwy] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:18:47 [Pigments-0RSWZmwy] plugin type:   'VST3'
+18:18:47 [Pigments-0RSWZmwy] realtime:      'no'
+18:18:47 [Pigments-0RSWZmwy] sockets:       '/run/user/1000/yabridge-Pigments-0RSWZmwy'
+18:18:47 [Pigments-0RSWZmwy] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+18:18:47 [Pigments-0RSWZmwy] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+18:18:47 [Pigments-0RSWZmwy] 
+18:18:47 [Pigments-0RSWZmwy] config from:   '<defaults>'
+18:18:47 [Pigments-0RSWZmwy] hosting mode:  'individually, 64-bit'
+18:18:47 [Pigments-0RSWZmwy] other options: '<none>'
+18:18:47 [Pigments-0RSWZmwy] 
+18:18:47 [Pigments-0RSWZmwy] Enabled features:
+18:18:47 [Pigments-0RSWZmwy] - bitbridge support
+18:18:47 [Pigments-0RSWZmwy] - CLAP support
+18:18:47 [Pigments-0RSWZmwy] - VST3 support
+18:18:47 [Pigments-0RSWZmwy] 
+18:18:48 [Pigments-0RSWZmwy] [Wine STDERR] 0074:err:ntoskrnl:ZwLoadDriver failed to create driver L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\winebth": c0000135
+18:18:48 [Pigments-0RSWZmwy] [Wine STDERR] Initializing yabridge host version 5.1.1
+18:18:48 [Pigments-0RSWZmwy] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:18:48 [Pigments-0RSWZmwy] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:18:48 [Pigments-0RSWZmwy] [Wine STDERR] 0144:err:ole:apartment_getclassobject DllGetClassObject returned error 0x80040111 for dll L"C:\\windows\\system32\\ieframe.dll"
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 10.50s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+18:18:58 [Pigments-236GIUio] Initializing yabridge version 5.1.1
+18:18:58 [Pigments-236GIUio] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+18:18:58 [Pigments-236GIUio] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+18:18:58 [Pigments-236GIUio] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:18:58 [Pigments-236GIUio] plugin type:   'VST3'
+18:18:58 [Pigments-236GIUio] realtime:      'no'
+18:18:58 [Pigments-236GIUio] sockets:       '/run/user/1000/yabridge-Pigments-236GIUio'
+18:18:58 [Pigments-236GIUio] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+18:18:58 [Pigments-236GIUio] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+18:18:58 [Pigments-236GIUio] 
+18:18:58 [Pigments-236GIUio] config from:   '<defaults>'
+18:18:58 [Pigments-236GIUio] hosting mode:  'individually, 64-bit'
+18:18:58 [Pigments-236GIUio] other options: '<none>'
+18:18:58 [Pigments-236GIUio] 
+18:18:58 [Pigments-236GIUio] Enabled features:
+18:18:58 [Pigments-236GIUio] - bitbridge support
+18:18:58 [Pigments-236GIUio] - CLAP support
+18:18:58 [Pigments-236GIUio] - VST3 support
+18:18:58 [Pigments-236GIUio] 
+18:18:58 [Pigments-236GIUio] [Wine STDERR] 0074:err:ntoskrnl:ZwLoadDriver failed to create driver L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\winebth": c0000135
+18:18:59 [Pigments-236GIUio] [Wine STDERR] Initializing yabridge host version 5.1.1
+18:18:59 [Pigments-236GIUio] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:18:59 [Pigments-236GIUio] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:18:59 [Pigments-236GIUio] [Wine STDERR] 0144:err:ole:apartment_getclassobject DllGetClassObject returned error 0x80040111 for dll L"C:\\windows\\system32\\ieframe.dll"
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 14.54s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+18:19:13 [Pigments-1EHNfosy] Initializing yabridge version 5.1.1
+18:19:13 [Pigments-1EHNfosy] library:       '/home/stcksmsh/.local/share/yabridge/libyabridge-vst3.so'
+18:19:13 [Pigments-1EHNfosy] host:          '/home/stcksmsh/.local/share/yabridge/yabridge-host.exe'
+18:19:13 [Pigments-1EHNfosy] plugin:        '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:19:13 [Pigments-1EHNfosy] plugin type:   'VST3'
+18:19:13 [Pigments-1EHNfosy] realtime:      'no'
+18:19:13 [Pigments-1EHNfosy] sockets:       '/run/user/1000/yabridge-Pigments-1EHNfosy'
+18:19:13 [Pigments-1EHNfosy] wine prefix:   '/home/stcksmsh/.wineprefixes/WIN10_64'
+18:19:13 [Pigments-1EHNfosy] wine version:  '9.0 (Ubuntu 9.0~repack-4build3)'
+18:19:13 [Pigments-1EHNfosy] 
+18:19:13 [Pigments-1EHNfosy] config from:   '<defaults>'
+18:19:13 [Pigments-1EHNfosy] hosting mode:  'individually, 64-bit'
+18:19:13 [Pigments-1EHNfosy] other options: '<none>'
+18:19:13 [Pigments-1EHNfosy] 
+18:19:13 [Pigments-1EHNfosy] Enabled features:
+18:19:13 [Pigments-1EHNfosy] - bitbridge support
+18:19:13 [Pigments-1EHNfosy] - CLAP support
+18:19:13 [Pigments-1EHNfosy] - VST3 support
+18:19:13 [Pigments-1EHNfosy] 
+18:19:13 [Pigments-1EHNfosy] [Wine STDERR] 0074:err:ntoskrnl:ZwLoadDriver failed to create driver L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\winebth": c0000135
+18:19:13 [Pigments-1EHNfosy] [Wine STDERR] Initializing yabridge host version 5.1.1
+18:19:13 [Pigments-1EHNfosy] [Wine STDERR] Preparing to load VST3 plugin at '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:19:13 [Pigments-1EHNfosy] [Wine STDERR] Finished initializing '/home/stcksmsh/.wineprefixes/WIN10_64/drive_c/Program Files/Common Files/VST3/Pigments.vst3'
+18:19:14 [Pigments-1EHNfosy] [Wine STDERR] 0144:err:ole:apartment_getclassobject DllGetClassObject returned error 0x80040111 for dll L"C:\\windows\\system32\\ieframe.dll"
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 10.50s
+  -> median: 10.5s
+
+=== Setting CPU governor to performance ===
+Setting cpu: 0
+Setting cpu: 1
+Setting cpu: 2
+Setting cpu: 3
+Setting cpu: 4
+Setting cpu: 5
+Setting cpu: 6
+Setting cpu: 7
+Setting cpu: 8
+Setting cpu: 9
+Setting cpu: 10
+Setting cpu: 11
+Setting cpu: 12
+Setting cpu: 13
+Setting cpu: 14
+Setting cpu: 15
+Setting cpu: 16
+Setting cpu: 17
+Setting cpu: 18
+Setting cpu: 19
+
+=== Native-only short leaf (performance governor) (native_short.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 7.97s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 7.96s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 7.97s
+  -> median: 7.97s
+=== Restoring CPU governor to powersave/schedutil (adjust if this isn't your default) ===
+Setting cpu: 0
+Error setting new values. Common errors:
+- Do you have proper administration rights? (super-user?)
+- Is the governor you requested available and modprobed?
+- Trying to set an invalid policy?
+- Trying to set a specific frequency, but userspace governor is not available,
+   for example because of hardware which cannot be set to a specific frequency
+   or because the userspace governor isn't loaded?
+Setting cpu: 0
+Setting cpu: 1
+Setting cpu: 2
+Setting cpu: 3
+Setting cpu: 4
+Setting cpu: 5
+Setting cpu: 6
+Setting cpu: 7
+Setting cpu: 8
+Setting cpu: 9
+Setting cpu: 10
+Setting cpu: 11
+Setting cpu: 12
+Setting cpu: 13
+Setting cpu: 14
+Setting cpu: 15
+Setting cpu: 16
+Setting cpu: 17
+Setting cpu: 18
+Setting cpu: 19
+
+=== Pinned to cores 0-11 (assumed P-cores - verify with lscpu -e) ===
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  single run: 7.91s (run once - re-run manually if you want a median)
+
+=== Batched region render (5 regions, one invocation) ===
+NOTE: requires the project's render settings already set to
+'Render regions as separate files' via Reaper's render dialog/preset.
+
+=== Batched: 5 regions, 1 invocation (batch_regions.RPP) ===
+  run 1...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 1: 8.45s
+  run 2...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 2: 8.53s
+  run 3...
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+exec of JACK server (command = "/usr/bin/jackd") failed: No such file or directory
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Failure to suspend: No such entity
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+error creating client
+audio: executing pasuspender
+audio: executing pasuspender
+  run 3: 8.51s
+  -> median: 8.51s
+
+Done. Results table written to ./exp2b_results.md
+Raw log in ./exp2b_raw.log
