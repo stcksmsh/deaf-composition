@@ -188,8 +188,23 @@ def embed_windows(wav_path: str | Path, checkpoint: str | None = None,
     )
     vectors /= np.linalg.norm(vectors, axis=1, keepdims=True) + 1e-9
 
+    # Per-window RMS, at the same window/hop as the embedding. Near-silent
+    # audio maps to an almost-universal CLAP embedding region regardless of
+    # source (confirmed empirically: a near-silent test leaf nearest-matched
+    # a real reference track's fade-to-silence tail at cosine=1.0) -- without
+    # this, nearest-window scoring can't tell "this leaf sounds like the
+    # target" from "this leaf is briefly silent, like everything else that's
+    # briefly silent." reference.py gates on it; kept here rather than
+    # recomputed there since the windowing must match exactly.
+    with np.errstate(divide="ignore"):
+        window_rms_db = [
+            float(20 * np.log10(max(float(np.sqrt(np.mean(np.square(w)))), 1e-9)))
+            for w in batch
+        ]
+
     return {
         "vectors": vectors,
+        "window_rms_db": window_rms_db,
         "load_s": load_s,
         "inference_s": time.monotonic() - started,
         "meta": {
@@ -221,6 +236,7 @@ def embed(wav_path: str | Path, checkpoint: str | None = None,
     return {
         "vector": pooled.tolist(),
         "vectors": vectors.tolist(),
+        "window_rms_db": result["window_rms_db"],
         "load_s": result["load_s"],
         "inference_s": result["inference_s"],
         "meta": {**result["meta"], "pooling": "mean+l2"},

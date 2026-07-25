@@ -164,7 +164,50 @@ class TestScoreEmbedding(unittest.TestCase):
         self.assertIsNone(result["distance"])
 
 
+class TestGateSilentWindows(unittest.TestCase):
+    def test_drops_windows_at_or_below_the_floor(self):
+        vectors = [[1.0, 0.0], [0.0, 1.0], [1.0, 1.0]]
+        levels = [-10.0, reference.WINDOW_SILENCE_FLOOR_DB, -80.0]
+        kept = reference._gate_silent_windows(vectors, levels)
+        self.assertEqual(kept, [[1.0, 0.0]])
+
+    def test_missing_levels_is_a_no_op(self):
+        vectors = [[1.0, 0.0], [0.0, 1.0]]
+        self.assertEqual(reference._gate_silent_windows(vectors, None), vectors)
+
+    def test_mismatched_length_is_a_no_op(self):
+        vectors = [[1.0, 0.0], [0.0, 1.0]]
+        self.assertEqual(reference._gate_silent_windows(vectors, [-10.0]), vectors)
+
+
 class TestScoreNode(unittest.TestCase):
+    def test_silent_window_cannot_spuriously_match_a_faded_reference(self):
+        # Regression: a near-silent leaf window nearest-matched a real
+        # reference track's fade-to-silence tail at cosine=1.0 in production.
+        # The leaf's only "real" window points away from the reference; its
+        # silent window (unit vector, coincidentally identical to the
+        # reference's silent window) must be excluded, not win the match.
+        # Library side already gated at build time (analyze_reference_track
+        # drops silent windows before they're ever stored) -- only the
+        # track's real content is in the envelope, no silence vector.
+        library = {"drop": {
+            "measured_stats": {},
+            "embedding_vectors": [[1.0, 0.0]],
+            "embedding_centroid": None,
+        }}
+        state = {
+            "measured": {},
+            "embedding": [0.0, 1.0],
+            "embedding_windows": [[-1.0, 0.0], [0.0, 1.0]],  # [real content, silence]
+            "embedding_window_levels": [-10.0, reference.WINDOW_SILENCE_FLOOR_DB - 1],
+        }
+        result = reference.score_node(state, library, "drop")
+        # Ungated, cos([0,1],[1,0])=0 beats cos([-1,0],[1,0])=-1, so the
+        # silent window would win "nearest" and read as more on-target than
+        # the leaf's actual (anti-correlated) content. Gated, only the real
+        # window remains and the true -1.0 distance is reported.
+        self.assertAlmostEqual(result["embedding"]["nearest_cosine"], -1.0, places=5)
+
     def test_prefers_embedding_windows_over_pooled(self):
         library = {"drop": {
             "measured_stats": {"lufs": {"mean": -20.0, "std": 2.0}},

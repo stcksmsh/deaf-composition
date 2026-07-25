@@ -27,6 +27,23 @@ SECTION_TYPES = ("intro", "build", "drop", "breakdown", "outro")
 UNLABELED = "unlabeled"
 AUDIO_EXTENSIONS = {".wav", ".flac", ".mp3", ".ogg", ".m4a"}
 
+# Below this, a CLAP window is "near-silent," not "quiet music." Confirmed
+# empirically: a near-silent test leaf nearest-matched a real reference
+# track's fade-to-silence tail at cosine=1.0 -- CLAP maps near-total-silence
+# to an almost-universal embedding region regardless of source, so an
+# ungated silent window can spuriously "match" any faded reference clip.
+# Matches the floor already used for the same purpose in
+# scripts/suggest_boundaries.py's TRAILING_SILENCE_FLOOR_DB.
+WINDOW_SILENCE_FLOOR_DB = -50.0
+
+
+def _gate_silent_windows(vectors: list, levels: list[float] | None) -> list:
+    """Drop windows at/below WINDOW_SILENCE_FLOOR_DB. No-op if levels are
+    unavailable (older state.json without embedding_window_levels)."""
+    if not levels or len(levels) != len(vectors):
+        return vectors
+    return [v for v, level in zip(vectors, levels) if level > WINDOW_SILENCE_FLOOR_DB]
+
 # Scalar-per-track metrics carried straight through from analyze.measure().
 MEASURED_SCALARS = ("lufs", "true_peak", "sample_peak", "crest_factor", "active_ratio")
 # Nested {mean,median,std} metrics — the median is what represents the track.
@@ -90,7 +107,15 @@ def analyze_reference_track(path: str | Path, embedding: bool = True,
     if embedding:
         try:
             embedded = analyze.embed_windows(path, checkpoint, amodel)
-            record["embedding_windows"] = embedded["vectors"].tolist()
+            vectors = _gate_silent_windows(embedded["vectors"].tolist(),
+                                           embedded["window_rms_db"])
+            if len(vectors) < len(embedded["vectors"]):
+                record["warnings"].append(
+                    f"dropped {len(embedded['vectors']) - len(vectors)}/"
+                    f"{len(embedded['vectors'])} near-silent window(s) "
+                    f"(<= {WINDOW_SILENCE_FLOOR_DB:.0f}dB)"
+                )
+            record["embedding_windows"] = vectors
         except Exception as exc:  # noqa: BLE001
             record["warnings"].append(f"embed failed: {exc}")
 
@@ -209,6 +234,8 @@ def score_node(state: dict, library: dict, section_type: str) -> dict:
                        f"have {sorted(library)}")
 
     vectors = state.get("embedding_windows")
+    if vectors:
+        vectors = _gate_silent_windows(vectors, state.get("embedding_window_levels"))
     if not vectors and state.get("embedding"):
         vectors = [state["embedding"]]  # fallback: pooled-only state.json
 

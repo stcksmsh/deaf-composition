@@ -10,7 +10,7 @@ from pathlib import Path
 
 from . import analyze, rpp
 
-SCHEMA_VERSION = 2  # bumped: state.json now carries embedding_windows too
+SCHEMA_VERSION = 3  # bumped: state.json now carries embedding_window_levels too
 
 
 def _sha256(path: Path) -> str:
@@ -79,6 +79,12 @@ def build(project: str | Path, wav: str | Path, symbolic: dict | None = None,
         # (see analyze.embed_windows). The pooled field above is a convenience
         # summary, not the primary signal.
         "embedding_windows": embedded["vectors"] if embedded else None,
+        # Per-window RMS (dB), same windowing as embedding_windows. Lets
+        # reference.py gate out near-silent windows before nearest-window
+        # scoring -- silence maps to an almost-universal CLAP embedding
+        # regardless of source, so an ungated silent window can spuriously
+        # "match" any faded reference clip.
+        "embedding_window_levels": embedded["window_rms_db"] if embedded else None,
     }
 
 
