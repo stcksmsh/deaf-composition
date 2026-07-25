@@ -7,3 +7,4 @@ Backups/
 *.rpp-bak
 *.pt
 state/
+reference_library.json
