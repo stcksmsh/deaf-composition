@@ -8,3 +8,4 @@ Backups/
 *.pt
 state/
 reference_library.json
+manifest.json
