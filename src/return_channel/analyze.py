@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import time
 from pathlib import Path
 
@@ -23,7 +24,18 @@ CLAP_WINDOW_S = 10.0
 # window and leaves 44% of the node unembedded — the steering signal cannot be
 # blind to half of each node. Must match whatever built the reference envelopes.
 CLAP_HOP_S = 5.0
-CLAP_AMODEL = "HTSAT-tiny"
+# Chosen from experiments/exp1/compare_checkpoints.py: music beat stock on both
+# real separation metrics (cohesion gap, silhouette) in every run; NN purity's
+# 0.991-vs-0.995 split is noise at that near-ceiling level. See
+# exp1_checkpoint_comparison.md. Every leaf embedding and every reference
+# envelope MUST use this checkpoint — vectors from different checkpoints are
+# not comparable.
+CLAP_AMODEL = "HTSAT-base"
+# laion_clap's bare load_ckpt() downloads stock 630k-audioset weights
+# regardless of amodel — it is NOT tied to the music-trained checkpoint above.
+# So there is no safe "default": the checkpoint must always be passed
+# explicitly, either via --checkpoint or this env var.
+CLAP_CHECKPOINT_ENV = "RETURN_CHANNEL_CLAP_CHECKPOINT"
 
 # Loading CLAP costs far more than embedding with it, and a batch embeds many
 # leaves per process, so the model is cached rather than rebuilt per call.
@@ -114,6 +126,26 @@ def windows(audio: np.ndarray, width: int, hop: int) -> list[np.ndarray]:
     return [audio[s:s + width] for s in starts]
 
 
+def _resolve_checkpoint(checkpoint: str | None, amodel: str) -> str | None:
+    if checkpoint is not None:
+        return checkpoint
+    checkpoint = os.environ.get(CLAP_CHECKPOINT_ENV)
+    if checkpoint is not None:
+        return checkpoint
+    if amodel == "HTSAT-tiny":
+        # The only amodel for which laion_clap's stock download is a legitimate
+        # pairing (original CLAP paper default). Every other amodel, including
+        # the canonical HTSAT-base, needs a checkpoint that actually matches it.
+        return None
+    raise RuntimeError(
+        f"no checkpoint given for amodel={amodel!r}. laion_clap's default "
+        f"load_ckpt() downloads stock 630k-audioset weights regardless of "
+        f"amodel, which is NOT the music-trained checkpoint this amodel is "
+        f"pinned to (see CLAP_AMODEL in analyze.py). Pass --checkpoint or set "
+        f"{CLAP_CHECKPOINT_ENV}."
+    )
+
+
 def _load_model(checkpoint: str | None, amodel: str):
     import laion_clap
 
@@ -139,6 +171,7 @@ def embed_windows(wav_path: str | Path, checkpoint: str | None = None,
     laion_clap is imported lazily: the checkpoint is a ~2GB download, and
     everything else in the return channel works without it.
     """
+    checkpoint = _resolve_checkpoint(checkpoint, amodel)
     audio, _ = librosa.load(str(wav_path), sr=CLAP_SR, mono=True)
     batch = windows(audio, int(CLAP_WINDOW_S * CLAP_SR), int(CLAP_HOP_S * CLAP_SR))
 

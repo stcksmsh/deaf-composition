@@ -5,3 +5,5 @@ references/
 *.wav
 Backups/
 *.rpp-bak
+*.pt
+state/
