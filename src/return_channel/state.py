@@ -10,7 +10,7 @@ from pathlib import Path
 
 from . import analyze, rpp
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2  # bumped: state.json now carries embedding_windows too
 
 
 def _sha256(path: Path) -> str:
@@ -72,7 +72,13 @@ def build(project: str | Path, wav: str | Path, symbolic: dict | None = None,
         },
         "symbolic": symbolic,
         "measured": measured,
+        # Bare pooled vector — the shape PROJECT_BRIEF.md's schema specifies.
         "embedding": embedded["vector"] if embedded else None,
+        # Unpooled per-window vectors: what reference.py scores against, since
+        # comparing a pooled leaf to per-window reference vectors is a mismatch
+        # (see analyze.embed_windows). The pooled field above is a convenience
+        # summary, not the primary signal.
+        "embedding_windows": embedded["vectors"] if embedded else None,
     }
 
 

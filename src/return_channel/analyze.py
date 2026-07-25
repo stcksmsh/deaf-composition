@@ -125,9 +125,16 @@ def _load_model(checkpoint: str | None, amodel: str):
     return _MODELS[key]
 
 
-def embed(wav_path: str | Path, checkpoint: str | None = None,
-          amodel: str = CLAP_AMODEL) -> dict:
-    """CLAP embedding, following experiments/exp1/exp1_separability.py.
+def embed_windows(wav_path: str | Path, checkpoint: str | None = None,
+                  amodel: str = CLAP_AMODEL) -> dict:
+    """Per-window CLAP vectors, unpooled — the primary signal for reference scoring.
+
+    Pooling a leaf to one vector and comparing it against per-window reference
+    vectors is a mismatch: pooling shrinks toward the centroid, so a pooled leaf
+    reads as systematically more "central" than any single reference window,
+    for reasons that have nothing to do with the audio. Keeping windows unpooled
+    lets a leaf be scored against individual reference moments instead — see
+    reference.py. embed() below pools these for a single-vector convenience field.
 
     laion_clap is imported lazily: the checkpoint is a ~2GB download, and
     everything else in the return channel works without it.
@@ -147,11 +154,9 @@ def embed(wav_path: str | Path, checkpoint: str | None = None,
         dtype=np.float32,
     )
     vectors /= np.linalg.norm(vectors, axis=1, keepdims=True) + 1e-9
-    pooled = vectors.mean(axis=0)
-    pooled /= np.linalg.norm(pooled) + 1e-9
 
     return {
-        "vector": pooled.tolist(),
+        "vectors": vectors,
         "load_s": load_s,
         "inference_s": time.monotonic() - started,
         "meta": {
@@ -159,10 +164,31 @@ def embed(wav_path: str | Path, checkpoint: str | None = None,
             "amodel": amodel,
             "enable_fusion": False,
             "checkpoint": checkpoint or "default",
-            "dim": int(pooled.shape[0]),
+            "dim": int(vectors.shape[1]),
             "n_windows": len(batch),
             "window_s": CLAP_WINDOW_S,
             "hop_s": CLAP_HOP_S,
-            "pooling": "mean+l2",
         },
+    }
+
+
+def embed(wav_path: str | Path, checkpoint: str | None = None,
+          amodel: str = CLAP_AMODEL) -> dict:
+    """CLAP embedding, following experiments/exp1/exp1_separability.py.
+
+    Returns both a mean-pooled single vector (for state.json's `embedding`
+    field, kept as the brief specifies it) and the unpooled per-window vectors
+    (for reference scoring — see embed_windows).
+    """
+    result = embed_windows(wav_path, checkpoint, amodel)
+    vectors = result["vectors"]
+    pooled = vectors.mean(axis=0)
+    pooled /= np.linalg.norm(pooled) + 1e-9
+
+    return {
+        "vector": pooled.tolist(),
+        "vectors": vectors.tolist(),
+        "load_s": result["load_s"],
+        "inference_s": result["inference_s"],
+        "meta": {**result["meta"], "pooling": "mean+l2"},
     }
