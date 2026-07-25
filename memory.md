@@ -40,18 +40,30 @@ assembled into `state.json`. Verified end-to-end on real projects.
 `ModelTier` dataclasses, JSON-diffable round-trip for §7.3 snapshot persistence. Structure
 only, no fold/scheduler logic yet (stage 4, on top of this).
 
-**Reaper-MCP picked (research done, not yet integrated): TwelveTake-Studios/reaper-mcp.**
+**Reaper-MCP picked AND installed/validated: TwelveTake-Studios/reaper-mcp** (`0331ac0`).
 Compared against shiehn/total-reaper-mcp (600+ tools/40+ categories, 64 stars, more
 comprehensive but likely too large a surface for a cheap leaf-implementation model to
 search per plan §6) and a few smaller/less mature options. TwelveTake:
 ~129-158 tools, cleanly categorized (explicit FX-param-automation tools, region/rendering
 tools matching the batching approach exp2 already validated), MIT license, versioned
 (v1.6.0 + changelog — real maintenance signal), file-based Lua-bridge IPC (no network/port
-setup, fits the already-headless workflow). **Not yet installed or hands-on validated** —
-in particular whether its Lua bridge script triggers correctly under xvfb-run headless
-Reaper (should, in principle — Reaper's scripting engine runs the same under Xvfb as with
-a real display, "headless" so far has only ever meant no physical display, not a disabled
-Lua interpreter — but unverified for this specific bridge's activation mechanism).
+setup, fits the already-headless workflow).
+
+**Installed and hands-on validated this session**: `.mcp.json` configures Claude Code to
+run it via `uvx twelvetake-reaper-mcp` — new project-scoped MCP servers need approval and
+only take effect on the *next* session/reconnect, they don't hot-load into a running one.
+The Lua bridge (vendored at `scripts/reaper_mcp_bridge.lua`) runs headless via
+`scripts/start_reaper_mcp_bridge.sh start`, which self-verifies by round-tripping a real
+`GetAppVersion` request through the file protocol before reporting success. Manually
+confirmed `GetAppVersion`/`CountTracks`/`InsertTrackAtIndex` all round-trip correctly
+against a live headless REAPER instance, independent of the MCP layer itself.
+
+Real gotchas hit getting it running the first time, now baked into the launcher script and
+noted in Working Notes below: `ShowConsoleMsg` output is invisible under Xvfb so it can't
+be used to confirm startup, the bridge directory can take 10-20s to appear (headless
+audio/plugin-scan cost), and `xvfb-run`'s own PID isn't enough to kill what it spawns.
+`.mcp.json`-configured tools won't appear in *this* conversation — needs a session
+reconnect + approval first.
 
 **Instrument palette identified, manifest.json dumped for real, curation NOT done.**
 Installed and confirmed working: ReaSynth (native, 18 params), Surge XT (native VST3, 778
@@ -78,7 +90,7 @@ curation pass). Both are concrete, scoped next actions now rather than open rese
 ## §10 open items status
 - [x] Assemble fingerprint reference library
 - [x] Freeze node schema
-- [x] Pick the Reaper-MCP (picked, not yet integrated)
+- [x] Pick the Reaper-MCP (picked AND installed/validated)
 - [~] Curate instrument palette + dump `manifest.json` (dumped; per-plugin param curation
   still open, see above)
 - [ ] Structure reference library (§4.3 — separate purpose, "how to build an arc":
@@ -104,6 +116,16 @@ curation pass). Both are concrete, scoped next actions now rather than open rese
 - Bridged (Wine/yabridge) plugins can abort the whole REAPER process on init, not just
   fail gracefully — write any multi-step result incrementally, not once at the end, or a
   late crash erases everything gathered before it.
+- **`reaper.ShowConsoleMsg` output only reaches REAPER's own GUI console** — invisible
+  under Xvfb, cannot be used to confirm a script started or is behaving. Use file-based
+  signals (a marker file, the actual expected output) to verify headless script execution.
+- A freshly-launched headless REAPER instance can take **10-20s before a `reaper.defer`
+  loop is actually live** (audio device probing / plugin scan first) — a short timeout
+  reads as "broken" when it's just slow. `scripts/start_reaper_mcp_bridge.sh` polls up to
+  60s and round-trips a real request before declaring success, not just checks a directory
+  exists.
+- New MCP servers added via `.mcp.json` need approval and only take effect on the *next*
+  Claude Code session/reconnect — they do not hot-load into an already-running session.
 - `git am` risk: a stalled `git am` from an earlier cloud session
   (`session_01PA6ixGgnhvAd8yXRUEHqTi`) sat in `.git/rebase-apply/` for part of this session
   before being resolved by hand (its `analyze.py` hunk assumed a `checkpoint_sha256()`
@@ -116,9 +138,11 @@ curation pass). Both are concrete, scoped next actions now rather than open rese
   given the project's promotional/HN-facing angle per plan §0.
 
 ## Next
-1. Curate the actual leaf-facing param subset per palette plugin (creative call, needs the
-   user).
-2. Install/wire TwelveTake-Studios/reaper-mcp, validate its Lua bridge activates correctly
-   under headless xvfb-run.
+1. **Restart/reconnect the Claude Code session** and approve the `reaper` MCP server —
+   `.mcp.json` is written but not live in whatever session reads this. Once reconnected,
+   `scripts/start_reaper_mcp_bridge.sh start` needs to have been run first (bridge must be
+   up before the MCP server can talk to it).
+2. Curate the actual leaf-facing param subset per palette plugin (creative call, needs the
+   user) — now doable interactively through the live MCP tools instead of blind.
 3. Decide on `songs.txt`.
 4. Only after 1-2: start stage 3 (leaf layer / DSL emission).
