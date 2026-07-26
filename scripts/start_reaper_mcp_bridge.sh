@@ -17,6 +17,15 @@
 #   - xvfb-run is a wrapper script; it forks Xvfb + reaper as children, so
 #     killing its own PID orphans a live REAPER process. Use process-group
 #     kill (this script's stop mode does).
+#   - REAPER started with no project argument opens "[unsaved project]" --
+#     Main_SaveProject on that pops a native Save-As dialog, which blocks
+#     the whole bridge under Xvfb with no window manager to click through
+#     (hit twice, see memory.md's "near-incident" and stage-3 leaf-proof
+#     entries). Passing a *nonexistent* .rpp path doesn't pre-name it either
+#     -- REAPER throws a blocking "file not found" error dialog and falls
+#     back to unsaved. The fix: always launch against a real, already-on-disk
+#     .rpp (PROJECT_TEMPLATE below, auto-created if missing) -- REAPER opens
+#     it silently and Main_SaveProject then works with zero dialogs.
 #
 # RUN
 #   scripts/start_reaper_mcp_bridge.sh start
@@ -30,6 +39,7 @@ BRIDGE_DST="$HOME/.config/REAPER/Scripts/reaper_mcp_bridge.lua"
 BRIDGE_DATA_DIR="$HOME/.config/REAPER/Scripts/mcp_bridge_data"
 PIDFILE="/tmp/reaper_mcp_bridge.pid"
 LOGFILE="/tmp/reaper_mcp_bridge.log"
+PROJECT_TEMPLATE="${REAPER_PROJECT_PATH:-$HERE/../state/scratch/session.rpp}"
 
 start() {
   if [[ -f "$PIDFILE" ]] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
@@ -41,7 +51,16 @@ start() {
   cp "$BRIDGE_SRC" "$BRIDGE_DST"
   rm -rf "$BRIDGE_DATA_DIR"
 
-  setsid nohup xvfb-run -a reaper -nosplash "$BRIDGE_DST" > "$LOGFILE" 2>&1 &
+  # Seed a minimal valid .rpp if none exists yet -- an empty <REAPER_PROJECT
+  # header is enough; REAPER fills in every other default on open/save. If
+  # PROJECT_TEMPLATE already exists (a previous session's real saved work),
+  # reuse it as-is rather than clobbering it.
+  mkdir -p "$(dirname "$PROJECT_TEMPLATE")"
+  if [[ ! -f "$PROJECT_TEMPLATE" ]]; then
+    printf '<REAPER_PROJECT 0.1 "7.75" %s\n  <TEMPOENVEX\n  >\n>\n' "$(date +%s)" > "$PROJECT_TEMPLATE"
+  fi
+
+  setsid nohup xvfb-run -a reaper -nosplash "$PROJECT_TEMPLATE" "$BRIDGE_DST" > "$LOGFILE" 2>&1 &
   echo $! > "$PIDFILE"
   echo "launched (process group $(cat "$PIDFILE")), waiting for bridge to come up..."
 

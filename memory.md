@@ -548,22 +548,49 @@ Output artifacts land in `state/leaf_proof/` (gitignored, `state/` already cover
 `leaf_bass_drop.wav`, `.state.json`, `.score.json`. Only `scripts/leaf_proof.py` itself is
 committed.
 
+## `save_project` fixed for real (2026-07-26)
+Root cause understood properly this time, not just worked around. Two things tried and
+rejected before finding the real fix:
+- Passing a *nonexistent* `.rpp` path as REAPER's CLI arg does **not** pre-name the
+  project (an assumption worth recording as wrong so it doesn't get retried) — REAPER
+  throws a blocking "file not found"-style error dialog and falls back to
+  `[unsaved project]` anyway. Confirmed by inspecting the Xvfb window tree directly
+  (`xwininfo -root -tree` against the matched `DISPLAY=:99` / `-auth` path) mid-hang:
+  a `"REAPER Error"` dialog plus an `"Error opening devices"` dialog (the latter is the
+  usually-harmless JACK-missing warning, but it's a real *modal* here, not just log
+  noise, when startup is otherwise unhappy).
+- **Real fix**: write a minimal *valid, already-on-disk* `.rpp` first (just
+  `<REAPER_PROJECT 0.1 "7.75" <epoch>\n  <TEMPOENVEX\n  >\n>`) and launch REAPER against
+  that path. Since the file genuinely exists, REAPER opens it with zero dialogs, treats
+  it as already-named, and `Main_SaveProject`/`save_project` then works silently —
+  verified live through the real `mcp__reaper__save_project` tool, not just the raw
+  bridge call.
+
+**Wired into `scripts/start_reaper_mcp_bridge.sh` permanently**: `start()` now seeds
+`state/scratch/session.rpp` (path overridable via `REAPER_PROJECT_PATH`) with that
+skeleton *only if it doesn't already exist*, and passes it as REAPER's first CLI arg
+alongside the bridge script (`reaper -nosplash session.rpp bridge.lua` — REAPER accepts
+a project path and a startup script as two separate positional args together, confirmed
+empirically). Re-verified end-to-end through the actual updated launcher (not just the
+manual test that found the fix): bridge came up clean on the first try, `save_project`
+returned `{"ok": true}` immediately, no `xdotool` intervention needed anywhere in the
+run. **Side benefit, not the goal but real**: because the launcher now reuses
+`session.rpp` if it's already there, project state survives bridge restarts going
+forward instead of being disposable every time (previous "unsaved project" instances
+were lost on every restart) — worth knowing if a future session finds unexpected
+leftover tracks in `state/scratch/session.rpp`, that's expected, not corruption.
+`state/` is gitignored, so this file itself never lands in git.
+
 ## Next
-1. **Fix `save_project` for real** — the Save-As-dialog-blocks-the-bridge issue has now
-   hit twice. Options not yet investigated: pre-assign a project filename some other way
-   (a bridge function that sets the path without triggering the dialog?), or accept
-   working exclusively with pre-saved `.rpp` files going forward (open one via
-   `Main_openProject` instead of building live in an unnamed project) so `save_project`
-   never needs to invent a filename. Matters for real once stage 4 needs to snapshot
-   project state per node (§7.3) — can't lean on the xdotool-Escape workaround forever.
-2. Decide: take on the full Vital param-mapping build (comparable scope to the whole
+1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 3/4 (Pigments' macro fallback is the remaining low-priority item).
-3. Stage 3/4 proper: this proof used one *isolated* leaf with no scope chain ancestors,
-   no siblings, no neighbor edges, and a hand-supplied (not model-emitted) implementation.
-   The real next steps toward §11 stage 4 ("prove one song builds and self-reviews
-   end-to-end"): (a) have a model actually emit the `Leaf.implementation` ops from a spec,
-   instead of hand-writing them, (b) build the minimal fold/review code that calls
-   `reference.score_node` itself and writes `ReviewState` back onto the `Node`, (c) two
-   sibling leaves + a parent that composes them, to exercise the "composes with siblings"
-   check for the first time.
+2. Stage 3/4 proper: the leaf-proof used one *isolated* leaf with no scope chain
+   ancestors, no siblings, no neighbor edges, and a hand-supplied (not model-emitted)
+   implementation. The real next steps toward §11 stage 4 ("prove one song builds and
+   self-reviews end-to-end"), in progress: (a) have a model actually emit the
+   `Leaf.implementation` ops from a spec, instead of hand-writing them, (b) build the
+   minimal fold/review code that calls `reference.score_node` itself and writes
+   `ReviewState` back onto the `Node`, (c) two sibling leaves + a parent that composes
+   them, to exercise the "composes with siblings" check for the first time. Now that
+   `save_project` works, real per-node snapshots (§7.3) are unblocked too.
