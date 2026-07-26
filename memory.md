@@ -1081,22 +1081,64 @@ re-emission rather than only ever trying harder at the mix-fix level.
 **Stopped at 3 passes** -- the diagnostic value of a 4th mix-only guess is low
 now that the evidence points at a leaf-level fix instead.
 
+## Leaf-level re-emission tried on the same failure: solved register, created loudness (2026-07-26)
+Routed percussion back to `leaf_emit.py`'s re-emission (via `feedback`, same
+mechanism `escalation.py` already proved on the silent pulse leaf) instead of a
+4th mix-fix pass -- fed it the full 3-pass mix-fix history and why it failed,
+told it explicitly to pick a genuinely higher-register instrument this time.
+Cleaned up first: deleted percussion's ReaComp+ReaEQ, removed the sidechain
+send from kick (abandoning the mix-fix approach for this leaf entirely, not
+layering a new approach on top of the old one).
+
+**The model responded correctly to the feedback**: picked `Percussion/Verber.fxp`
+(a different preset entirely) and moved every note from the mid-range (48-55)
+up to 84-90 -- both changes directly responsive to "pick something whose energy
+sits above 500Hz."
+
+**Real result: solved exactly what it was asked to solve, nothing more.**
+Percussion's centroid moved from 159Hz to **439Hz** -- comfortably clear of
+both kick (230Hz) and bass (111Hz). The composition review's spectral-overlap
+complaint is **completely gone**, for the first time across 4 total fix
+attempts (3 mix-fix + this one). But a **new** problem appeared: percussion
+rendered at -42.1 LUFS, even quieter than any mix-fix attempt -- "Verber" is
+plausibly a reverb-tail-oriented preset, hitting the same class of problem as
+the very first pulse-leaf bug from earlier in the session (a preset whose
+envelope doesn't produce strong output on short percussive MIDI triggers).
+Composition review now fails on a 13dB loudness gap instead of spectral
+overlap; the leaf's own review_leaf also independently failed hard (measured
+distance 17.586) -- the standard leaf-review pipeline would have caught this
+new problem on its own, separate from the composition check.
+
+**The complete picture, now backed by real data across 4 total fix attempts,
+not speculation**: mix-level fixes (sidechain/EQ/highpass) and leaf-level
+re-emission are NOT interchangeable -- each solves a different class of
+problem (relational/register vs. this-specific-leaf's-own-envelope-behavior),
+and this specific failure needed both, applied in sequence, not either alone.
+Neither mechanism is "the" fix; they're complementary tools a real fold would
+need to chain (leaf retry for register, then either another leaf retry or a
+mix-level gain boost for the resulting loudness gap) rather than treat as
+alternatives to pick once.
+
+**Left in this state deliberately** -- not chasing a 5th fix pass. The
+combined value of this whole thread (4 real fix attempts, 2 real mechanisms,
+1 confirmed-correct diagnosis, 1 genuine architectural finding about tool
+complementarity) is now complete enough to design the real next piece from,
+rather than continuing to patch this one specific backbone by hand.
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. **Route the backbone's still-failing spectral overlap back through leaf-level
-   re-emission** (escalation.py's proven mechanism) instead of a 4th mix-fix pass
-   -- ask Haiku to re-pick percussion's preset entirely, with the full 3-pass mix-fix
-   history as feedback context ("mix-level fixes couldn't resolve this without
-   destroying the sound -- pick an instrument whose natural register doesn't
-   clash to begin with"). The natural test of whether escalation.py's decide()
-   should route composition failures to leaf retry, not just own-criteria failures.
+2. **Build real orchestration logic for chaining fix strategies** -- now backed by
+   concrete evidence (not a hypothetical) that a composition failure sometimes
+   needs leaf retry, sometimes needs mix fix, and sometimes needs both in
+   sequence. `escalation.decide()` currently only knows "retry the same leaf" or
+   "escalate to human" -- it has no way to route a composition failure to
+   `mix_fix.py` vs `leaf_emit.py`'s retry, let alone chain both. This is the real
+   "two criteria conflict" trigger's first genuine test case: composition-level
+   fix and leaf-level fix are two different resolution strategies that can each
+   partially succeed while leaving a problem the other approach would catch.
 3. Run the escalation/retry loop for real on the noise leaf's total-silence failure
-   -- a second, independent real case for the same mechanism.
-4. The "two criteria conflict" escalation trigger still has no real test case --
-   arguably #2 above IS one once built (composition says "fix the mix," leaf-level
-   retry says "no, re-pick the sound" -- two different resolution strategies that
-   could genuinely conflict about which node should change).
-5. Everything built this session is still a chain of individually-run proof
+   -- a second, independent real case, still not done.
+4. Everything built this session is still a chain of individually-run proof
    scripts, not one autonomous pipeline. Real remaining integration work.
