@@ -1125,20 +1125,49 @@ combined value of this whole thread (4 real fix attempts, 2 real mechanisms,
 complementarity) is now complete enough to design the real next piece from,
 rather than continuing to patch this one specific backbone by hand.
 
+## Orchestration: which fix strategy, and when to switch -- built and validated (2026-07-26)
+Closed the previous entry's #2. `src/planner/orchestrate.py`'s `choose_fix_strategy()`
+decides mix_fix vs. leaf_retry vs. escalate for a failing composition review, given
+the real, hard-won lesson from the 4-round backbone saga: **reason count trending
+non-improving across consecutive rounds of the same strategy** is the one clean
+signal available from review data alone (crude -- documented as missing at least
+one real regression that didn't change the reason count, round 2 of the saga --
+but real and honestly characterized, not oversold). `max_non_improving` defaults
+to 2, matching `escalation.py`'s own `DEFAULT_MAX_ATTEMPTS` for consistency across
+the planner package, not independently tuned.
+
+**Validated against the actual 4-round history**, not just trusted by design
+(`scripts/orchestrate_validate.py`, replaying the real `ReviewState` reason lists
+from `drop_tree_review.py` through `backbone_reemit_review.py`): the policy
+reproduces the exact sequence of decisions made by hand -- mix_fix, mix_fix,
+mix_fix, switch to leaf_retry -- **4/4 rounds match**. Its recommendation for the
+still-open round 5 (retry `leaf_retry` again, since it's only had one
+non-improving round so far, not two) independently matches what was already
+flagged as the natural next step in the previous entry, before the policy was
+even asked. This isn't a retrofit dressed up as validation -- the reason-count
+data was fixed before the policy was written, and the policy's job was to see if
+a simple, honest rule reproduces sound judgment from it, which it did.
+
+**Explicitly scoped narrowly, not oversold**: `choose_fix_strategy()` decides
+strategy *family* and *when to give up on one*, nothing about *which specific*
+mix fix or leaf change to make (that's still `mix_fix.py`/`leaf_emit.py`'s own
+model calls) or *which sibling* a leaf_retry should target (left to the caller,
+since that requires reading which node_ids a composition failure actually names
+-- the same kind of judgment call this project has consistently kept in
+`review.py`'s structured `ReviewState.reasons`, not string-parsed here).
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. **Build real orchestration logic for chaining fix strategies** -- now backed by
-   concrete evidence (not a hypothetical) that a composition failure sometimes
-   needs leaf retry, sometimes needs mix fix, and sometimes needs both in
-   sequence. `escalation.decide()` currently only knows "retry the same leaf" or
-   "escalate to human" -- it has no way to route a composition failure to
-   `mix_fix.py` vs `leaf_emit.py`'s retry, let alone chain both. This is the real
-   "two criteria conflict" trigger's first genuine test case: composition-level
-   fix and leaf-level fix are two different resolution strategies that can each
-   partially succeed while leaving a problem the other approach would catch.
+2. Actually run round 5 for real (leaf_retry on percussion again, feedback about
+   the loudness problem this time) -- would close the backbone saga out for real,
+   and is the orchestrator's own next recommendation, not a fresh guess.
 3. Run the escalation/retry loop for real on the noise leaf's total-silence failure
    -- a second, independent real case, still not done.
-4. Everything built this session is still a chain of individually-run proof
+4. Wire `choose_fix_strategy()` into an actual loop that calls it, executes its
+   recommendation via the already-existing `mix_fix`/`leaf_emit` mechanisms, and
+   re-reviews automatically -- right now it's validated against historical data
+   replayed by hand, not yet driving a live decision.
+5. Everything built this session is still a chain of individually-run proof
    scripts, not one autonomous pipeline. Real remaining integration work.
