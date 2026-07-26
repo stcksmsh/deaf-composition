@@ -122,11 +122,29 @@ def _validate(fixes, valid_node_ids: set[str]) -> list[dict]:
 
 
 def propose_composition_fix(parent: Node, composition_review: ReviewState,
-                             sibling_info: dict[str, dict], client, retries: int = 2) -> list[dict]:
+                             sibling_info: dict[str, dict], client, retries: int = 2,
+                             prior_fixes: list[dict] | None = None) -> list[dict]:
     """sibling_info: {node_id: {"own_purpose": str, "track_index": int,
     "lufs": float, "centroid_hz": float}} for every sibling review_composition
-    was run against. Returns the model's proposed fixes list (validated node
-    ids only) -- the caller resolves node_id -> real track_index and executes."""
+    was run against -- pass CURRENT values (post any prior fix), not the
+    original failure's numbers. Returns the model's proposed fixes list
+    (validated node ids only) -- the caller resolves node_id -> real
+    track_index and executes.
+
+    prior_fixes: fixes already applied in an earlier pass (this function's
+    own previous return value) -- lets a second call revise/replace an
+    existing EQ cut instead of blindly stacking a new one on top, which is
+    what a real convergence check needs (does the fold settle, or does
+    fixing A just relocate the problem to B, forever)."""
+    prior_note = ""
+    if prior_fixes:
+        prior_note = f"""
+Fixes already applied in an earlier pass (these are ALREADY live -- if the \
+same target still has a problem, consider REVISING one of these rather than \
+adding a redundant third fix on top):
+{json.dumps(prior_fixes, indent=2)}
+"""
+
     prompt = f"""A composition review failed for {parent.node_id}'s children. \
 This is a genuine mixing problem, not something re-picking a preset or note \
 pattern on one leaf alone can fix -- you're deciding how these SPECIFIC \
@@ -134,12 +152,13 @@ siblings should relate to each other.
 
 own_purpose: {parent.own_purpose}
 
-Composition review failure reasons (verbatim, from real measurements):
+Composition review failure reasons (verbatim, from real measurements, current \
+state -- after any prior fixes below already applied):
 {json.dumps(list(composition_review.reasons), indent=2)}
 
-Siblings involved:
+Siblings involved (current measured values):
 {json.dumps(sibling_info, indent=2)}
-
+{prior_note}
 Propose 1-3 concrete fixes. Don't default to sidechain just because this is \
 a rhythm section -- read the actual reported problem (which pairs, loudness \
 vs. spectral) and pick sidechain only where transient masking is really the \

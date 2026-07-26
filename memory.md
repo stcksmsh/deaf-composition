@@ -995,22 +995,66 @@ The new percussion↔bass overlap is itself now a legitimate input to another
 `propose_composition_fix()` call -- the mechanism is real and reusable, not a
 one-shot demo.
 
+## Convergence test, run for real: it did NOT converge (2026-07-26)
+Pass 1's fix relocated the percussion↔bass overlap instead of resolving it. Ran
+a real pass 2 to answer the actual question -- does the fold settle, or
+oscillate -- rather than assuming either.
+
+**`propose_composition_fix()` extended with `prior_fixes`**: a second call gets
+the currently-live fixes as context, so it can revise (e.g., soften the bass
+cut now that the real conflict frequency moved) rather than blindly stacking a
+third fix on top. The model used this well -- it correctly reasoned that the
+bass cut's original justification (separating from percussion's *old* 159Hz
+centroid) no longer applied now that percussion sat at 115Hz, and reduced that
+cut's depth rather than leaving it untouched or removing it.
+
+**But the actual result: it got worse, not better.** Percussion's new notch
+targeted its own current centroid (115Hz) with the intent of pushing remaining
+energy toward its higher transient content -- instead the measured centroid
+moved to **103Hz**, further past bass's 111Hz, not away from it. Composition
+review still FAILED (ratio 1.03 → 1.08, no improvement), percussion got
+noticeably quieter as an unplanned side effect (-29.7 → -34.2 LUFS), and the
+combined backbone mix kept getting quieter across both passes (-24.3 → -26.0 →
+-27.6 LUFS) -- an EQ-cuts-only fix vocabulary has an inherent one-directional
+bias (cuts only remove energy, never add it back), so repeated notching
+trends the whole mix down regardless of whether it's solving the actual
+problem.
+
+**A real, useful architectural finding, not a fluke**: notching *at* a
+broadband percussive signal's own current median frequency doesn't reliably
+push that median away from the notch -- removing energy there just
+redistributes weight to whatever spectral content is left, which can land on
+either side unpredictably. Two iterations of the same instinct ("cut where the
+overlap is") produced two different, both-wrong outcomes. This is real
+information about `mix_fix.py`'s current tool vocabulary being too blunt for
+this class of problem, not something to keep iterating on blindly hoping the
+third try lands -- a genuinely better fix would likely need a different tool
+(a highpass on percussion's low end rather than a narrow notch at its
+centroid, so the removed energy is structurally guaranteed to shift the median
+upward instead of leaving the outcome to chance) or accepting the tradeoff and
+declaring victory on the *original* kick↔percussion fix alone rather than
+chasing the percussion↔bass overlap it created.
+
+Stopped at 2 passes rather than trying a 3rd blind iteration -- consistent
+with the whole session's pattern of treating a real negative result as
+information worth stopping on, not something to paper over with another guess.
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. Feed the new percussion↔bass overlap back through `propose_composition_fix()` --
-   a second real iteration of the same mechanism, and a genuine test of whether
-   the fold can converge (fix A creates problem B, fix B needs to not re-create A)
-   rather than oscillate.
+2. Give `mix_fix.py` a highpass-filter tool (structurally guaranteed to shift a
+   signal's spectral centroid upward, unlike a notch's unpredictable direction)
+   as a real 3rd option alongside sidechain/eq_cut -- directly motivated by the
+   convergence failure above, not a guess.
 3. Run the escalation/retry loop for real on the noise leaf's total-silence failure
    -- a natural second real test of `src/planner/escalation.py`, on a more severe
    case than the pulse leaf's -52 LUFS (this one is *undefined* LUFS).
 4. The "two criteria conflict" escalation trigger still has no real test case or
    conflict-detection logic — needs a genuine observed case to design against, not
    a synthetic one, consistent with how every other check this session got built.
-5. Everything built this session (leaf_proof.py through backbone_fix_review.py) is
-   still a chain of individually-run proof scripts, not one autonomous pipeline
+5. Everything built this session (leaf_proof.py through backbone_fix_review_2.py)
+   is still a chain of individually-run proof scripts, not one autonomous pipeline
    that walks a whole song's tree, executes it, and folds review end to end
    without a human running each script in sequence by hand. That's the real
    remaining integration work.
