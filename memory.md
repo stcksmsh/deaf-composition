@@ -749,24 +749,63 @@ Composition review correctly failed hard (huge LUFS gaps driven by the near-sile
 layer, plus 2 flagged spectral-overlap pairs), combined-mix LUFS (-14.7) sane
 otherwise (no cancellation).
 
+## Seam continuity: plan §3.6's third check, run for real (2026-07-26)
+Closed the previous entry's #2. First moved the "build" section's 4 tracks from
+timeline position 0 to position 16 (`set_item_position` ×4 + `save_project`) --
+they'd been sitting *overlapping* the intro the whole time, since
+`build_section_proof.py`'s scheduler only ever allocated tracks, never timeline
+position (nothing needed real sequencing until this check). Rendered the actual
+boundary from the live combined timeline (every track audible together, not
+soloed): `seam_before_intro_tail.wav` (12-16s) and `seam_after_build_head.wav`
+(16-20s) — the real acoustic handoff, not two isolated section renders compared
+after the fact. Also rendered `song_so_far.wav` (0-32s) for an actual listen
+across the transition, and re-rendered `section_build_combined.wav` at its new
+16-32s position (the old 0-16s version was stale the moment the tracks moved).
+
+**`review_seam(before_state, after_state)`** (`src/planner/review.py`) — plan
+§3.6's third check, the one no code existed for at all until this. Deliberately
+looser thresholds than `review_composition`'s simultaneous-sibling checks (a
+section change is often *supposed* to jump — documented directly in the
+threshold constants' comments, not just here): loudness gap > 10dB, or spectral
+centroid ratio > 2.0 (more than an octave) right at the boundary.
+
+**Real result**: loudness held fine (-20.5 → -15.4 LUFS, 5.1dB gap, well under
+threshold) — but spectral centroid jumped from 1735Hz to 567Hz, ratio 3.06,
+**failing** the check. Makes complete sense once you know what's on each side:
+intro is airy/high-register (pad + bells), build immediately drops into
+low-register material (the rhythmic pulse's root-note pattern + bass) — a real,
+abrupt timbral handoff with nothing bridging the register gap between them. Not
+a contrived failure; an honest one, same pattern as every other genuine finding
+this session.
+
+**Also, for the first time, a real `NeighborEdge`** (plan §3.4): built a `song`
+parent `Node` over the two existing sections with `NeighborEdge(target=
+"proof/section_build", kind="local", weight=1.0)` on it — `node.py`'s schema has
+carried `NeighborEdge` since the schema was frozen, nothing before this session
+ever actually instantiated one.
+
+All three of plan §3.6's review checks now have real, tested code:
+`review_leaf` (own criteria), `review_composition` (siblings), `review_seam`
+(neighbors) — `review.py`'s own module docstring updated to reflect this instead
+of listing seam continuity as "isn't here."
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. Seam continuity (plan §3.6 check 3) still has no code — needs two *timeline-
-   adjacent* leaves (not parallel layers like both this run's and fold_proof.py's
-   pairs) to even be testable — the intro and build sections built so far actually
-   sit at the same timeline position (0-16s each), not sequential; making them
-   genuinely adjacent (build starting where intro ends) is a small, natural next step
-   that would unlock testing this for the first time.
-3. `decompose()` only ever returns leaves directly (documented as a deliberate
+2. `decompose()` only ever returns leaves directly (documented as a deliberate
    scope-down, not a limitation of the code) — true multi-level recursion (calling
    decompose again on a child whose own spec still looks too broad for one leaf)
    hasn't been exercised yet, just structurally supported.
-4. Model-emission quality is now a known, real cost center: 2 of 6 leaf-implementation
+3. Model-emission quality is now a known, real cost center: 2 of 6 leaf-implementation
    calls across this session's two decompose runs invented a nonexistent param name
    for an override. `apply_surge_preset`'s fail-loud behavior contained the damage
    correctly both times, but a real pipeline at scale will want either a curated
    list of known-safe override names fed into the emission prompt, or an
    automatic retry-without-overrides fallback built into the executor rather than
    done by hand each time.
+4. Nothing yet *acts* on a failed review — `review_seam`'s FAIL here (and every
+   other FAIL this session) just gets printed and written to a result JSON. Plan
+   §7.4's escalation logic (re-split, patch, or surface to the human after N
+   failures) has no code at all — the natural next structural piece once enough
+   individual checks exist to have something worth escalating.

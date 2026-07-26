@@ -1,19 +1,19 @@
-"""Minimal fold/review (plan §3.6) -- the piece node.py's own docstring
-explicitly deferred ("no split/decompose/fold logic yet"). Only the two
-checks a real leaf pair can actually exercise right now:
+"""Fold/review (plan §3.6) -- the piece node.py's own docstring explicitly
+deferred ("no split/decompose/fold logic yet"). All three of plan §3.6's
+checks now have real code:
 
   1. own acceptance criteria -- reference.score_node against the reference
      envelope, exactly what leaf_proof.py/leaf_emit.py called by hand.
   2. composes with siblings -- a real, if deliberately lightweight,
-     structural coupling check between two already-scored children's own
-     solo measurements (not a combined mixed render -- see review_composition's
-     docstring for why that's a scoped-down version, not a placeholder).
-
-Seam continuity (plan §3.6 check 3) isn't here: it applies to sequential
-timeline neighbors sharing a boundary (plan §3.4's local edges), and the
-two leaves this module was first run against are parallel layers of the
-same section, not timeline-adjacent -- there's no seam between them to
-check yet.
+     structural coupling check between simultaneous children's own solo
+     measurements plus an actual combined-mix render (see
+     review_composition's own docstring).
+  3. seams hold -- a real, deliberately looser check between timeline-
+     *adjacent* nodes' boundary windows (see review_seam's own docstring).
+     Needed two sections to actually sit sequentially on the timeline
+     before this was even testable -- the first two proof runs
+     (fold_proof.py, build_section_review.py) both built parallel layers
+     of one section, not sequential ones.
 """
 from __future__ import annotations
 
@@ -40,6 +40,15 @@ SPECTRAL_OVERLAP_RATIO_THRESHOLD = 1.5
 # the loudest solo sibling, that's a real signal of phase cancellation or
 # something wrong in the render chain, not just "close balance."
 COMBINED_QUIETER_THAN_LOUDEST_DB = 3.0
+
+# A seam is a boundary between timeline-*adjacent* nodes (plan §3.4's local
+# edges), not simultaneous siblings -- a real handoff can legitimately jump
+# in both loudness and timbre (that's often the whole point of a section
+# change), so these thresholds are deliberately looser than the composition
+# checks above. What they catch is an *abrupt* jump with nothing bridging
+# it, not a deliberate contrast.
+SEAM_LOUDNESS_JUMP_THRESHOLD_DB = 10.0
+SEAM_SPECTRAL_JUMP_RATIO_THRESHOLD = 2.0  # more than an octave right at the boundary
 
 
 def review_leaf(node: Node, state: dict, library: dict) -> tuple[ReviewState, dict]:
@@ -140,4 +149,50 @@ def review_composition(sibling_states: dict[str, dict],
         status=ReviewStatus.PASSED if composes else ReviewStatus.FAILED,
         reasons=tuple(reasons),
         composes_with_siblings=composes,
+    )
+
+
+def review_seam(before_state: dict, after_state: dict) -> ReviewState:
+    """Check 3 (plan §3.6): does the handoff between two timeline-*adjacent*
+    nodes hold? `before_state`/`after_state` should be short windows right
+    at the boundary (e.g. the last few seconds of one section, the first
+    few of the next), not the sections' own full-length measured stats --
+    a seam is a local property of the boundary itself, not whatever each
+    section averages out to overall. Judged at the lowest common ancestor
+    that can see both sides (plan §3.6) -- the caller is responsible for
+    that; this function only computes the verdict.
+
+    Deliberately looser thresholds than review_composition's simultaneous-
+    sibling checks (see the threshold constants' own comments): a section
+    change is often *supposed* to jump in loudness or timbre. What this
+    catches is an abrupt jump with nothing bridging it, not a deliberate
+    contrast -- still a real, if coarse, distinction, not a stand-in for
+    one. A genuine "does this transition work musically" judgment is well
+    beyond what a measurement-only check can make."""
+    reasons = []
+
+    before_lufs = before_state["measured"]["lufs"]
+    after_lufs = after_state["measured"]["lufs"]
+    gap = abs(after_lufs - before_lufs)
+    if gap > SEAM_LOUDNESS_JUMP_THRESHOLD_DB:
+        reasons.append(
+            f"loudness jumps {gap:.1f}dB across the seam "
+            f"({before_lufs:.1f} -> {after_lufs:.1f} LUFS)"
+        )
+
+    before_c = before_state["measured"]["spectral_centroid"]["median"]
+    after_c = after_state["measured"]["spectral_centroid"]["median"]
+    if before_c > 0 and after_c > 0:
+        ratio = max(before_c, after_c) / min(before_c, after_c)
+        if ratio > SEAM_SPECTRAL_JUMP_RATIO_THRESHOLD:
+            reasons.append(
+                f"spectral centroid jumps from {before_c:.0f}Hz to {after_c:.0f}Hz "
+                f"(ratio {ratio:.2f}) -- an abrupt timbral shift right at the boundary"
+            )
+
+    seams_hold = not reasons
+    return ReviewState(
+        status=ReviewStatus.PASSED if seams_hold else ReviewStatus.FAILED,
+        reasons=tuple(reasons),
+        seams_hold=seams_hold,
     )
