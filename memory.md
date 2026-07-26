@@ -581,16 +581,85 @@ were lost on every restart) — worth knowing if a future session finds unexpect
 leftover tracks in `state/scratch/session.rpp`, that's expected, not corruption.
 `state/` is gitignored, so this file itself never lands in git.
 
+## DSL emission + minimal fold/review, both proven live (2026-07-26)
+User set up a real `ANTHROPIC_API_KEY` for this (given directly in chat — stored in
+`.env`, gitignored, never committed; `anthropic==0.120.0` added to `requirements.txt`).
+Confirmed working with a live Haiku call before building anything on top of it.
+
+**`scripts/leaf_emit.py`** — real DSL emission (plan §6/§8.1), not hand-authored.
+Given only a `Node`'s `own_purpose`/`spec`/`acceptance_criteria`/`scope_chain` and a
+curated 3-tool catalog (`apply_surge_preset`, `create_midi_item`,
+`add_midi_notes_batch` — Anthropic tool-use format, `tool_choice: any`), a real
+`claude-haiku-4-5-20251001` call picked `Pads/Distant.fxp` (a genuinely apt name for
+an atmospheric-intro spec it was never shown a preset list description of, just
+filenames) and one sustained middle-C held across the full 8-bar item — a sensible,
+unforced plan. Rendering is deliberately *not* something the model plans (deterministic
+plumbing derived from the emitted MIDI item, not a creative decision, matches `Leaf`'s
+own "no remaining creative sub-decision" definition) — the script appends it. Scoped
+down on purpose: exactly one MIDI item per leaf, referenced by a fixed `item_index=0`
+placeholder (sidesteps needing multi-turn execution feedback for a real REAPER-assigned
+item index); `_validate_ops` fails loudly on any other op-sequence shape rather than
+silently patching it. **Emission only** — the script doesn't execute against REAPER
+itself (no standalone client exists for the ~150 reaper-mcp tools outside a real MCP
+session); the controlling Claude Code session ran the emitted ops verbatim, same
+pattern as `leaf_proof.py`.
+
+Executed live: rebuilt a fresh `session.rpp` (the earlier 17-track scratch project was
+never saved, so it's gone — expected, `state/` is gitignored) with just the one track
+this leaf needed, ran the three emitted ops **unmodified except `track_index` rebased
+12→0** (the spec text baked in an assumption about a project layout that no longer
+existed by execution time — a runtime-environment fact, not a change to anything Haiku
+actually decided). `apply_surge_preset` succeeded (503/778 params). Rendered, and for
+the first time **used the fixed `save_project` for real** in the actual pipeline (not
+just the fix's own verification) — instant, no dialog, and `rpp.parse_file` correctly
+recovered exactly the 1 note that was added, confirming the fix works for downstream
+tooling too, not just "doesn't hang." Scored against `"intro"`: measured distance 4.36
+(fails the 3.0 threshold — same loudness-scale-mismatch pattern as every solo-stem
+render this session, a single soft pad note read against full mixed/mastered
+references), embedding distance 0.772 (passes the 0.8 threshold, barely — a real signal
+that "Distant.fxp" was a sonically apt pick).
+
+**`src/planner/review.py`** — the fold/review code `node.py`'s own docstring flagged as
+not yet built. Two real functions: `review_leaf(node, state, library)` (check 1 —
+`reference.score_node` against the node's own `acceptance_criteria`, returns a real
+`ReviewState`) and `review_composition(sibling_states)` (check 2 — a genuine, if
+deliberately lightweight, structural check: do siblings' own solo LUFS levels sit
+within 12dB of each other, i.e. would one bury the other before any mixing even
+happens). Scoped down honestly: composition is checked from each child's own solo
+`state.json`, not a combined mixed render (spectral masking once layers actually
+overlap is real future work, not built) — and seam continuity (plan §3.6 check 3)
+isn't touched at all, since these two leaves are parallel layers of one section, not
+timeline-adjacent, so there's no seam between them yet.
+
+**`scripts/fold_proof.py`** ran it for real against two siblings under one parent
+`Split` node: `proof/leaf_intro_texture` (the model-emitted pad from `leaf_emit.py`)
+and a hand-written second layer, `proof/leaf_intro_bells` (ReaSynth, 4 sparse quiet
+high notes scattered across the same 16s, rendered solo via `set_track_solo` so its
+`state.json` reflects only its own audio). Both individual leaves **failed** their own
+acceptance criteria (bells: measured distance 5.26 vs threshold 4.0, same loudness-scale
+pattern; embedding distance 0.604, actually better than the pad's) — but the **parent's
+composition review PASSED**: an 8.5dB LUFS gap (pad -24.8, bells -16.3) is under the
+12dB burial threshold, a correct, non-trivial "these two would sit together reasonably"
+verdict. Real discrimination at both the leaf and the composition level, not a rubber
+stamp at either.
+
+**A known, honest gap surfaced, not fixed**: `state.build()`'s `symbolic` extraction has
+no track-scoping — `leaf_intro_bells`'s state.json's symbolic notes include both tracks'
+notes (session.rpp had both by the time it was built), since `_slice_symbolic` only
+slices by time region, not by track. Doesn't affect the `measured`/`embedding` scoring
+used here (audio-domain, computed from the isolated solo render, unaffected), but a real
+per-node snapshot (§7.3) will eventually need track-scoped symbolic extraction too — not
+built, flagged for whoever picks this up next.
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
-   pushing stage 3/4 (Pigments' macro fallback is the remaining low-priority item).
-2. Stage 3/4 proper: the leaf-proof used one *isolated* leaf with no scope chain
-   ancestors, no siblings, no neighbor edges, and a hand-supplied (not model-emitted)
-   implementation. The real next steps toward §11 stage 4 ("prove one song builds and
-   self-reviews end-to-end"), in progress: (a) have a model actually emit the
-   `Leaf.implementation` ops from a spec, instead of hand-writing them, (b) build the
-   minimal fold/review code that calls `reference.score_node` itself and writes
-   `ReviewState` back onto the `Node`, (c) two sibling leaves + a parent that composes
-   them, to exercise the "composes with siblings" check for the first time. Now that
-   `save_project` works, real per-node snapshots (§7.3) are unblocked too.
+   pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
+2. Stage 4 gaps still open, now smaller: (a) `state.build()`'s symbolic extraction needs
+   track-scoping, not just time-region-scoping (see above); (b) `review_composition`
+   only checks solo-state loudness balance — a real combined-mix render + spectral
+   masking check is the next honest step up; (c) seam continuity (plan §3.6 check 3)
+   has no code at all yet — needs two *timeline-adjacent* leaves (not parallel layers
+   like this run's pair) to even be testable; (d) everything so far is manually
+   orchestrated in a proof script, not an actual recursive decompose/schedule loop
+   walking a whole tree — that's still the real, unstarted core of stage 4.

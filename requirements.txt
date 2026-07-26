@@ -21,3 +21,8 @@ pyloudnorm==0.1.1  # LUFS (BS.1770); needs only numpy + scipy, no pin conflicts
 mcp==1.28.1  # FastMCP SDK -- backs scripts/deaf_composition_mcp_server.py, the
              # supplementary local MCP server exposing apply_surge_preset() as a
              # real tool for the leaf-execution model, alongside the reaper-mcp tools.
+
+anthropic==0.120.0  # scripts/leaf_emit.py -- real Haiku call that emits a
+                    # Leaf.implementation ops list from a spec (plan §6/§8.1:
+                    # DSL emission vs the manifest). Reads ANTHROPIC_API_KEY
+                    # from .env (gitignored, never committed).

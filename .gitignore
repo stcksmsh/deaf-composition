@@ -9,3 +9,4 @@ Backups/
 state/
 reference_library.json
 manifest.json
+.env
