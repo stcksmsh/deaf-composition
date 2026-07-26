@@ -1192,18 +1192,68 @@ since that requires reading which node_ids a composition failure actually names
 -- the same kind of judgment call this project has consistently kept in
 `review.py`'s structured `ReviewState.reasons`, not string-parsed here).
 
+## Round 5: the live loop worked, and it found a worse bug + its own blind spot (2026-07-26)
+Built `scripts/backbone_orchestrated_round5.py` -- rebuilds the real 5-round review
+history from the actual persisted `state.json` files on disk (real audio
+measurements, not hand-typed reason strings), calls `choose_fix_strategy()` for
+real (not replayed), and dispatches to a real `emit_leaf_implementation()` call
+using `escalation.feedback_for_retry()` generically instead of hand-crafted
+feedback text. This is qualitatively different from `orchestrate_validate.py`:
+that replayed fixed historical data through the function; this let the function's
+live output pick the next real action.
+
+**It worked as a pipeline**: same review history reconstructed independently from
+real files matched the hand-replayed version exactly; the orchestrator correctly
+said `leaf_retry`; the resulting live model call (using generic feedback, not my
+own wording) produced a genuinely different response from every prior attempt --
+`Percussion/Synth Tom 2.fxp`, mid-range notes (60-64), dense 16th-note pattern.
+
+**Executed live, and it's the worst result of the entire session**: near-total
+digital silence, sample_peak **-110.2dB** (not "quiet" -- essentially the noise
+floor), `own-criteria measured distance 295.141` (vs. threshold 4.0, the largest
+distance recorded all session by a wide margin).
+
+**A real, second-time-confirmed limitation of `orchestrate.py` itself**: round 4
+(-42.1 LUFS) and round 5 (-110dB, effectively -infinity) both report as exactly
+"1 reason" in the composition review ("undefined LUFS" / "13dB apart" -- one
+reason either way), so the reason-count signal treats them as equally bad,
+completely missing that round 5 is a categorically different failure. This is
+precisely the blind spot the module's own docstring already flagged from round 2
+of the mix-fix saga (a real regression that didn't change the reason count) --
+now confirmed on a starker case, not a one-off.
+
+**A new hypothesis worth testing before more retries, not yet confirmed**: three
+different percussion presets across this whole saga -- a pad-type preset (the
+very first pulse-leaf bug), `Verber.fxp`, and now `Synth Tom 2.fxp` -- have all
+produced near/total silence when driven by the same short 0.25-beat MIDI note
+length. That pattern is starting to look less like "wrong preset each time" and
+more like a structural mismatch between very short note triggers and how many
+Surge envelopes actually respond -- worth testing directly (e.g. re-run round 5
+with longer note lengths, same preset) before assuming the next preset choice is
+the fix. Not chased further this session -- flagged as the honest next hypothesis,
+not confirmed.
+
+**Deliberately stopped here** rather than immediately trying a round 6 -- the
+combined yield (a working live loop, a newly confirmed orchestrator limitation,
+and a real testable hypothesis about note length) is a complete, valuable stopping
+point, and blindly retrying a 6th time without addressing the note-length
+hypothesis would likely just reproduce the same class of failure with a 4th preset.
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. Actually run round 5 for real (leaf_retry on percussion again, feedback about
-   the loudness problem this time) -- would close the backbone saga out for real,
-   and is the orchestrator's own next recommendation, not a fresh guess.
-3. Run the escalation/retry loop for real on the noise leaf's total-silence failure
-   -- a second, independent real case, still not done.
-4. Wire `choose_fix_strategy()` into an actual loop that calls it, executes its
-   recommendation via the already-existing `mix_fix`/`leaf_emit` mechanisms, and
-   re-reviews automatically -- right now it's validated against historical data
-   replayed by hand, not yet driving a live decision.
+2. **Test the note-length hypothesis directly** -- re-render percussion with the
+   SAME preset (Synth Tom 2.fxp) but longer note lengths (e.g. 0.5-1 beat instead
+   of 0.25) before trying yet another preset. If that alone fixes the silence,
+   it's a much more valuable, generalizable finding than another leaf_retry.
+3. Consider hardening `orchestrate.py`'s convergence signal beyond raw reason
+   count -- e.g. also compare LUFS magnitude directly, not just whether a reason
+   fired -- now backed by two independent real cases where it missed a severity
+   change (round 2 of the mix-fix saga, and round 4->5 here).
+4. Run the escalation/retry loop for real on the noise leaf's total-silence failure
+   (a different leaf, from the multi-level recursion work) -- a second, independent
+   real case, still not done, and now plausibly related to the same note-length
+   hypothesis (worth checking its note lengths too before assuming it's unrelated).
 5. Everything built this session is still a chain of individually-run proof
    scripts, not one autonomous pipeline. Real remaining integration work.
