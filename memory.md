@@ -1039,22 +1039,64 @@ Stopped at 2 passes rather than trying a 3rd blind iteration -- consistent
 with the whole session's pattern of treating a real negative result as
 information worth stopping on, not something to paper over with another guess.
 
+## Pass 3: highpass added, diagnosis confirmed correct, deeper problem surfaced (2026-07-26)
+Added `highpass` as a real third `mix_fix.py` fix type (ReaEQ's existing
+bandtype=0 hipass band -- no new REAPER tool needed), with the tool description
+explicitly warning against `eq_cut`'s unpredictable direction (backed by pass
+2's real failure, not a guess) and recommending highpass when a signal needs
+to vacate a register entirely.
+
+**The model used it well and reasoned about the whole history**: given all of
+pass 1 + pass 2's fixes as `prior_fixes` context, it proposed highpassing
+percussion at 220Hz *and*, unprompted, reverting the now-redundant bass EQ cut
+back toward 0dB -- correctly recognizing that once percussion is structurally
+out of the low register, bass doesn't need its own compensating cut anymore.
+Genuine simplification, not more stacking.
+
+**Real result, and it's the most informative one yet**: the centroid prediction
+was **exactly right** -- percussion moved from 103Hz to 159Hz, upward as a
+highpass should (confirms pass 2's diagnosis was correct, not just plausible).
+But 159Hz is almost precisely percussion's *original*, pre-any-fix centroid --
+three passes netted to zero displacement, and both original overlaps
+(kick↔percussion, percussion↔bass) are back at nearly their starting ratios.
+**Worse**, a highpass at 220Hz turned out to remove so much of
+`Plucks/Metallic.fxp`'s actual energy that percussion's level collapsed to
+-43.3 LUFS (from -34.2) -- a new 14.3dB gap vs. bass, the worst loudness-balance
+failure of any pass. The whole backbone kept trending quieter across all three
+passes (-24.3 → -26.0 → -27.6 → -28.5 LUFS combined) -- every fix so far has
+only removed energy, none has added any back, a structural bias built into
+this session's chosen mix-fix vocabulary (sidechain ducking + subtractive EQ
+only).
+
+**The real lesson, confirmed by evidence across 3 real passes, not assumed**:
+for a preset whose actual sonic identity lives in the exact register clashing
+with its neighbors, mix-level surgery (sidechain, notch, or highpass) cannot
+resolve the clash without gutting what made the sound useful in the first
+place -- the correct fix is picking a *different preset* at the leaf level,
+not further mix processing. This connects directly back to the already-proven
+`escalation.py` retry mechanism (exactly what fixed the earlier silent-pulse
+leaf by re-emitting with a different, better-suited preset) -- suggesting
+composition-level failures should sometimes route back to leaf-level
+re-emission rather than only ever trying harder at the mix-fix level.
+**Stopped at 3 passes** -- the diagnostic value of a 4th mix-only guess is low
+now that the evidence points at a leaf-level fix instead.
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. Give `mix_fix.py` a highpass-filter tool (structurally guaranteed to shift a
-   signal's spectral centroid upward, unlike a notch's unpredictable direction)
-   as a real 3rd option alongside sidechain/eq_cut -- directly motivated by the
-   convergence failure above, not a guess.
+2. **Route the backbone's still-failing spectral overlap back through leaf-level
+   re-emission** (escalation.py's proven mechanism) instead of a 4th mix-fix pass
+   -- ask Haiku to re-pick percussion's preset entirely, with the full 3-pass mix-fix
+   history as feedback context ("mix-level fixes couldn't resolve this without
+   destroying the sound -- pick an instrument whose natural register doesn't
+   clash to begin with"). The natural test of whether escalation.py's decide()
+   should route composition failures to leaf retry, not just own-criteria failures.
 3. Run the escalation/retry loop for real on the noise leaf's total-silence failure
-   -- a natural second real test of `src/planner/escalation.py`, on a more severe
-   case than the pulse leaf's -52 LUFS (this one is *undefined* LUFS).
-4. The "two criteria conflict" escalation trigger still has no real test case or
-   conflict-detection logic — needs a genuine observed case to design against, not
-   a synthetic one, consistent with how every other check this session got built.
-5. Everything built this session (leaf_proof.py through backbone_fix_review_2.py)
-   is still a chain of individually-run proof scripts, not one autonomous pipeline
-   that walks a whole song's tree, executes it, and folds review end to end
-   without a human running each script in sequence by hand. That's the real
-   remaining integration work.
+   -- a second, independent real case for the same mechanism.
+4. The "two criteria conflict" escalation trigger still has no real test case --
+   arguably #2 above IS one once built (composition says "fix the mix," leaf-level
+   retry says "no, re-pick the sound" -- two different resolution strategies that
+   could genuinely conflict about which node should change).
+5. Everything built this session is still a chain of individually-run proof
+   scripts, not one autonomous pipeline. Real remaining integration work.

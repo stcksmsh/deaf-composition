@@ -50,14 +50,25 @@ MIX_FIX_TOOL = {
                     "properties": {
                         "type": {
                             "type": "string",
-                            "enum": ["sidechain", "eq_cut"],
+                            "enum": ["sidechain", "eq_cut", "highpass"],
                             "description": (
                                 "sidechain: ducks target's level whenever trigger "
                                 "actually plays -- right when the two parts mostly "
                                 "don't overlap in time and the problem is transient "
-                                "masking. eq_cut: permanently cuts a frequency band "
-                                "on target -- right when the two parts constantly "
-                                "occupy the same register regardless of timing."
+                                "masking. eq_cut: a narrow notch at one frequency on "
+                                "target -- CAUTION: cutting energy at a signal's own "
+                                "spectral centroid does NOT reliably push that "
+                                "centroid away from the cut; it redistributes the "
+                                "remaining energy, which can land on either side "
+                                "unpredictably (confirmed empirically: this backfired "
+                                "on this exact backbone once already). highpass: "
+                                "removes ALL content below cutoff_hz -- unlike eq_cut, "
+                                "this is structurally guaranteed to shift the "
+                                "remaining signal's centroid upward (only lower "
+                                "content is removed, nothing shifts down), the right "
+                                "choice when a signal needs to vacate a low register "
+                                "entirely for a neighbor rather than avoid one "
+                                "specific frequency within it."
                             ),
                         },
                         "rationale": {
@@ -70,7 +81,7 @@ MIX_FIX_TOOL = {
                         },
                         "target_node_id": {
                             "type": "string",
-                            "description": "the node being ducked (sidechain) or EQ'd (eq_cut)",
+                            "description": "the node being ducked/EQ'd/highpassed",
                         },
                         "send_volume_db": {
                             "type": "number",
@@ -86,7 +97,14 @@ MIX_FIX_TOOL = {
                         },
                         "q": {
                             "type": "number",
-                            "description": "eq_cut only: bandwidth, e.g. 1.5 (narrower = more surgical)",
+                            "description": (
+                                "eq_cut/highpass: bandwidth or slope steepness, "
+                                "e.g. 1.5 (narrower/steeper = more surgical)"
+                            ),
+                        },
+                        "cutoff_hz": {
+                            "type": "number",
+                            "description": "highpass only: frequency below which content is removed",
                         },
                     },
                     "required": ["type", "rationale", "target_node_id"],
@@ -118,6 +136,8 @@ def _validate(fixes, valid_node_ids: set[str]) -> list[dict]:
             raise ValueError(f"unknown trigger_node_id {f.get('trigger_node_id')!r}")
         if f["type"] == "eq_cut" and f.get("freq_hz") is None:
             raise ValueError(f"eq_cut fix missing freq_hz: {f!r}")
+        if f["type"] == "highpass" and f.get("cutoff_hz") is None:
+            raise ValueError(f"highpass fix missing cutoff_hz: {f!r}")
     return fixes
 
 
@@ -162,8 +182,11 @@ Siblings involved (current measured values):
 Propose 1-3 concrete fixes. Don't default to sidechain just because this is \
 a rhythm section -- read the actual reported problem (which pairs, loudness \
 vs. spectral) and pick sidechain only where transient masking is really the \
-issue, eq_cut where constant register crowding is the issue. A fix must \
-target one of the sibling node_ids given above."""
+issue. For spectral overlap, prefer highpass over eq_cut when a signal needs \
+to vacate a low register entirely (highpass's effect on the centroid is \
+predictable; eq_cut's is not, per the tool description above -- this has \
+already backfired once on this exact kind of problem). A fix must target one \
+of the sibling node_ids given above."""
 
     valid_ids = set(sibling_info)
     last_error: Exception | None = None
