@@ -690,15 +690,83 @@ model of the combined render itself (does the pad's harmonic content get eaten o
 the bells sit on top, not just "are their solo centroids close") — flagged as real
 future work in `review_composition`'s own docstring, not silently assumed done.
 
+## Real decompose→emit chain, run end-to-end on a 4-leaf model-decided section (2026-07-26)
+Closed stage 4's actual unstarted core (previous entry's #2): a real recursive
+decompose step, chained to the already-proven emit step, run on a genuinely new
+section ("build," not a rerun of the intro pad+bells pair).
+
+**`src/planner/decompose.py`** — the piece nothing before this session touched at
+all: a real Sonnet call (plan §6: mid-tree decomposition) that decides how many
+leaf children a Split node needs and what each one's job is, given only
+`own_purpose`/`spec`/`scope_chain`. Forced tool-use (`tool_choice: {"type": "tool",
+"name": "decompose"}`), 2-4 children. **Hit and root-caused a real API quirk**: the
+first 4 attempts against the real prompt (not a toy one — a simplified paraphrase
+worked fine on the first try) came back with `children` as a giant, perfectly
+well-formed JSON string double-encoding the whole tool input, instead of an actual
+array — `len()` on the string then silently "succeeded" by counting characters
+(3395, 4055...), which is how this was caught. Retries alone didn't fix it (3/3
+failures on the real prompt). **Fixed by recovering the string**, not just
+retrying: the content inspected mid-failure was genuinely excellent decomposition,
+not garbage, so `_validate()` now `json.loads()`s a string `children` before giving
+up, with the failure mode and reasoning documented directly in the code, not just
+here.
+
+**`src/planner/scheduler.py`** — `build_section()` chains `decompose()` to
+`leaf_emit.py`'s existing `emit_leaf_implementation()` (imported as-is via the same
+scripts-as-flat-modules pattern the rest of the project already uses, e.g.
+`apply_surge_preset_live.py` importing from `apply_surge_preset.py`), assigning
+each decomposed child a fresh sequential track (plumbing, not a creative decision,
+so the scheduler owns it) and a tapered scope-chain link back to the parent.
+Doesn't execute — same documented gap as `leaf_emit.py` (no standalone client for
+the ~150 reaper-mcp tools outside a real MCP session).
+
+**Real run, `scripts/build_section_proof.py`**: a "build section" spec (rising
+energy after the intro, before a drop) decomposed into **4 model-decided layers**
+— rhythmic pulse, rising bass, atmospheric glue texture, rising lead accent —
+each with a genuinely coherent spec (increasing density/velocity toward the end,
+staying below drop-level intensity, explicit frequency-range separation between
+layers) and a real emitted implementation, including the model choosing its own
+Surge override (`{"Filter Cutoff": 0.7}` on the texture layer) unprompted.
+
+**Two real leaf-emission mistakes hit during execution, both handled the way the
+system is supposed to handle them**: the model twice invented a plausible-sounding
+but nonexistent Surge param name for an override (`"Master Volume"`, then
+`"Filter Cutoff"` again on a *different* preset) — `apply_surge_preset` correctly
+raised immediately both times (its own documented behavior: "caller mistakes worth
+failing loudly on"), and the executing session retried without the invalid
+override rather than guessing a fix or silently patching the emitted plan.
+
+**Reviewed for real** (`scripts/build_section_review.py`, reusing `review_leaf`/
+`review_composition` unchanged): 3 of 4 leaves failed their own criteria, 1
+(**the bass layer**) passed cleanly. The standout finding: the rhythmic-pulse
+layer came out at **-52.1 LUFS**, essentially inaudible — the model paired "MW
+Pulsating" (a pad preset, slow attack/release) with a pattern of short 0.5-beat
+staccato hits; a pad envelope structurally can't reach useful amplitude on notes
+that short. **A real preset/technique mismatch the model had no way to hear**,
+caught only because the audio was actually rendered and measured — exactly the
+class of failure this whole architecture exists to catch, not a contrived result.
+Composition review correctly failed hard (huge LUFS gaps driven by the near-silent
+layer, plus 2 flagged spectral-overlap pairs), combined-mix LUFS (-14.7) sane
+otherwise (no cancellation).
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. Stage 4's actual unstarted core: everything so far (`leaf_proof.py`, `leaf_emit.py`,
-   `fold_proof.py`) is a proof script manually orchestrated step by step by the
-   controlling session, not a real recursive decompose/schedule loop that walks a tree
-   top-down and folds verdicts back up on its own. That's the next real build.
-3. Seam continuity (plan §3.6 check 3) still has no code — needs two *timeline-
-   adjacent* leaves (not parallel layers like this session's pair) to even be
-   testable; will likely fall out naturally once real sequential leaves exist under
-   the decompose loop from #2.
+2. Seam continuity (plan §3.6 check 3) still has no code — needs two *timeline-
+   adjacent* leaves (not parallel layers like both this run's and fold_proof.py's
+   pairs) to even be testable — the intro and build sections built so far actually
+   sit at the same timeline position (0-16s each), not sequential; making them
+   genuinely adjacent (build starting where intro ends) is a small, natural next step
+   that would unlock testing this for the first time.
+3. `decompose()` only ever returns leaves directly (documented as a deliberate
+   scope-down, not a limitation of the code) — true multi-level recursion (calling
+   decompose again on a child whose own spec still looks too broad for one leaf)
+   hasn't been exercised yet, just structurally supported.
+4. Model-emission quality is now a known, real cost center: 2 of 6 leaf-implementation
+   calls across this session's two decompose runs invented a nonexistent param name
+   for an override. `apply_surge_preset`'s fail-loud behavior contained the damage
+   correctly both times, but a real pipeline at scale will want either a curated
+   list of known-safe override names fed into the emission prompt, or an
+   automatic retry-without-overrides fallback built into the executor rather than
+   done by hand each time.
