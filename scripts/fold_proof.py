@@ -104,13 +104,31 @@ def build_parent(children: list[Node]) -> Node:
 def main() -> int:
     library = reference.load_library(LIBRARY)
 
-    # --- rebuild leaf_intro_bells's state (post track-1 render) ---
+    # --- rebuild both leaves' state, track-scoped this time. Previously
+    # leaf_intro_bells's state.json (built after track 1 existed) silently
+    # absorbed track 0's notes too, since nothing filtered by track -- the
+    # gap state.py's _slice_symbolic now closes. Rebuilding leaf_intro_texture
+    # here too, even though its original build happened to predate track 1
+    # existing (so wasn't actually polluted), for consistency going forward. ---
+    texture_wav = ROOT / "state/leaf_proof/leaf_intro_texture.wav"
+    texture_built = state.build(project=PROJECT, wav=texture_wav, region=None,
+                                 track="TEXTURE / ATMOS", embedding=True)
+    state.write(texture_built, texture_wav.with_suffix(".state.json"))
+
     bells_wav = ROOT / "state/leaf_proof/leaf_intro_bells.wav"
-    bells_built = state.build(project=PROJECT, wav=bells_wav, region=None, embedding=True)
+    bells_built = state.build(project=PROJECT, wav=bells_wav, region=None,
+                               track="INTRO BELLS", embedding=True)
     state.write(bells_built, bells_wav.with_suffix(".state.json"))
 
-    texture_state_path = ROOT / "state/leaf_proof/leaf_intro_texture.state.json"
-    texture_built = json.loads(texture_state_path.read_text())
+    # --- the actual combined-mix render (both tracks audible together,
+    # neither soloed/muted) -- review_composition's third, genuinely new
+    # check needs this, not just the two solo renders. ---
+    combined_wav = ROOT / "state/leaf_proof/section_intro_combined.wav"
+    combined_built = state.build(
+        project=PROJECT, wav=combined_wav, region=None,
+        track={"TEXTURE / ATMOS", "INTRO BELLS"}, embedding=False,
+    )
+    state.write(combined_built, combined_wav.with_suffix(".state.json"))
 
     bells_node = build_bells_leaf()
     texture_node = Node(  # mirrors leaf_emit.py's build_spec_node(), same node_id
@@ -138,7 +156,7 @@ def main() -> int:
               f"LUFS {built['measured']['lufs']:.1f}\n")
 
     print(f"=== Reviewing composition at {parent.node_id} ===\n")
-    composition_review = review_composition(results)
+    composition_review = review_composition(results, combined_state=combined_built)
     parent.review_state = composition_review
     print(f"{parent.node_id}: {composition_review.status.value}"
           + (f" -- {'; '.join(composition_review.reasons)}"

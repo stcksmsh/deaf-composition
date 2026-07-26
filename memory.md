@@ -651,15 +651,54 @@ used here (audio-domain, computed from the isolated solo render, unaffected), bu
 per-node snapshot (§7.3) will eventually need track-scoped symbolic extraction too — not
 built, flagged for whoever picks this up next.
 
+## Track-scoped symbolic extraction + real combined-mix composition check (2026-07-26)
+Closed the two gaps flagged at the end of the previous entry.
+
+**`state.py`'s `_slice_symbolic`/`build()` now take a `track` param** (a name or set
+of names, matching `symbolic["tracks"][i]["name"]`) alongside the existing `region`
+time-window param — filters `notes`/`tracks`/`fx`/`automation` down to just the leaf's
+own track(s). Backward compatible (`track=None` default, identical old behavior).
+`fold_proof.py` rebuilds both leaves' states with explicit track scoping now
+(`"TEXTURE / ATMOS"`, `"INTRO BELLS"`) instead of the untracked pull that silently
+absorbed both tracks' notes into whichever leaf happened to be built after both
+existed. Re-running confirmed the fix doesn't change `measured`/`embedding` scores
+(those come from the isolated solo renders, never affected by symbolic pollution) —
+only `symbolic.notes` correctness changed, as expected.
+
+**`review_composition` gained two more real checks**, on top of the existing loudness
+balance: (1) **spectral-overlap** — do the two siblings' own solo spectral centroids
+sit within half an octave of each other (ratio < 1.5)? — computed from data already in
+their `state.json`s, no extra render needed; (2) **combined-mix sanity** — an actual
+new render of the section with both tracks audible together (`section_intro_combined.wav`,
+via `mcp__reaper__render_project` with both tracks unsoloed/unmuted), checked against
+"combining uncorrelated sources should never produce something quieter than the
+loudest ingredient" (a real audio-engineering inequality — a violation means phase
+cancellation or a render-chain bug, not just poor balance).
+
+**Real result, and a genuinely useful one**: re-running `fold_proof.py` flipped the
+composition verdict from PASS to **FAIL** — the spectral-overlap check caught something
+neither the loudness-balance check nor a symbolic/MIDI-level read would have: the pad
+(`Pads/Distant.fxp`, sustained note) and the bells (ReaSynth, nominally high-register
+short notes) came out with spectral centroids at 1548Hz and 1318Hz respectively —
+despite the bells' MIDI pitches being much higher, their actual rendered timbral
+brightness landed close to the pad's (short transient plucks decay fast, likely
+dominated by lower-frequency envelope/waveform content, not sustained high harmonics).
+That's real audio-grounded signal, exactly the class of thing this system exists to
+catch that a symbolic-only check couldn't. The combined-mix LUFS check passed silently
+(no cancellation detected). Still deliberately not built: an actual spectral-masking
+model of the combined render itself (does the pad's harmonic content get eaten once
+the bells sit on top, not just "are their solo centroids close") — flagged as real
+future work in `review_composition`'s own docstring, not silently assumed done.
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. Stage 4 gaps still open, now smaller: (a) `state.build()`'s symbolic extraction needs
-   track-scoping, not just time-region-scoping (see above); (b) `review_composition`
-   only checks solo-state loudness balance — a real combined-mix render + spectral
-   masking check is the next honest step up; (c) seam continuity (plan §3.6 check 3)
-   has no code at all yet — needs two *timeline-adjacent* leaves (not parallel layers
-   like this run's pair) to even be testable; (d) everything so far is manually
-   orchestrated in a proof script, not an actual recursive decompose/schedule loop
-   walking a whole tree — that's still the real, unstarted core of stage 4.
+2. Stage 4's actual unstarted core: everything so far (`leaf_proof.py`, `leaf_emit.py`,
+   `fold_proof.py`) is a proof script manually orchestrated step by step by the
+   controlling session, not a real recursive decompose/schedule loop that walks a tree
+   top-down and folds verdicts back up on its own. That's the next real build.
+3. Seam continuity (plan §3.6 check 3) still has no code — needs two *timeline-
+   adjacent* leaves (not parallel layers like this session's pair) to even be
+   testable; will likely fall out naturally once real sequential leaves exist under
+   the decompose loop from #2.

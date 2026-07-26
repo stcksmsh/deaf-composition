@@ -25,24 +25,46 @@ def _versions() -> dict:
             "soundfile": soundfile.__version__}
 
 
-def _slice_symbolic(symbolic: dict, region: dict) -> dict:
-    """Restrict a project's symbolic data to one region's time span."""
-    start, end = region["start"], region["end"]
+def _slice_symbolic(symbolic: dict, region: dict | None = None,
+                     track: str | set[str] | None = None) -> dict:
+    """Restrict a project's symbolic data to one region's time span and/or one
+    leaf's own track(s). Time-only slicing (the original behavior) picks up
+    every track's notes that fall in the window -- fine for a whole-section
+    node that legitimately owns multiple tracks, wrong for a single-track
+    leaf's own state.json, which was silently absorbing sibling tracks'
+    notes whenever they'd already been added to the same project (found via
+    fold_proof.py: a track-1 leaf's state.json included track-0's notes too,
+    since nothing filtered by track at all)."""
     sliced = dict(symbolic)
-    sliced["notes"] = [n for n in symbolic["notes"] if start <= n["start_s"] < end]
-    sliced["bounds"] = dict(symbolic["bounds"], selection={"start": start, "end": end})
+    notes = symbolic["notes"]
+    if region is not None:
+        start, end = region["start"], region["end"]
+        notes = [n for n in notes if start <= n["start_s"] < end]
+        sliced["bounds"] = dict(symbolic["bounds"], selection={"start": start, "end": end})
+    if track is not None:
+        tracks = {track} if isinstance(track, str) else set(track)
+        notes = [n for n in notes if n.get("track") in tracks]
+        sliced["tracks"] = [t for t in symbolic["tracks"] if t["name"] in tracks]
+        sliced["fx"] = [f for f in symbolic["fx"] if f.get("track") in tracks]
+        sliced["automation"] = [a for a in symbolic["automation"] if a.get("track") in tracks]
+    sliced["notes"] = notes
     return sliced
 
 
 def build(project: str | Path, wav: str | Path, symbolic: dict | None = None,
-          region: dict | None = None, embedding: bool = True,
-          checkpoint: str | None = None, render_info: dict | None = None) -> dict:
-    """One node's state: what was specified, what came out, and where it sits."""
+          region: dict | None = None, track: str | set[str] | None = None,
+          embedding: bool = True, checkpoint: str | None = None,
+          render_info: dict | None = None) -> dict:
+    """One node's state: what was specified, what came out, and where it sits.
+    `track` scopes symbolic data to one leaf's own track(s) -- pass the exact
+    REAPER track name(s) (matches symbolic["tracks"][i]["name"]); omit it for
+    a node that legitimately spans multiple tracks (a whole section, the
+    album root)."""
     project, wav = Path(project), Path(wav)
     if symbolic is None:
         symbolic = rpp.extract_symbolic(rpp.parse_file(project))
-    if region is not None:
-        symbolic = _slice_symbolic(symbolic, region)
+    if region is not None or track is not None:
+        symbolic = _slice_symbolic(symbolic, region=region, track=track)
 
     started = time.monotonic()
     measured = analyze.measure(wav)
