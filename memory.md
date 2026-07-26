@@ -511,14 +511,59 @@ is inherently slow (took over 2 minutes) — fine for one-off leaf execution, bu
 generation pipeline ends up calling this per-leaf at scale, latency (not just
 correctness) may become a real constraint worth revisiting.
 
+## Plan §11 stage 3 proven end-to-end: minimal single-leaf proof (2026-07-26)
+User chose stage 3 over Vital (Vital has no dependencies on anything else, can wait;
+stage 3 is the project's actual spine). Built `scripts/leaf_proof.py`: one hand-written
+`Node`/`Leaf` (per `src/planner/node.py`'s frozen schema) whose `implementation` records
+the exact ops run live — `apply_surge_preset` (Bass 5 + slower attack/release overrides,
+reusing the pipeline verified earlier this session) + a 16-note driving root/fifth/octave
+bassline via `create_midi_item`/`add_midi_notes_batch` + `render_project` — then measured,
+embedded, and scored the render against the real reference library's `"drop"` envelope via
+`reference.score_node`, exactly as a fold review would (no reviewer node exists yet, so
+called directly).
+
+**Real result, not a rubber stamp**: measured distance FAILed hard (14.79 vs a threshold
+of 3.0) — dominated by LUFS (-37 LUFS for a solo unmastered bass stem vs a "drop" envelope
+built from full mixed/mastered reference tracks, correctly registering as very different).
+Embedding distance passed comfortably (0.51 vs 0.8) — CLAP-level timbre match is fine, the
+gap is entirely "this is one instrument, not a finished section," which is exactly the
+right thing for the loop to catch. Closes plan §11 stage 3's own bar — "prove a leaf spec
+becomes correct audio" — with a verdict that couldn't have been gamed by a lenient
+threshold, not just a working script.
+
+**Hit and worked around the documented near-incident again**: `mcp__reaper__save_project`
+on the still-never-named scratch project popped REAPER's Save-As dialog and blocked the
+bridge, same as before. Recovered the same way (`xdotool key Escape` against
+`DISPLAY=:99`, matched to the live `Xvfb :99 ... -auth /tmp/xvfb-run.<id>/Xauthority` via
+`ps -eo pid,ppid,args | grep Xvfb`, not by directory mtime — mtimes on the xvfb-run temp
+dirs were unreliable for matching, the live `Xvfb` process's own `-auth` argument is the
+ground truth). **Sidestepped needing a saved `.rpp` at all** for this proof rather than
+retry save: `return_channel.state.build()` accepts an explicit `symbolic` dict, so
+`leaf_proof.py` hand-supplies the note data (matching `rpp.extract_symbolic`'s schema)
+instead of round-tripping through `rpp.parse_file` on a file that was never written. A
+real pipeline run still needs the save path solved for real eventually (see Next) — this
+was a one-off proof of leaf→audio→score, not a save-flow fix.
+
+Output artifacts land in `state/leaf_proof/` (gitignored, `state/` already covered) —
+`leaf_bass_drop.wav`, `.state.json`, `.score.json`. Only `scripts/leaf_proof.py` itself is
+committed.
+
 ## Next
-1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
-   Surge effort), or prioritize elsewhere (stage 3's actual fold/tree code, Pigments).
-2. Pigments: descoped from preset-value-loading (user decision) — build the macro+curated-
-   param fallback surface for it directly instead.
-3. Stage 3 proper (decompose/fold/scheduler — `node.py` explicitly has none of this yet)
-   can now start for real: the leaf vocabulary question is settled (§8.1 + `apply_surge_preset`,
-   now verified live end-to-end). The next design step is probably a minimal single-leaf
-   proof: one hand-written Leaf.implementation (a couple mcp_tool calls + one
-   apply_surge_preset call) executed and reviewed end-to-end, per plan §11 stage 3's own
-   framing ("prove a leaf spec becomes correct audio") — before any scheduler/tree code.
+1. **Fix `save_project` for real** — the Save-As-dialog-blocks-the-bridge issue has now
+   hit twice. Options not yet investigated: pre-assign a project filename some other way
+   (a bridge function that sets the path without triggering the dialog?), or accept
+   working exclusively with pre-saved `.rpp` files going forward (open one via
+   `Main_openProject` instead of building live in an unnamed project) so `save_project`
+   never needs to invent a filename. Matters for real once stage 4 needs to snapshot
+   project state per node (§7.3) — can't lean on the xdotool-Escape workaround forever.
+2. Decide: take on the full Vital param-mapping build (comparable scope to the whole
+   Surge effort, no dependencies on anything else — can wait indefinitely), or keep
+   pushing stage 3/4 (Pigments' macro fallback is the remaining low-priority item).
+3. Stage 3/4 proper: this proof used one *isolated* leaf with no scope chain ancestors,
+   no siblings, no neighbor edges, and a hand-supplied (not model-emitted) implementation.
+   The real next steps toward §11 stage 4 ("prove one song builds and self-reviews
+   end-to-end"): (a) have a model actually emit the `Leaf.implementation` ops from a spec,
+   instead of hand-writing them, (b) build the minimal fold/review code that calls
+   `reference.score_node` itself and writes `ReviewState` back onto the `Node`, (c) two
+   sibling leaves + a parent that composes them, to exercise the "composes with siblings"
+   check for the first time.
