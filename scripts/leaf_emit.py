@@ -48,7 +48,14 @@ from planner.node import (  # noqa: E402
 )
 
 MODEL = "claude-haiku-4-5-20251001"
-SURGE_PADS_DIR = Path("/usr/share/surge-xt/patches_factory/Pads")
+SURGE_FACTORY_DIR = Path("/usr/share/surge-xt/patches_factory")
+# Every category except the two that aren't real sonic content -- broadened
+# from "Pads only" after a real retro finding: the pulse leaf in
+# build_section_review.py picked a Pads preset (slow attack/release) for a
+# rhythmic part of short staccato notes and rendered at -52 LUFS, essentially
+# inaudible, because nothing offered was ever going to have a fast enough
+# attack for that job. Plucks/Percussion/Basses etc. are real options now.
+EXCLUDED_CATEGORIES = {"Tutorials", "Templates"}
 
 TOOL_CATALOG = [
     {
@@ -155,8 +162,18 @@ def build_spec_node() -> Node:
     )
 
 
-def emit_leaf_implementation(node: Node, client: anthropic.Anthropic) -> dict:
-    preset_names = sorted(p.name for p in SURGE_PADS_DIR.glob("*.fxp"))
+def _factory_preset_names() -> list[str]:
+    names = []
+    for category_dir in sorted(SURGE_FACTORY_DIR.iterdir()):
+        if not category_dir.is_dir() or category_dir.name in EXCLUDED_CATEGORIES:
+            continue
+        names += [f"{category_dir.name}/{p.name}" for p in sorted(category_dir.glob("*.fxp"))]
+    return names
+
+
+def emit_leaf_implementation(node: Node, client: anthropic.Anthropic,
+                              feedback: str | None = None) -> dict:
+    preset_names = _factory_preset_names()
 
     prompt = f"""You are planning the implementation of one leaf node in a \
 recursive music-composition tree. A leaf is translation, not composition: \
@@ -170,10 +187,12 @@ spec: {node.spec}
 acceptance_criteria: {json.dumps(node.acceptance_criteria.to_dict())}
 scope_chain: {json.dumps([{"level": s.level, "summary": s.summary} for s in node.scope_chain])}
 
-Available Surge XT factory pad presets (preset_path must be exactly \
-"Pads/<one of these>"):
+Available Surge XT factory presets, every category (preset_path must be \
+exactly one of these, "<Category>/<name>.fxp" -- pick whichever category \
+actually fits the part: a rhythmic/percussive part needs a fast attack \
+(Plucks, Percussion), a sustained texture needs a slow one (Pads), etc.):
 {json.dumps(preset_names, indent=2)}
-
+{f"{chr(10)}{feedback}{chr(10)}" if feedback else ""}
 Emit the tool calls needed to realize this leaf, in the exact order they \
 must execute: one apply_surge_preset call, one create_midi_item call, then \
 one add_midi_notes_batch call (item_index=0). Call each tool exactly once, \

@@ -789,6 +789,51 @@ All three of plan §3.6's review checks now have real, tested code:
 (neighbors) — `review.py`'s own module docstring updated to reflect this instead
 of listing seam continuity as "isn't here."
 
+## Escalation (plan §7.4), run for real against a known failure, and it worked (2026-07-26)
+User's framing: `song_so_far.wav` "has some good parts/structure but is very 2018 AI
+vibe" — multi-level recursion, emission quality, and escalation are all needed for
+this to actually work well, escalation first. Closed the previous entry's #4.
+
+**`src/planner/escalation.py`** — plan §7.4's three triggers, all real: (1) fails own
+criteria N times (`max_attempts`, default 2) → retry, then escalate; (2) low
+confidence — a FAIL within 15% of its own threshold escalates immediately rather than
+burning a retry on a near-miss; (3) `build_payload()` is the literal "surfaces the
+rendered stem + measurements + specific conflict" plan §7.4 describes. Explicitly
+does NOT decide *how* to fix anything — the human is still the taste oracle (§7.1);
+this module only decides retry-vs-escalate and builds what the human needs to rule on
+it. `feedback_for_retry()` turns a `ReviewState`'s reasons into the actual retry
+mechanism: natural-language feedback appended to the next `emit_leaf_implementation()`
+call.
+
+**Broadened `leaf_emit.py`'s preset catalog before running the retry** — every Surge
+factory category (`Plucks`, `Percussion`, `Basses`, etc.), not just `Pads`. Root cause
+check: the known -52 LUFS failure happened because Pads-only meant the model had
+nothing with a fast enough attack to offer for a rhythmic part, no matter how it
+retried. Fixing the retry's *chance* of succeeding, not just adding the retry
+mechanism itself — an empty toolbox doesn't get better with more attempts.
+
+**Real end-to-end result, run against the actual known-broken pulse leaf, not a
+synthetic test**: `escalation.decide()` on attempt 1 correctly said "retry" (not
+"escalate yet"). Re-emission got the real failure reasons via `feedback_for_retry()`
+and **picked `Plucks/Snap.fxp` instead of a Pads preset** — a fast-attack, genuinely
+appropriate choice — plus switched to a steady 8th-note pattern. Executed live
+(cleared the old MIDI item's notes rather than duplicating, reapplied the new
+preset). Re-reviewed: **LUFS went from -52.1 to -16.8, measured distance from 19.876
+to 1.606** (comfortably under the 4.0 threshold) — `escalation.decide()` on attempt 2
+correctly returned `"pass"`. No human intervention needed; the model fixed its own
+mistake once told what was wrong, using a strictly worse toolbox constraint (Pads-only)
+identified and lifted as part of making the retry meaningful. Re-rendered
+`section_build_combined.wav` and `song_so_far.wav` so the fix is actually audible in
+the full song, not just in isolated review numbers.
+
+**Not yet built**: `decide()`'s "two criteria conflict" trigger (plan §7.4's second
+one) has no real test case yet — no observed run this session has had a node fail two
+review dimensions in genuinely opposing directions (the pulse leaf's own-criteria and
+composition failures were aligned, not conflicting: fixing loudness fixed both). The
+code path exists in principle (any node with multiple simultaneous FAILed reviews) but
+detecting true directional conflict (fixing A would break B) is real, undone work —
+flagged, not silently assumed solved.
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
@@ -796,16 +841,17 @@ of listing seam continuity as "isn't here."
 2. `decompose()` only ever returns leaves directly (documented as a deliberate
    scope-down, not a limitation of the code) — true multi-level recursion (calling
    decompose again on a child whose own spec still looks too broad for one leaf)
-   hasn't been exercised yet, just structurally supported.
-3. Model-emission quality is now a known, real cost center: 2 of 6 leaf-implementation
-   calls across this session's two decompose runs invented a nonexistent param name
-   for an override. `apply_surge_preset`'s fail-loud behavior contained the damage
-   correctly both times, but a real pipeline at scale will want either a curated
-   list of known-safe override names fed into the emission prompt, or an
-   automatic retry-without-overrides fallback built into the executor rather than
-   done by hand each time.
-4. Nothing yet *acts* on a failed review — `review_seam`'s FAIL here (and every
-   other FAIL this session) just gets printed and written to a result JSON. Plan
-   §7.4's escalation logic (re-split, patch, or surface to the human after N
-   failures) has no code at all — the natural next structural piece once enough
-   individual checks exist to have something worth escalating.
+   hasn't been exercised yet, just structurally supported. User flagged this as
+   needed (alongside escalation, now done) for the record to stop reading as
+   "2018 AI vibe."
+3. Model-emission quality: overrides are still a real cost center (2 of 6
+   leaf-implementation calls invented a nonexistent Surge param name for an
+   override, both caught by `apply_surge_preset`'s fail-loud design, not
+   silently). A curated list of known-safe override names fed into the emission
+   prompt, or an automatic retry-without-overrides fallback in the executor
+   itself (rather than handled by hand each time, as it was both times this
+   session), would close this properly.
+4. The "two criteria conflict" escalation trigger has no real test case or
+   conflict-detection logic yet (see above) — needs a genuine case to design
+   against, not a synthetic one, consistent with how every other check in this
+   session got built against real observed failures rather than guessed ones.
