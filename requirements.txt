@@ -17,3 +17,7 @@
 torchvision==0.17.2
 
 pyloudnorm==0.1.1  # LUFS (BS.1770); needs only numpy + scipy, no pin conflicts
+
+mcp==1.28.1  # FastMCP SDK -- backs scripts/deaf_composition_mcp_server.py, the
+             # supplementary local MCP server exposing apply_surge_preset() as a
+             # real tool for the leaf-execution model, alongside the reaper-mcp tools.

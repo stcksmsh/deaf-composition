@@ -1775,7 +1775,11 @@ _G.__MIDI_TEST = {note_in_filter = note_in_filter, transpose_notes_pure = transp
 -- Main processing function
 local function process_request()
     -- Look for any request files with numbered pattern
-    for i = 1, 1000 do
+    -- Scans past 1000: the vendored twelvetake-reaper-mcp server cycles its own
+    -- request ids through the full 1-999 range, so our own surge_bridge_client.py
+    -- must live in a genuinely disjoint band (1200-1999) to avoid id collisions
+    -- between the two independent file-based clients sharing this directory.
+    for i = 1, 2000 do
         local numbered_request_file = bridge_dir .. 'request_' .. i .. '.json'
         local numbered_response_file = bridge_dir .. 'response_' .. i .. '.json'
         
@@ -3656,6 +3660,33 @@ local function process_request()
                             response.ok = false
                         end
 
+                    elseif fname == "TrackFX_FormatParamValueNormalized" then
+                        -- Format an arbitrary normalized value (does not change current state)
+                        if #args >= 4 then
+                            local track = nil
+                            if type(args[1]) == "number" then
+                                if args[1] == -1 then
+                                    track = reaper.GetMasterTrack(0)
+                                else
+                                    track = reaper.GetTrack(0, args[1])
+                                end
+                            else
+                                track = args[1]
+                            end
+
+                            if track then
+                                local retval, buf = reaper.TrackFX_FormatParamValueNormalized(track, args[2], args[3], args[4], "")
+                                response.ok = retval
+                                response.ret = buf
+                            else
+                                response.error = "Track not found"
+                                response.ok = false
+                            end
+                        else
+                            response.error = "TrackFX_FormatParamValueNormalized requires 4 arguments"
+                            response.ok = false
+                        end
+
                     elseif fname == "TrackFX_GetParam" then
                         -- Get FX parameter value
                         if #args >= 3 then
@@ -3688,6 +3719,65 @@ local function process_request()
                             response.ok = false
                         end
                     
+                    elseif fname == "TrackFX_GetParameterStepSizes" then
+                        -- Get FX parameter step size / small step / large step / is_toggle
+                        if #args >= 3 then
+                            local track = nil
+                            if type(args[1]) == "number" then
+                                if args[1] == -1 then
+                                    track = reaper.GetMasterTrack(0)
+                                else
+                                    track = reaper.GetTrack(0, args[1])
+                                end
+                            else
+                                track = args[1]
+                            end
+
+                            if track then
+                                local retval, step, smallstep, largestep, is_toggle =
+                                    reaper.TrackFX_GetParameterStepSizes(track, args[2], args[3])
+                                response.retval = retval
+                                response.step = step
+                                response.smallstep = smallstep
+                                response.largestep = largestep
+                                response.is_toggle = is_toggle
+                                response.ok = true
+                            else
+                                response.error = "Track not found"
+                                response.ok = false
+                            end
+                        else
+                            response.error = "TrackFX_GetParameterStepSizes requires 3 arguments"
+                            response.ok = false
+                        end
+
+                    elseif fname == "TrackFX_GetParamIdent" then
+                        -- Get the plugin's own stable param identifier (VST3 paramID), not the display name
+                        if #args >= 3 then
+                            local track = nil
+                            if type(args[1]) == "number" then
+                                if args[1] == -1 then
+                                    track = reaper.GetMasterTrack(0)
+                                else
+                                    track = reaper.GetTrack(0, args[1])
+                                end
+                            else
+                                track = args[1]
+                            end
+
+                            if track then
+                                local retval, ident = reaper.TrackFX_GetParamIdent(track, args[2], args[3])
+                                response.ok = retval
+                                response.ret = ident
+                            else
+                                response.error = "Track not found"
+                                response.ok = false
+                            end
+                        else
+                            response.error = "TrackFX_GetParamIdent requires 3 arguments"
+                            response.ok = false
+                        end
+
                     elseif fname == "TrackFX_SetParam" then
                         -- Set FX parameter value
                         if #args >= 4 then

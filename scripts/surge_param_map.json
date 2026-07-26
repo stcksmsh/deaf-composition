@@ -1,0 +1,6083 @@
+[
+  {
+    "index": 0,
+    "name": "M1: -",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1,
+    "note": "assumed (macro ctrltype not in static assign table)"
+  },
+  {
+    "index": 1,
+    "name": "M2: -",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1,
+    "note": "assumed (macro ctrltype not in static assign table)"
+  },
+  {
+    "index": 2,
+    "name": "M3: -",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1,
+    "note": "assumed (macro ctrltype not in static assign table)"
+  },
+  {
+    "index": 3,
+    "name": "M4: -",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1,
+    "note": "assumed (macro ctrltype not in static assign table)"
+  },
+  {
+    "index": 4,
+    "name": "M5: -",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1,
+    "note": "assumed (macro ctrltype not in static assign table)"
+  },
+  {
+    "index": 5,
+    "name": "M6: -",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1,
+    "note": "assumed (macro ctrltype not in static assign table)"
+  },
+  {
+    "index": 6,
+    "name": "M7: -",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1,
+    "note": "assumed (macro ctrltype not in static assign table)"
+  },
+  {
+    "index": 7,
+    "name": "M8: -",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1,
+    "note": "assumed (macro ctrltype not in static assign table)"
+  },
+  {
+    "index": 8,
+    "name": "Send FX 1 Return",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 9,
+    "name": "Send FX 2 Return",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 10,
+    "name": "Send FX 3 Return",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 11,
+    "name": "Send FX 4 Return",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 12,
+    "name": "Global Volume",
+    "ctrltype": "ct_decibel_attenuation_clipper",
+    "resolved": true,
+    "min": -48,
+    "max": 0
+  },
+  {
+    "index": 13,
+    "name": "Active Scene",
+    "ctrltype": "ct_scenesel",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 14,
+    "name": "Scene Mode",
+    "ctrltype": "ct_scenemode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 15,
+    "name": "Split Point",
+    "ctrltype": "ct_midikey_or_channel",
+    "resolved": true,
+    "min": 0,
+    "max": 127
+  },
+  {
+    "index": 16,
+    "name": "FX Disable",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "ct_none in Surge; not a real DSP-facing param"
+  },
+  {
+    "index": 17,
+    "name": "Polyphony Limit",
+    "ctrltype": "ct_polylimit",
+    "resolved": true,
+    "min": 2,
+    "max": 64
+  },
+  {
+    "index": 18,
+    "name": "FX Chain Bypass",
+    "ctrltype": "ct_fxbypass",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 19,
+    "name": "FX A1 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 20,
+    "name": "FX A1 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 21,
+    "name": "FX A1 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 22,
+    "name": "FX A1 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 23,
+    "name": "FX A1 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 24,
+    "name": "FX A1 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 25,
+    "name": "FX A1 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 26,
+    "name": "FX A1 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 27,
+    "name": "FX A1 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 28,
+    "name": "FX A1 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 29,
+    "name": "FX A1 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 30,
+    "name": "FX A1 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 31,
+    "name": "FX A1 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 32,
+    "name": "FX A2 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 33,
+    "name": "FX A2 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 34,
+    "name": "FX A2 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 35,
+    "name": "FX A2 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 36,
+    "name": "FX A2 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 37,
+    "name": "FX A2 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 38,
+    "name": "FX A2 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 39,
+    "name": "FX A2 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 40,
+    "name": "FX A2 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 41,
+    "name": "FX A2 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 42,
+    "name": "FX A2 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 43,
+    "name": "FX A2 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 44,
+    "name": "FX A2 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 45,
+    "name": "FX B1 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 46,
+    "name": "FX B1 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 47,
+    "name": "FX B1 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 48,
+    "name": "FX B1 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 49,
+    "name": "FX B1 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 50,
+    "name": "FX B1 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 51,
+    "name": "FX B1 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 52,
+    "name": "FX B1 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 53,
+    "name": "FX B1 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 54,
+    "name": "FX B1 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 55,
+    "name": "FX B1 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 56,
+    "name": "FX B1 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 57,
+    "name": "FX B1 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 58,
+    "name": "FX B2 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 59,
+    "name": "FX B2 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 60,
+    "name": "FX B2 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 61,
+    "name": "FX B2 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 62,
+    "name": "FX B2 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 63,
+    "name": "FX B2 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 64,
+    "name": "FX B2 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 65,
+    "name": "FX B2 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 66,
+    "name": "FX B2 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 67,
+    "name": "FX B2 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 68,
+    "name": "FX B2 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 69,
+    "name": "FX B2 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 70,
+    "name": "FX B2 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 71,
+    "name": "FX S1 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 72,
+    "name": "FX S1 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 73,
+    "name": "FX S1 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 74,
+    "name": "FX S1 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 75,
+    "name": "FX S1 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 76,
+    "name": "FX S1 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 77,
+    "name": "FX S1 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 78,
+    "name": "FX S1 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 79,
+    "name": "FX S1 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 80,
+    "name": "FX S1 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 81,
+    "name": "FX S1 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 82,
+    "name": "FX S1 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 83,
+    "name": "FX S1 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 84,
+    "name": "FX S2 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 85,
+    "name": "FX S2 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 86,
+    "name": "FX S2 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 87,
+    "name": "FX S2 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 88,
+    "name": "FX S2 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 89,
+    "name": "FX S2 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 90,
+    "name": "FX S2 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 91,
+    "name": "FX S2 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 92,
+    "name": "FX S2 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 93,
+    "name": "FX S2 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 94,
+    "name": "FX S2 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 95,
+    "name": "FX S2 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 96,
+    "name": "FX S2 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 97,
+    "name": "FX G1 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 98,
+    "name": "FX G1 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 99,
+    "name": "FX G1 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 100,
+    "name": "FX G1 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 101,
+    "name": "FX G1 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 102,
+    "name": "FX G1 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 103,
+    "name": "FX G1 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 104,
+    "name": "FX G1 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 105,
+    "name": "FX G1 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 106,
+    "name": "FX G1 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 107,
+    "name": "FX G1 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 108,
+    "name": "FX G1 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 109,
+    "name": "FX G1 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 110,
+    "name": "FX G2 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 111,
+    "name": "FX G2 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 112,
+    "name": "FX G2 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 113,
+    "name": "FX G2 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 114,
+    "name": "FX G2 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 115,
+    "name": "FX G2 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 116,
+    "name": "FX G2 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 117,
+    "name": "FX G2 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 118,
+    "name": "FX G2 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 119,
+    "name": "FX G2 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 120,
+    "name": "FX G2 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 121,
+    "name": "FX G2 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 122,
+    "name": "FX G2 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 123,
+    "name": "FX A3 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 124,
+    "name": "FX A3 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 125,
+    "name": "FX A3 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 126,
+    "name": "FX A3 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 127,
+    "name": "FX A3 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 128,
+    "name": "FX A3 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 129,
+    "name": "FX A3 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 130,
+    "name": "FX A3 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 131,
+    "name": "FX A3 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 132,
+    "name": "FX A3 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 133,
+    "name": "FX A3 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 134,
+    "name": "FX A3 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 135,
+    "name": "FX A3 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 136,
+    "name": "FX A4 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 137,
+    "name": "FX A4 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 138,
+    "name": "FX A4 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 139,
+    "name": "FX A4 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 140,
+    "name": "FX A4 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 141,
+    "name": "FX A4 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 142,
+    "name": "FX A4 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 143,
+    "name": "FX A4 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 144,
+    "name": "FX A4 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 145,
+    "name": "FX A4 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 146,
+    "name": "FX A4 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 147,
+    "name": "FX A4 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 148,
+    "name": "FX A4 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 149,
+    "name": "FX B3 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 150,
+    "name": "FX B3 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 151,
+    "name": "FX B3 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 152,
+    "name": "FX B3 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 153,
+    "name": "FX B3 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 154,
+    "name": "FX B3 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 155,
+    "name": "FX B3 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 156,
+    "name": "FX B3 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 157,
+    "name": "FX B3 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 158,
+    "name": "FX B3 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 159,
+    "name": "FX B3 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 160,
+    "name": "FX B3 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 161,
+    "name": "FX B3 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 162,
+    "name": "FX B4 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 163,
+    "name": "FX B4 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 164,
+    "name": "FX B4 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 165,
+    "name": "FX B4 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 166,
+    "name": "FX B4 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 167,
+    "name": "FX B4 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 168,
+    "name": "FX B4 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 169,
+    "name": "FX B4 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 170,
+    "name": "FX B4 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 171,
+    "name": "FX B4 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 172,
+    "name": "FX B4 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 173,
+    "name": "FX B4 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 174,
+    "name": "FX B4 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 175,
+    "name": "FX S3 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 176,
+    "name": "FX S3 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 177,
+    "name": "FX S3 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 178,
+    "name": "FX S3 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 179,
+    "name": "FX S3 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 180,
+    "name": "FX S3 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 181,
+    "name": "FX S3 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 182,
+    "name": "FX S3 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 183,
+    "name": "FX S3 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 184,
+    "name": "FX S3 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 185,
+    "name": "FX S3 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 186,
+    "name": "FX S3 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 187,
+    "name": "FX S3 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 188,
+    "name": "FX S4 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 189,
+    "name": "FX S4 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 190,
+    "name": "FX S4 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 191,
+    "name": "FX S4 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 192,
+    "name": "FX S4 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 193,
+    "name": "FX S4 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 194,
+    "name": "FX S4 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 195,
+    "name": "FX S4 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 196,
+    "name": "FX S4 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 197,
+    "name": "FX S4 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 198,
+    "name": "FX S4 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 199,
+    "name": "FX S4 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 200,
+    "name": "FX S4 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 201,
+    "name": "FX G3 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 202,
+    "name": "FX G3 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 203,
+    "name": "FX G3 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 204,
+    "name": "FX G3 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 205,
+    "name": "FX G3 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 206,
+    "name": "FX G3 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 207,
+    "name": "FX G3 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 208,
+    "name": "FX G3 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 209,
+    "name": "FX G3 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 210,
+    "name": "FX G3 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 211,
+    "name": "FX G3 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 212,
+    "name": "FX G3 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 213,
+    "name": "FX G3 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 214,
+    "name": "FX G4 FX Type",
+    "ctrltype": "ct_fxtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 215,
+    "name": "FX G4 Param 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 216,
+    "name": "FX G4 Param 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 217,
+    "name": "FX G4 Param 3",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 218,
+    "name": "FX G4 Param 4",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 219,
+    "name": "FX G4 Param 5",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 220,
+    "name": "FX G4 Param 6",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 221,
+    "name": "FX G4 Param 7",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 222,
+    "name": "FX G4 Param 8",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 223,
+    "name": "FX G4 Param 9",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 224,
+    "name": "FX G4 Param 10",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 225,
+    "name": "FX G4 Param 11",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 226,
+    "name": "FX G4 Param 12",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by the effect loaded in this slot"
+  },
+  {
+    "index": 227,
+    "name": "Character",
+    "ctrltype": "ct_character",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 228,
+    "name": "A Octave",
+    "ctrltype": "ct_pitch_octave",
+    "resolved": true,
+    "min": -3,
+    "max": 3
+  },
+  {
+    "index": 229,
+    "name": "A Pitch",
+    "ctrltype": "ct_pitch_semi7bp",
+    "resolved": true,
+    "min": -7,
+    "max": 7
+  },
+  {
+    "index": 230,
+    "name": "A Portamento",
+    "ctrltype": "ct_portatime",
+    "resolved": true,
+    "min": -8,
+    "max": 2
+  },
+  {
+    "index": 231,
+    "name": "A Play Mode",
+    "ctrltype": "ct_polymode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 232,
+    "name": "A FM Routing",
+    "ctrltype": "ct_fmconfig",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 233,
+    "name": "A FM Depth",
+    "ctrltype": "ct_decibel_fmdepth",
+    "resolved": true,
+    "min": -48,
+    "max": 24
+  },
+  {
+    "index": 234,
+    "name": "A Osc Drift",
+    "ctrltype": "ct_percent_oscdrift",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 235,
+    "name": "A Noise Color",
+    "ctrltype": "ct_noise_color",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 236,
+    "name": "A Keytrack Root Key",
+    "ctrltype": "ct_midikey",
+    "resolved": true,
+    "min": 0,
+    "max": 127
+  },
+  {
+    "index": 237,
+    "name": "A Volume",
+    "ctrltype": "ct_amplitude_clipper",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 238,
+    "name": "A Pan",
+    "ctrltype": "ct_percent_bipolar_pan",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 239,
+    "name": "A Width",
+    "ctrltype": "ct_percent_bipolar",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 240,
+    "name": "A Send FX 1 Level",
+    "ctrltype": "ct_sendlevel",
+    "resolved": true,
+    "min": 0,
+    "max": 1.5874011517
+  },
+  {
+    "index": 241,
+    "name": "A Send FX 2 Level",
+    "ctrltype": "ct_sendlevel",
+    "resolved": true,
+    "min": 0,
+    "max": 1.5874011517
+  },
+  {
+    "index": 242,
+    "name": "A Send FX 3 Level",
+    "ctrltype": "ct_sendlevel",
+    "resolved": true,
+    "min": 0,
+    "max": 1.5874011517
+  },
+  {
+    "index": 243,
+    "name": "A Send FX 4 Level",
+    "ctrltype": "ct_sendlevel",
+    "resolved": true,
+    "min": 0,
+    "max": 1.5874011517
+  },
+  {
+    "index": 244,
+    "name": "A Pitch Bend Up Range",
+    "ctrltype": "ct_pbdepth",
+    "resolved": true,
+    "min": 0,
+    "max": 24
+  },
+  {
+    "index": 245,
+    "name": "A Pitch Bend Down Range",
+    "ctrltype": "ct_pbdepth",
+    "resolved": true,
+    "min": 0,
+    "max": 24
+  },
+  {
+    "index": 246,
+    "name": "A VCA Gain",
+    "ctrltype": "ct_decibel",
+    "resolved": true,
+    "min": -48,
+    "max": 48
+  },
+  {
+    "index": 247,
+    "name": "A Velocity > VCA Gain",
+    "ctrltype": "ct_decibel_attenuation",
+    "resolved": true,
+    "min": -48,
+    "max": 0
+  },
+  {
+    "index": 248,
+    "name": "A Feedback",
+    "ctrltype": "ct_filter_feedback",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 249,
+    "name": "A Filter Configuration",
+    "ctrltype": "ct_fbconfig",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 250,
+    "name": "A Filter Balance",
+    "ctrltype": "ct_percent_bipolar",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 251,
+    "name": "A Highpass",
+    "ctrltype": "ct_freq_hpf",
+    "resolved": true,
+    "min": -72,
+    "max": 15
+  },
+  {
+    "index": 252,
+    "name": "A Waveshaper Type",
+    "ctrltype": "ct_wstype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 253,
+    "name": "A Waveshaper Drive",
+    "ctrltype": "ct_decibel_narrow_short_extendable",
+    "resolved": true,
+    "min": -24,
+    "max": 24
+  },
+  {
+    "index": 254,
+    "name": "A Filter 2 Offset Mode",
+    "ctrltype": "ct_bool_relative_switch",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 255,
+    "name": "A Link Resonance",
+    "ctrltype": "ct_bool_link_switch",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 256,
+    "name": "A Osc 1 Type",
+    "ctrltype": "ct_osctype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 257,
+    "name": "A Osc 1 Octave",
+    "ctrltype": "ct_pitch_octave",
+    "resolved": true,
+    "min": -3,
+    "max": 3
+  },
+  {
+    "index": 258,
+    "name": "A Osc 1 Pitch",
+    "ctrltype": "ct_pitch_semi7bp_absolutable",
+    "resolved": true,
+    "min": -7,
+    "max": 7
+  },
+  {
+    "index": 259,
+    "name": "A Osc 1 Shape",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 260,
+    "name": "A Osc 1 Width 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 261,
+    "name": "A Osc 1 Width 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 262,
+    "name": "A Osc 1 Sub Mix",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 263,
+    "name": "A Osc 1 Sync",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 264,
+    "name": "A Osc 1 Unison Detune",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 265,
+    "name": "A Osc 1 Unison Voices",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 266,
+    "name": "A Osc 1 Keytrack",
+    "ctrltype": "ct_bool_keytrack",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 267,
+    "name": "A Osc 1 Retrigger",
+    "ctrltype": "ct_bool_retrigger",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 268,
+    "name": "A Osc 2 Type",
+    "ctrltype": "ct_osctype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 269,
+    "name": "A Osc 2 Octave",
+    "ctrltype": "ct_pitch_octave",
+    "resolved": true,
+    "min": -3,
+    "max": 3
+  },
+  {
+    "index": 270,
+    "name": "A Osc 2 Pitch",
+    "ctrltype": "ct_pitch_semi7bp_absolutable",
+    "resolved": true,
+    "min": -7,
+    "max": 7
+  },
+  {
+    "index": 271,
+    "name": "A Osc 2 Shape",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 272,
+    "name": "A Osc 2 Width 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 273,
+    "name": "A Osc 2 Width 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 274,
+    "name": "A Osc 2 Sub Mix",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 275,
+    "name": "A Osc 2 Sync",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 276,
+    "name": "A Osc 2 Unison Detune",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 277,
+    "name": "A Osc 2 Unison Voices",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 278,
+    "name": "A Osc 2 Keytrack",
+    "ctrltype": "ct_bool_keytrack",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 279,
+    "name": "A Osc 2 Retrigger",
+    "ctrltype": "ct_bool_retrigger",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 280,
+    "name": "A Osc 3 Type",
+    "ctrltype": "ct_osctype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 281,
+    "name": "A Osc 3 Octave",
+    "ctrltype": "ct_pitch_octave",
+    "resolved": true,
+    "min": -3,
+    "max": 3
+  },
+  {
+    "index": 282,
+    "name": "A Osc 3 Pitch",
+    "ctrltype": "ct_pitch_semi7bp_absolutable",
+    "resolved": true,
+    "min": -7,
+    "max": 7
+  },
+  {
+    "index": 283,
+    "name": "A Osc 3 Shape",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 284,
+    "name": "A Osc 3 Width 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 285,
+    "name": "A Osc 3 Width 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 286,
+    "name": "A Osc 3 Sub Mix",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 287,
+    "name": "A Osc 3 Sync",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 288,
+    "name": "A Osc 3 Unison Detune",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 289,
+    "name": "A Osc 3 Unison Voices",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 290,
+    "name": "A Osc 3 Keytrack",
+    "ctrltype": "ct_bool_keytrack",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 291,
+    "name": "A Osc 3 Retrigger",
+    "ctrltype": "ct_bool_retrigger",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 292,
+    "name": "A Osc 1 Volume",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 293,
+    "name": "A Osc 1 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 294,
+    "name": "A Osc 1 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 295,
+    "name": "A Osc 1 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 296,
+    "name": "A Osc 2 Volume",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 297,
+    "name": "A Osc 2 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 298,
+    "name": "A Osc 2 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 299,
+    "name": "A Osc 2 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 300,
+    "name": "A Osc 3 Volume",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 301,
+    "name": "A Osc 3 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 302,
+    "name": "A Osc 3 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 303,
+    "name": "A Osc 3 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 304,
+    "name": "A Ring Modulation 1x2 Volume",
+    "ctrltype": "ct_amplitude_ringmod",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 305,
+    "name": "A Ring Modulation 1x2 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 306,
+    "name": "A Ring Modulation 1x2 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 307,
+    "name": "A Ring Modulation 1x2 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 308,
+    "name": "A Ring Modulation 2x3 Volume",
+    "ctrltype": "ct_amplitude_ringmod",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 309,
+    "name": "A Ring Modulation 2x3 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 310,
+    "name": "A Ring Modulation 2x3 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 311,
+    "name": "A Ring Modulation 2x3 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 312,
+    "name": "A Noise Volume",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 313,
+    "name": "A Noise Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 314,
+    "name": "A Noise Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 315,
+    "name": "A Noise Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 316,
+    "name": "A Pre-Filter Gain",
+    "ctrltype": "ct_decibel",
+    "resolved": true,
+    "min": -48,
+    "max": 48
+  },
+  {
+    "index": 317,
+    "name": "A Filter 1 Type",
+    "ctrltype": "ct_filtertype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 318,
+    "name": "A Filter 1 Subtype",
+    "ctrltype": "ct_filtersubtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 319,
+    "name": "A Filter 1 Cutoff",
+    "ctrltype": "ct_freq_audible_with_tunability",
+    "resolved": true,
+    "min": -60,
+    "max": 70
+  },
+  {
+    "index": 320,
+    "name": "A Filter 1 Resonance",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 321,
+    "name": "A Filter 1 FEG Mod Amount",
+    "ctrltype": "ct_freq_mod",
+    "resolved": true,
+    "min": -96,
+    "max": 96
+  },
+  {
+    "index": 322,
+    "name": "A Filter 1 Keytrack",
+    "ctrltype": "ct_percent_bipolar",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 323,
+    "name": "A Filter 2 Type",
+    "ctrltype": "ct_filtertype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 324,
+    "name": "A Filter 2 Subtype",
+    "ctrltype": "ct_filtersubtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 325,
+    "name": "A Filter 2 Cutoff",
+    "ctrltype": "ct_freq_audible_with_tunability",
+    "resolved": true,
+    "min": -60,
+    "max": 70
+  },
+  {
+    "index": 326,
+    "name": "A Filter 2 Resonance",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 327,
+    "name": "A Filter 2 FEG Mod Amount",
+    "ctrltype": "ct_freq_mod",
+    "resolved": true,
+    "min": -96,
+    "max": 96
+  },
+  {
+    "index": 328,
+    "name": "A Filter 2 Keytrack",
+    "ctrltype": "ct_percent_bipolar",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 329,
+    "name": "A Amp EG Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 330,
+    "name": "A Amp EG Attack Shape",
+    "ctrltype": "ct_envshape_attack",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 331,
+    "name": "A Amp EG Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 332,
+    "name": "A Amp EG Decay Shape",
+    "ctrltype": "ct_envshape",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 333,
+    "name": "A Amp EG Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 334,
+    "name": "A Amp EG Release",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 335,
+    "name": "A Amp EG Release Shape",
+    "ctrltype": "ct_envshape",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 336,
+    "name": "A Amp EG Envelope Mode",
+    "ctrltype": "ct_envmode",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 337,
+    "name": "A Filter EG Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 338,
+    "name": "A Filter EG Attack Shape",
+    "ctrltype": "ct_envshape_attack",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 339,
+    "name": "A Filter EG Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 340,
+    "name": "A Filter EG Decay Shape",
+    "ctrltype": "ct_envshape",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 341,
+    "name": "A Filter EG Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 342,
+    "name": "A Filter EG Release",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 343,
+    "name": "A Filter EG Release Shape",
+    "ctrltype": "ct_envshape",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 344,
+    "name": "A Filter EG Envelope Mode",
+    "ctrltype": "ct_envmode",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 345,
+    "name": "A LFO 1 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 346,
+    "name": "A LFO 1 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 347,
+    "name": "A LFO 1 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 348,
+    "name": "A LFO 1 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 349,
+    "name": "A LFO 1 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 350,
+    "name": "A LFO 1 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 351,
+    "name": "A LFO 1 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 352,
+    "name": "A LFO 1 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 353,
+    "name": "A LFO 1 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 354,
+    "name": "A LFO 1 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 355,
+    "name": "A LFO 1 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 356,
+    "name": "A LFO 1 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 357,
+    "name": "A LFO 1 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 358,
+    "name": "A LFO 2 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 359,
+    "name": "A LFO 2 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 360,
+    "name": "A LFO 2 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 361,
+    "name": "A LFO 2 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 362,
+    "name": "A LFO 2 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 363,
+    "name": "A LFO 2 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 364,
+    "name": "A LFO 2 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 365,
+    "name": "A LFO 2 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 366,
+    "name": "A LFO 2 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 367,
+    "name": "A LFO 2 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 368,
+    "name": "A LFO 2 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 369,
+    "name": "A LFO 2 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 370,
+    "name": "A LFO 2 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 371,
+    "name": "A LFO 3 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 372,
+    "name": "A LFO 3 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 373,
+    "name": "A LFO 3 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 374,
+    "name": "A LFO 3 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 375,
+    "name": "A LFO 3 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 376,
+    "name": "A LFO 3 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 377,
+    "name": "A LFO 3 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 378,
+    "name": "A LFO 3 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 379,
+    "name": "A LFO 3 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 380,
+    "name": "A LFO 3 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 381,
+    "name": "A LFO 3 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 382,
+    "name": "A LFO 3 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 383,
+    "name": "A LFO 3 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 384,
+    "name": "A LFO 4 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 385,
+    "name": "A LFO 4 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 386,
+    "name": "A LFO 4 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 387,
+    "name": "A LFO 4 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 388,
+    "name": "A LFO 4 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 389,
+    "name": "A LFO 4 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 390,
+    "name": "A LFO 4 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 391,
+    "name": "A LFO 4 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 392,
+    "name": "A LFO 4 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 393,
+    "name": "A LFO 4 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 394,
+    "name": "A LFO 4 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 395,
+    "name": "A LFO 4 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 396,
+    "name": "A LFO 4 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 397,
+    "name": "A LFO 5 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 398,
+    "name": "A LFO 5 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 399,
+    "name": "A LFO 5 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 400,
+    "name": "A LFO 5 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 401,
+    "name": "A LFO 5 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 402,
+    "name": "A LFO 5 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 403,
+    "name": "A LFO 5 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 404,
+    "name": "A LFO 5 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 405,
+    "name": "A LFO 5 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 406,
+    "name": "A LFO 5 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 407,
+    "name": "A LFO 5 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 408,
+    "name": "A LFO 5 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 409,
+    "name": "A LFO 5 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 410,
+    "name": "A LFO 6 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 411,
+    "name": "A LFO 6 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 412,
+    "name": "A LFO 6 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 413,
+    "name": "A LFO 6 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 414,
+    "name": "A LFO 6 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 415,
+    "name": "A LFO 6 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 416,
+    "name": "A LFO 6 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 417,
+    "name": "A LFO 6 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 418,
+    "name": "A LFO 6 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 419,
+    "name": "A LFO 6 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 420,
+    "name": "A LFO 6 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 421,
+    "name": "A LFO 6 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 422,
+    "name": "A LFO 6 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 423,
+    "name": "A Scene LFO 1 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 424,
+    "name": "A Scene LFO 1 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 425,
+    "name": "A Scene LFO 1 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 426,
+    "name": "A Scene LFO 1 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 427,
+    "name": "A Scene LFO 1 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 428,
+    "name": "A Scene LFO 1 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 429,
+    "name": "A Scene LFO 1 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 430,
+    "name": "A Scene LFO 1 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 431,
+    "name": "A Scene LFO 1 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 432,
+    "name": "A Scene LFO 1 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 433,
+    "name": "A Scene LFO 1 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 434,
+    "name": "A Scene LFO 1 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 435,
+    "name": "A Scene LFO 1 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 436,
+    "name": "A Scene LFO 2 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 437,
+    "name": "A Scene LFO 2 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 438,
+    "name": "A Scene LFO 2 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 439,
+    "name": "A Scene LFO 2 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 440,
+    "name": "A Scene LFO 2 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 441,
+    "name": "A Scene LFO 2 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 442,
+    "name": "A Scene LFO 2 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 443,
+    "name": "A Scene LFO 2 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 444,
+    "name": "A Scene LFO 2 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 445,
+    "name": "A Scene LFO 2 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 446,
+    "name": "A Scene LFO 2 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 447,
+    "name": "A Scene LFO 2 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 448,
+    "name": "A Scene LFO 2 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 449,
+    "name": "A Scene LFO 3 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 450,
+    "name": "A Scene LFO 3 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 451,
+    "name": "A Scene LFO 3 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 452,
+    "name": "A Scene LFO 3 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 453,
+    "name": "A Scene LFO 3 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 454,
+    "name": "A Scene LFO 3 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 455,
+    "name": "A Scene LFO 3 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 456,
+    "name": "A Scene LFO 3 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 457,
+    "name": "A Scene LFO 3 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 458,
+    "name": "A Scene LFO 3 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 459,
+    "name": "A Scene LFO 3 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 460,
+    "name": "A Scene LFO 3 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 461,
+    "name": "A Scene LFO 3 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 462,
+    "name": "A Scene LFO 4 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 463,
+    "name": "A Scene LFO 4 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 464,
+    "name": "A Scene LFO 4 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 465,
+    "name": "A Scene LFO 4 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 466,
+    "name": "A Scene LFO 4 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 467,
+    "name": "A Scene LFO 4 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 468,
+    "name": "A Scene LFO 4 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 469,
+    "name": "A Scene LFO 4 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 470,
+    "name": "A Scene LFO 4 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 471,
+    "name": "A Scene LFO 4 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 472,
+    "name": "A Scene LFO 4 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 473,
+    "name": "A Scene LFO 4 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 474,
+    "name": "A Scene LFO 4 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 475,
+    "name": "A Scene LFO 5 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 476,
+    "name": "A Scene LFO 5 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 477,
+    "name": "A Scene LFO 5 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 478,
+    "name": "A Scene LFO 5 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 479,
+    "name": "A Scene LFO 5 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 480,
+    "name": "A Scene LFO 5 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 481,
+    "name": "A Scene LFO 5 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 482,
+    "name": "A Scene LFO 5 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 483,
+    "name": "A Scene LFO 5 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 484,
+    "name": "A Scene LFO 5 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 485,
+    "name": "A Scene LFO 5 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 486,
+    "name": "A Scene LFO 5 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 487,
+    "name": "A Scene LFO 5 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 488,
+    "name": "A Scene LFO 6 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 489,
+    "name": "A Scene LFO 6 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 490,
+    "name": "A Scene LFO 6 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 491,
+    "name": "A Scene LFO 6 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 492,
+    "name": "A Scene LFO 6 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 493,
+    "name": "A Scene LFO 6 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 494,
+    "name": "A Scene LFO 6 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 495,
+    "name": "A Scene LFO 6 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 496,
+    "name": "A Scene LFO 6 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 497,
+    "name": "A Scene LFO 6 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 498,
+    "name": "A Scene LFO 6 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 499,
+    "name": "A Scene LFO 6 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 500,
+    "name": "A Scene LFO 6 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 501,
+    "name": "B Octave",
+    "ctrltype": "ct_pitch_octave",
+    "resolved": true,
+    "min": -3,
+    "max": 3
+  },
+  {
+    "index": 502,
+    "name": "B Pitch",
+    "ctrltype": "ct_pitch_semi7bp",
+    "resolved": true,
+    "min": -7,
+    "max": 7
+  },
+  {
+    "index": 503,
+    "name": "B Portamento",
+    "ctrltype": "ct_portatime",
+    "resolved": true,
+    "min": -8,
+    "max": 2
+  },
+  {
+    "index": 504,
+    "name": "B Play Mode",
+    "ctrltype": "ct_polymode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 505,
+    "name": "B FM Routing",
+    "ctrltype": "ct_fmconfig",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 506,
+    "name": "B FM Depth",
+    "ctrltype": "ct_decibel_fmdepth",
+    "resolved": true,
+    "min": -48,
+    "max": 24
+  },
+  {
+    "index": 507,
+    "name": "B Osc Drift",
+    "ctrltype": "ct_percent_oscdrift",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 508,
+    "name": "B Noise Color",
+    "ctrltype": "ct_noise_color",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 509,
+    "name": "B Keytrack Root Key",
+    "ctrltype": "ct_midikey",
+    "resolved": true,
+    "min": 0,
+    "max": 127
+  },
+  {
+    "index": 510,
+    "name": "B Volume",
+    "ctrltype": "ct_amplitude_clipper",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 511,
+    "name": "B Pan",
+    "ctrltype": "ct_percent_bipolar_pan",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 512,
+    "name": "B Width",
+    "ctrltype": "ct_percent_bipolar",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 513,
+    "name": "B Send FX 1 Level",
+    "ctrltype": "ct_sendlevel",
+    "resolved": true,
+    "min": 0,
+    "max": 1.5874011517
+  },
+  {
+    "index": 514,
+    "name": "B Send FX 2 Level",
+    "ctrltype": "ct_sendlevel",
+    "resolved": true,
+    "min": 0,
+    "max": 1.5874011517
+  },
+  {
+    "index": 515,
+    "name": "B Send FX 3 Level",
+    "ctrltype": "ct_sendlevel",
+    "resolved": true,
+    "min": 0,
+    "max": 1.5874011517
+  },
+  {
+    "index": 516,
+    "name": "B Send FX 4 Level",
+    "ctrltype": "ct_sendlevel",
+    "resolved": true,
+    "min": 0,
+    "max": 1.5874011517
+  },
+  {
+    "index": 517,
+    "name": "B Pitch Bend Up Range",
+    "ctrltype": "ct_pbdepth",
+    "resolved": true,
+    "min": 0,
+    "max": 24
+  },
+  {
+    "index": 518,
+    "name": "B Pitch Bend Down Range",
+    "ctrltype": "ct_pbdepth",
+    "resolved": true,
+    "min": 0,
+    "max": 24
+  },
+  {
+    "index": 519,
+    "name": "B VCA Gain",
+    "ctrltype": "ct_decibel",
+    "resolved": true,
+    "min": -48,
+    "max": 48
+  },
+  {
+    "index": 520,
+    "name": "B Velocity > VCA Gain",
+    "ctrltype": "ct_decibel_attenuation",
+    "resolved": true,
+    "min": -48,
+    "max": 0
+  },
+  {
+    "index": 521,
+    "name": "B Feedback",
+    "ctrltype": "ct_filter_feedback",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 522,
+    "name": "B Filter Configuration",
+    "ctrltype": "ct_fbconfig",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 523,
+    "name": "B Filter Balance",
+    "ctrltype": "ct_percent_bipolar",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 524,
+    "name": "B Highpass",
+    "ctrltype": "ct_freq_hpf",
+    "resolved": true,
+    "min": -72,
+    "max": 15
+  },
+  {
+    "index": 525,
+    "name": "B Waveshaper Type",
+    "ctrltype": "ct_wstype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 526,
+    "name": "B Waveshaper Drive",
+    "ctrltype": "ct_decibel_narrow_short_extendable",
+    "resolved": true,
+    "min": -24,
+    "max": 24
+  },
+  {
+    "index": 527,
+    "name": "B Filter 2 Offset Mode",
+    "ctrltype": "ct_bool_relative_switch",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 528,
+    "name": "B Link Resonance",
+    "ctrltype": "ct_bool_link_switch",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 529,
+    "name": "B Osc 1 Type",
+    "ctrltype": "ct_osctype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 530,
+    "name": "B Osc 1 Octave",
+    "ctrltype": "ct_pitch_octave",
+    "resolved": true,
+    "min": -3,
+    "max": 3
+  },
+  {
+    "index": 531,
+    "name": "B Osc 1 Pitch",
+    "ctrltype": "ct_pitch_semi7bp_absolutable",
+    "resolved": true,
+    "min": -7,
+    "max": 7
+  },
+  {
+    "index": 532,
+    "name": "B Osc 1 Shape",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 533,
+    "name": "B Osc 1 Width 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 534,
+    "name": "B Osc 1 Width 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 535,
+    "name": "B Osc 1 Sub Mix",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 536,
+    "name": "B Osc 1 Sync",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 537,
+    "name": "B Osc 1 Unison Detune",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 538,
+    "name": "B Osc 1 Unison Voices",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 539,
+    "name": "B Osc 1 Keytrack",
+    "ctrltype": "ct_bool_keytrack",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 540,
+    "name": "B Osc 1 Retrigger",
+    "ctrltype": "ct_bool_retrigger",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 541,
+    "name": "B Osc 2 Type",
+    "ctrltype": "ct_osctype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 542,
+    "name": "B Osc 2 Octave",
+    "ctrltype": "ct_pitch_octave",
+    "resolved": true,
+    "min": -3,
+    "max": 3
+  },
+  {
+    "index": 543,
+    "name": "B Osc 2 Pitch",
+    "ctrltype": "ct_pitch_semi7bp_absolutable",
+    "resolved": true,
+    "min": -7,
+    "max": 7
+  },
+  {
+    "index": 544,
+    "name": "B Osc 2 Shape",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 545,
+    "name": "B Osc 2 Width 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 546,
+    "name": "B Osc 2 Width 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 547,
+    "name": "B Osc 2 Sub Mix",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 548,
+    "name": "B Osc 2 Sync",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 549,
+    "name": "B Osc 2 Unison Detune",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 550,
+    "name": "B Osc 2 Unison Voices",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 551,
+    "name": "B Osc 2 Keytrack",
+    "ctrltype": "ct_bool_keytrack",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 552,
+    "name": "B Osc 2 Retrigger",
+    "ctrltype": "ct_bool_retrigger",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 553,
+    "name": "B Osc 3 Type",
+    "ctrltype": "ct_osctype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 554,
+    "name": "B Osc 3 Octave",
+    "ctrltype": "ct_pitch_octave",
+    "resolved": true,
+    "min": -3,
+    "max": 3
+  },
+  {
+    "index": 555,
+    "name": "B Osc 3 Pitch",
+    "ctrltype": "ct_pitch_semi7bp_absolutable",
+    "resolved": true,
+    "min": -7,
+    "max": 7
+  },
+  {
+    "index": 556,
+    "name": "B Osc 3 Shape",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 557,
+    "name": "B Osc 3 Width 1",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 558,
+    "name": "B Osc 3 Width 2",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 559,
+    "name": "B Osc 3 Sub Mix",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 560,
+    "name": "B Osc 3 Sync",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 561,
+    "name": "B Osc 3 Unison Detune",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 562,
+    "name": "B Osc 3 Unison Voices",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "type-dependent: meaning set by this oscillator's type"
+  },
+  {
+    "index": 563,
+    "name": "B Osc 3 Keytrack",
+    "ctrltype": "ct_bool_keytrack",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 564,
+    "name": "B Osc 3 Retrigger",
+    "ctrltype": "ct_bool_retrigger",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 565,
+    "name": "B Osc 1 Volume",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 566,
+    "name": "B Osc 1 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 567,
+    "name": "B Osc 1 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 568,
+    "name": "B Osc 1 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 569,
+    "name": "B Osc 2 Volume",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 570,
+    "name": "B Osc 2 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 571,
+    "name": "B Osc 2 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 572,
+    "name": "B Osc 2 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 573,
+    "name": "B Osc 3 Volume",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 574,
+    "name": "B Osc 3 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 575,
+    "name": "B Osc 3 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 576,
+    "name": "B Osc 3 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 577,
+    "name": "B Ring Modulation 1x2 Volume",
+    "ctrltype": "ct_amplitude_ringmod",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 578,
+    "name": "B Ring Modulation 1x2 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 579,
+    "name": "B Ring Modulation 1x2 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 580,
+    "name": "B Ring Modulation 1x2 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 581,
+    "name": "B Ring Modulation 2x3 Volume",
+    "ctrltype": "ct_amplitude_ringmod",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 582,
+    "name": "B Ring Modulation 2x3 Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 583,
+    "name": "B Ring Modulation 2x3 Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 584,
+    "name": "B Ring Modulation 2x3 Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 585,
+    "name": "B Noise Volume",
+    "ctrltype": "ct_amplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 586,
+    "name": "B Noise Mute",
+    "ctrltype": "ct_bool_mute",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 587,
+    "name": "B Noise Solo",
+    "ctrltype": "ct_bool_solo",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 588,
+    "name": "B Noise Route",
+    "ctrltype": "ct_oscroute",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 589,
+    "name": "B Pre-Filter Gain",
+    "ctrltype": "ct_decibel",
+    "resolved": true,
+    "min": -48,
+    "max": 48
+  },
+  {
+    "index": 590,
+    "name": "B Filter 1 Type",
+    "ctrltype": "ct_filtertype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 591,
+    "name": "B Filter 1 Subtype",
+    "ctrltype": "ct_filtersubtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 592,
+    "name": "B Filter 1 Cutoff",
+    "ctrltype": "ct_freq_audible_with_tunability",
+    "resolved": true,
+    "min": -60,
+    "max": 70
+  },
+  {
+    "index": 593,
+    "name": "B Filter 1 Resonance",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 594,
+    "name": "B Filter 1 FEG Mod Amount",
+    "ctrltype": "ct_freq_mod",
+    "resolved": true,
+    "min": -96,
+    "max": 96
+  },
+  {
+    "index": 595,
+    "name": "B Filter 1 Keytrack",
+    "ctrltype": "ct_percent_bipolar",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 596,
+    "name": "B Filter 2 Type",
+    "ctrltype": "ct_filtertype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 597,
+    "name": "B Filter 2 Subtype",
+    "ctrltype": "ct_filtersubtype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 598,
+    "name": "B Filter 2 Cutoff",
+    "ctrltype": "ct_freq_audible_with_tunability",
+    "resolved": true,
+    "min": -60,
+    "max": 70
+  },
+  {
+    "index": 599,
+    "name": "B Filter 2 Resonance",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 600,
+    "name": "B Filter 2 FEG Mod Amount",
+    "ctrltype": "ct_freq_mod",
+    "resolved": true,
+    "min": -96,
+    "max": 96
+  },
+  {
+    "index": 601,
+    "name": "B Filter 2 Keytrack",
+    "ctrltype": "ct_percent_bipolar",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 602,
+    "name": "B Amp EG Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 603,
+    "name": "B Amp EG Attack Shape",
+    "ctrltype": "ct_envshape_attack",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 604,
+    "name": "B Amp EG Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 605,
+    "name": "B Amp EG Decay Shape",
+    "ctrltype": "ct_envshape",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 606,
+    "name": "B Amp EG Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 607,
+    "name": "B Amp EG Release",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 608,
+    "name": "B Amp EG Release Shape",
+    "ctrltype": "ct_envshape",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 609,
+    "name": "B Amp EG Envelope Mode",
+    "ctrltype": "ct_envmode",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 610,
+    "name": "B Filter EG Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 611,
+    "name": "B Filter EG Attack Shape",
+    "ctrltype": "ct_envshape_attack",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 612,
+    "name": "B Filter EG Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 613,
+    "name": "B Filter EG Decay Shape",
+    "ctrltype": "ct_envshape",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 614,
+    "name": "B Filter EG Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 615,
+    "name": "B Filter EG Release",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 616,
+    "name": "B Filter EG Release Shape",
+    "ctrltype": "ct_envshape",
+    "resolved": true,
+    "min": 0,
+    "max": 2
+  },
+  {
+    "index": 617,
+    "name": "B Filter EG Envelope Mode",
+    "ctrltype": "ct_envmode",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 618,
+    "name": "B LFO 1 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 619,
+    "name": "B LFO 1 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 620,
+    "name": "B LFO 1 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 621,
+    "name": "B LFO 1 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 622,
+    "name": "B LFO 1 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 623,
+    "name": "B LFO 1 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 624,
+    "name": "B LFO 1 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 625,
+    "name": "B LFO 1 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 626,
+    "name": "B LFO 1 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 627,
+    "name": "B LFO 1 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 628,
+    "name": "B LFO 1 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 629,
+    "name": "B LFO 1 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 630,
+    "name": "B LFO 1 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 631,
+    "name": "B LFO 2 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 632,
+    "name": "B LFO 2 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 633,
+    "name": "B LFO 2 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 634,
+    "name": "B LFO 2 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 635,
+    "name": "B LFO 2 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 636,
+    "name": "B LFO 2 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 637,
+    "name": "B LFO 2 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 638,
+    "name": "B LFO 2 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 639,
+    "name": "B LFO 2 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 640,
+    "name": "B LFO 2 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 641,
+    "name": "B LFO 2 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 642,
+    "name": "B LFO 2 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 643,
+    "name": "B LFO 2 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 644,
+    "name": "B LFO 3 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 645,
+    "name": "B LFO 3 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 646,
+    "name": "B LFO 3 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 647,
+    "name": "B LFO 3 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 648,
+    "name": "B LFO 3 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 649,
+    "name": "B LFO 3 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 650,
+    "name": "B LFO 3 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 651,
+    "name": "B LFO 3 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 652,
+    "name": "B LFO 3 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 653,
+    "name": "B LFO 3 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 654,
+    "name": "B LFO 3 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 655,
+    "name": "B LFO 3 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 656,
+    "name": "B LFO 3 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 657,
+    "name": "B LFO 4 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 658,
+    "name": "B LFO 4 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 659,
+    "name": "B LFO 4 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 660,
+    "name": "B LFO 4 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 661,
+    "name": "B LFO 4 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 662,
+    "name": "B LFO 4 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 663,
+    "name": "B LFO 4 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 664,
+    "name": "B LFO 4 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 665,
+    "name": "B LFO 4 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 666,
+    "name": "B LFO 4 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 667,
+    "name": "B LFO 4 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 668,
+    "name": "B LFO 4 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 669,
+    "name": "B LFO 4 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 670,
+    "name": "B LFO 5 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 671,
+    "name": "B LFO 5 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 672,
+    "name": "B LFO 5 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 673,
+    "name": "B LFO 5 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 674,
+    "name": "B LFO 5 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 675,
+    "name": "B LFO 5 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 676,
+    "name": "B LFO 5 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 677,
+    "name": "B LFO 5 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 678,
+    "name": "B LFO 5 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 679,
+    "name": "B LFO 5 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 680,
+    "name": "B LFO 5 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 681,
+    "name": "B LFO 5 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 682,
+    "name": "B LFO 5 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 683,
+    "name": "B LFO 6 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 684,
+    "name": "B LFO 6 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 685,
+    "name": "B LFO 6 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 686,
+    "name": "B LFO 6 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 687,
+    "name": "B LFO 6 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 688,
+    "name": "B LFO 6 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 689,
+    "name": "B LFO 6 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 690,
+    "name": "B LFO 6 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 691,
+    "name": "B LFO 6 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 692,
+    "name": "B LFO 6 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 693,
+    "name": "B LFO 6 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 694,
+    "name": "B LFO 6 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 695,
+    "name": "B LFO 6 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 696,
+    "name": "B Scene LFO 1 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 697,
+    "name": "B Scene LFO 1 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 698,
+    "name": "B Scene LFO 1 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 699,
+    "name": "B Scene LFO 1 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 700,
+    "name": "B Scene LFO 1 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 701,
+    "name": "B Scene LFO 1 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 702,
+    "name": "B Scene LFO 1 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 703,
+    "name": "B Scene LFO 1 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 704,
+    "name": "B Scene LFO 1 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 705,
+    "name": "B Scene LFO 1 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 706,
+    "name": "B Scene LFO 1 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 707,
+    "name": "B Scene LFO 1 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 708,
+    "name": "B Scene LFO 1 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 709,
+    "name": "B Scene LFO 2 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 710,
+    "name": "B Scene LFO 2 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 711,
+    "name": "B Scene LFO 2 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 712,
+    "name": "B Scene LFO 2 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 713,
+    "name": "B Scene LFO 2 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 714,
+    "name": "B Scene LFO 2 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 715,
+    "name": "B Scene LFO 2 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 716,
+    "name": "B Scene LFO 2 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 717,
+    "name": "B Scene LFO 2 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 718,
+    "name": "B Scene LFO 2 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 719,
+    "name": "B Scene LFO 2 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 720,
+    "name": "B Scene LFO 2 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 721,
+    "name": "B Scene LFO 2 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 722,
+    "name": "B Scene LFO 3 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 723,
+    "name": "B Scene LFO 3 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 724,
+    "name": "B Scene LFO 3 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 725,
+    "name": "B Scene LFO 3 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 726,
+    "name": "B Scene LFO 3 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 727,
+    "name": "B Scene LFO 3 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 728,
+    "name": "B Scene LFO 3 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 729,
+    "name": "B Scene LFO 3 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 730,
+    "name": "B Scene LFO 3 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 731,
+    "name": "B Scene LFO 3 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 732,
+    "name": "B Scene LFO 3 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 733,
+    "name": "B Scene LFO 3 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 734,
+    "name": "B Scene LFO 3 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 735,
+    "name": "B Scene LFO 4 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 736,
+    "name": "B Scene LFO 4 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 737,
+    "name": "B Scene LFO 4 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 738,
+    "name": "B Scene LFO 4 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 739,
+    "name": "B Scene LFO 4 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 740,
+    "name": "B Scene LFO 4 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 741,
+    "name": "B Scene LFO 4 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 742,
+    "name": "B Scene LFO 4 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 743,
+    "name": "B Scene LFO 4 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 744,
+    "name": "B Scene LFO 4 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 745,
+    "name": "B Scene LFO 4 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 746,
+    "name": "B Scene LFO 4 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 747,
+    "name": "B Scene LFO 4 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 748,
+    "name": "B Scene LFO 5 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 749,
+    "name": "B Scene LFO 5 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 750,
+    "name": "B Scene LFO 5 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 751,
+    "name": "B Scene LFO 5 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 752,
+    "name": "B Scene LFO 5 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 753,
+    "name": "B Scene LFO 5 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 754,
+    "name": "B Scene LFO 5 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 755,
+    "name": "B Scene LFO 5 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 756,
+    "name": "B Scene LFO 5 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 757,
+    "name": "B Scene LFO 5 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 758,
+    "name": "B Scene LFO 5 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 759,
+    "name": "B Scene LFO 5 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 760,
+    "name": "B Scene LFO 5 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 761,
+    "name": "B Scene LFO 6 Type",
+    "ctrltype": "ct_lfotype",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 762,
+    "name": "B Scene LFO 6 Rate",
+    "ctrltype": "ct_lforate_deactivatable",
+    "resolved": true,
+    "min": -7,
+    "max": 9
+  },
+  {
+    "index": 763,
+    "name": "B Scene LFO 6 Phase",
+    "ctrltype": "ct_lfophaseshuffle",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 764,
+    "name": "B Scene LFO 6 Amplitude",
+    "ctrltype": "ct_lfoamplitude",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 765,
+    "name": "B Scene LFO 6 Deform",
+    "ctrltype": "ct_lfodeform",
+    "resolved": true,
+    "min": -1,
+    "max": 1
+  },
+  {
+    "index": 766,
+    "name": "B Scene LFO 6 Trigger Mode",
+    "ctrltype": "ct_lfotrigmode",
+    "resolved": true,
+    "min": 0,
+    "max": null,
+    "note": "enum, max = runtime enum size - 1 (query via TrackFX_GetParameterStepSizes)"
+  },
+  {
+    "index": 767,
+    "name": "B Scene LFO 6 Unipolar",
+    "ctrltype": "ct_bool_unipolar",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 768,
+    "name": "B Scene LFO 6 Delay",
+    "ctrltype": "ct_envtime_deactivatable",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 769,
+    "name": "B Scene LFO 6 Attack",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 770,
+    "name": "B Scene LFO 6 Hold",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 771,
+    "name": "B Scene LFO 6 Decay",
+    "ctrltype": "ct_envtime",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 772,
+    "name": "B Scene LFO 6 Sustain",
+    "ctrltype": "ct_percent",
+    "resolved": true,
+    "min": 0,
+    "max": 1
+  },
+  {
+    "index": 773,
+    "name": "B Scene LFO 6 Release",
+    "ctrltype": "ct_envtime_lfodecay",
+    "resolved": true,
+    "min": -8,
+    "max": 5
+  },
+  {
+    "index": 774,
+    "name": "Bypass Surge XT",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "host-level VST3 param, not a Surge parameter"
+  },
+  {
+    "index": 775,
+    "name": "Bypass",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "host-level VST3 param, not a Surge parameter"
+  },
+  {
+    "index": 776,
+    "name": "Wet",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "host-level VST3 param, not a Surge parameter"
+  },
+  {
+    "index": 777,
+    "name": "Delta",
+    "ctrltype": null,
+    "resolved": false,
+    "note": "host-level VST3 param, not a Surge parameter"
+  }
+]

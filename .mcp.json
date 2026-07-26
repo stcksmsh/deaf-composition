@@ -2,7 +2,14 @@
   "mcpServers": {
     "reaper": {
       "command": "uvx",
-      "args": ["twelvetake-reaper-mcp"]
+      "args": ["twelvetake-reaper-mcp"],
+      "env": {
+        "REAPER_BRIDGE_DIR": "${HOME}/.config/REAPER/Scripts/mcp_bridge_data"
+      }
+    },
+    "deaf_composition": {
+      "command": "/home/stcksmsh/Music/Albums/AI-test/.venv/bin/python",
+      "args": ["/home/stcksmsh/Music/Albums/AI-test/scripts/deaf_composition_mcp_server.py"]
     }
   }
 }

@@ -1,0 +1,702 @@
+[
+  {
+    "target": "fx[fxslot_send1].return_level",
+    "short_name": "\"volume_FX1\"",
+    "label": "\"Send FX 1 Return\"",
+    "path": "\"fx/send/1/return\"",
+    "ctrltype": "ct_amplitude"
+  },
+  {
+    "target": "fx[fxslot_send2].return_level",
+    "short_name": "\"volume_FX2\"",
+    "label": "\"Send FX 2 Return\"",
+    "path": "\"fx/send/2/return\"",
+    "ctrltype": "ct_amplitude"
+  },
+  {
+    "target": "fx[fxslot_send3].return_level",
+    "short_name": "\"volume_FX3\"",
+    "label": "\"Send FX 3 Return\"",
+    "path": "\"fx/send/3/return\"",
+    "ctrltype": "ct_amplitude"
+  },
+  {
+    "target": "fx[fxslot_send4].return_level",
+    "short_name": "\"volume_FX4\"",
+    "label": "\"Send FX 4 Return\"",
+    "path": "\"fx/send/4/return\"",
+    "ctrltype": "ct_amplitude"
+  },
+  {
+    "target": "volume",
+    "short_name": "\"volume\"",
+    "label": "\"Global Volume\"",
+    "path": "\"global/volume\"",
+    "ctrltype": "ct_decibel_attenuation_clipper"
+  },
+  {
+    "target": "scene_active",
+    "short_name": "\"scene_active\"",
+    "label": "\"Active Scene\"",
+    "path": "\"global/active_scene\"",
+    "ctrltype": "ct_scenesel"
+  },
+  {
+    "target": "scenemode",
+    "short_name": "\"scenemode\"",
+    "label": "\"Scene Mode\"",
+    "path": "\"global/scene_mode\"",
+    "ctrltype": "ct_scenemode"
+  },
+  {
+    "target": "splitpoint",
+    "short_name": "\"splitkey\"",
+    "label": "\"Split Point\"",
+    "path": "\"global/split_point\"",
+    "ctrltype": "ct_midikey_or_channel"
+  },
+  {
+    "target": "fx_disable",
+    "short_name": "\"fx_disable\"",
+    "label": "\"FX Disable\"",
+    "path": "\"hidden/fx_disable\"",
+    "ctrltype": "ct_none"
+  },
+  {
+    "target": "polylimit",
+    "short_name": "\"polylimit\"",
+    "label": "\"Polyphony Limit\"",
+    "path": "\"global/polyphony_limit\"",
+    "ctrltype": "ct_polylimit"
+  },
+  {
+    "target": "fx_bypass",
+    "short_name": "\"fx_bypass\"",
+    "label": "\"FX Chain Bypass\"",
+    "path": "\"fx/chain_bypass\"",
+    "ctrltype": "ct_fxbypass"
+  },
+  {
+    "target": "fx[fx].type",
+    "short_name": "\"type\"",
+    "label": "\"FX Type\"",
+    "path": "fmt::format(\"{}/type\", fxslot_shortoscname[fx])",
+    "ctrltype": "ct_fxtype"
+  },
+  {
+    "target": "fx[fx].p[p]",
+    "short_name": "label",
+    "label": "dawlabel",
+    "path": "fmt::format(\"{}/param{}\", fxslot_shortoscname[fx], p + 1)",
+    "ctrltype": "ct_none"
+  },
+  {
+    "target": "scene[sc].octave",
+    "short_name": "\"octave\"",
+    "label": "\"Octave\"",
+    "path": "fmt::format(\"{:c}/octave\", 'a' + sc)",
+    "ctrltype": "ct_pitch_octave"
+  },
+  {
+    "target": "scene[sc].pitch",
+    "short_name": "\"pitch\"",
+    "label": "\"Pitch\"",
+    "path": "fmt::format(\"{:c}/pitch\", 'a' + sc)",
+    "ctrltype": "ct_pitch_semi7bp"
+  },
+  {
+    "target": "scene[sc].portamento",
+    "short_name": "\"portamento\"",
+    "label": "\"Portamento\"",
+    "path": "fmt::format(\"{:c}/portamento\", 'a' + sc)",
+    "ctrltype": "ct_portatime"
+  },
+  {
+    "target": "scene[sc].osc[osc].type",
+    "short_name": "\"type\"",
+    "label": "\"Type\"",
+    "path": "fmt::format(\"{:c}/osc/{}/type\", 'a' + sc, osc + 1)",
+    "ctrltype": "ct_osctype"
+  },
+  {
+    "target": "scene[sc].osc[osc].octave",
+    "short_name": "\"octave\"",
+    "label": "\"Octave\"",
+    "path": "fmt::format(\"{:c}/osc/{}/octave\", 'a' + sc, osc + 1)",
+    "ctrltype": "ct_pitch_octave"
+  },
+  {
+    "target": "scene[sc].osc[osc].pitch",
+    "short_name": "\"pitch\"",
+    "label": "\"Pitch\"",
+    "path": "fmt::format(\"{:c}/osc/{}/pitch\", 'a' + sc, osc + 1)",
+    "ctrltype": "ct_pitch_semi7bp_absolutable"
+  },
+  {
+    "target": "scene[sc].osc[osc].p[i]",
+    "short_name": "label",
+    "label": "\"-\"",
+    "path": "fmt::format(\"{:c}/osc/{}/param{}\", 'a' + sc, osc + 1, i + 1)",
+    "ctrltype": "ct_none"
+  },
+  {
+    "target": "scene[sc].osc[osc].keytrack",
+    "short_name": "\"keytrack\"",
+    "label": "\"Keytrack\"",
+    "path": "fmt::format(\"{:c}/osc/{}/keytrack\", 'a' + sc, osc + 1)",
+    "ctrltype": "ct_bool_keytrack"
+  },
+  {
+    "target": "scene[sc].osc[osc].retrigger",
+    "short_name": "\"retrigger\"",
+    "label": "\"Retrigger\"",
+    "path": "fmt::format(\"{:c}/osc/{}/retrigger\", 'a' + sc, osc + 1)",
+    "ctrltype": "ct_bool_retrigger"
+  },
+  {
+    "target": "scene[sc].polymode",
+    "short_name": "\"polymode\"",
+    "label": "\"Play Mode\"",
+    "path": "fmt::format(\"{:c}/play_mode\", 'a' + sc)",
+    "ctrltype": "ct_polymode"
+  },
+  {
+    "target": "scene[sc].fm_switch",
+    "short_name": "\"fm_switch\"",
+    "label": "\"FM Routing\"",
+    "path": "fmt::format(\"{:c}/osc/fm_routing\", 'a' + sc)",
+    "ctrltype": "ct_fmconfig"
+  },
+  {
+    "target": "scene[sc].fm_depth",
+    "short_name": "\"fm_depth\"",
+    "label": "\"FM Depth\"",
+    "path": "fmt::format(\"{:c}/osc/fm_depth\", 'a' + sc)",
+    "ctrltype": "ct_decibel_fmdepth"
+  },
+  {
+    "target": "scene[sc].drift",
+    "short_name": "\"drift\"",
+    "label": "\"Osc Drift\"",
+    "path": "fmt::format(\"{:c}/osc/drift\", 'a' + sc)",
+    "ctrltype": "ct_percent_oscdrift"
+  },
+  {
+    "target": "scene[sc].noise_colour",
+    "short_name": "\"noisecol\"",
+    "label": "\"Noise Color\"",
+    "path": "fmt::format(\"{:c}/mixer/noise/color\", 'a' + sc)",
+    "ctrltype": "ct_noise_color"
+  },
+  {
+    "target": "scene[sc].keytrack_root",
+    "short_name": "\"ktrkroot\"",
+    "label": "\"Keytrack Root Key\"",
+    "path": "fmt::format(\"{:c}/filter/keytrack_root\", 'a' + sc)",
+    "ctrltype": "ct_midikey"
+  },
+  {
+    "target": "scene[sc].volume",
+    "short_name": "\"volume\"",
+    "label": "\"Volume\"",
+    "path": "fmt::format(\"{:c}/amp/volume\", 'a' + sc)",
+    "ctrltype": "ct_amplitude_clipper"
+  },
+  {
+    "target": "scene[sc].pan",
+    "short_name": "\"pan\"",
+    "label": "\"Pan\"",
+    "path": "fmt::format(\"{:c}/amp/pan\", 'a' + sc)",
+    "ctrltype": "ct_percent_bipolar_pan"
+  },
+  {
+    "target": "scene[sc].width",
+    "short_name": "\"pan2\"",
+    "label": "\"Width\"",
+    "path": "fmt::format(\"{:c}/amp/width\", 'a' + sc)",
+    "ctrltype": "ct_percent_bipolar"
+  },
+  {
+    "target": "scene[sc].send_level[0]",
+    "short_name": "\"send_fx_1\"",
+    "label": "\"Send FX 1 Level\"",
+    "path": "fmt::format(\"{:c}/send/1/level\", 'a' + sc)",
+    "ctrltype": "ct_sendlevel"
+  },
+  {
+    "target": "scene[sc].send_level[1]",
+    "short_name": "\"send_fx_2\"",
+    "label": "\"Send FX 2 Level\"",
+    "path": "fmt::format(\"{:c}/send/2/level\", 'a' + sc)",
+    "ctrltype": "ct_sendlevel"
+  },
+  {
+    "target": "scene[sc].send_level[2]",
+    "short_name": "\"send_fx_3\"",
+    "label": "\"Send FX 3 Level\"",
+    "path": "fmt::format(\"{:c}/send/3/level\", 'a' + sc)",
+    "ctrltype": "ct_sendlevel"
+  },
+  {
+    "target": "scene[sc].send_level[3]",
+    "short_name": "\"send_fx_4\"",
+    "label": "\"Send FX 4 Level\"",
+    "path": "fmt::format(\"{:c}/send/4/level\", 'a' + sc)",
+    "ctrltype": "ct_sendlevel"
+  },
+  {
+    "target": "scene[sc].level_o1",
+    "short_name": "\"level_o1\"",
+    "label": "\"Osc 1 Volume\"",
+    "path": "fmt::format(\"{:c}/mixer/osc1/volume\", 'a' + sc)",
+    "ctrltype": "ct_amplitude"
+  },
+  {
+    "target": "scene[sc].mute_o1",
+    "short_name": "\"mute_o1\"",
+    "label": "\"Osc 1 Mute\"",
+    "path": "fmt::format(\"{:c}/mixer/osc1/mute\", 'a' + sc)",
+    "ctrltype": "ct_bool_mute"
+  },
+  {
+    "target": "scene[sc].solo_o1",
+    "short_name": "\"solo_o1\"",
+    "label": "\"Osc 1 Solo\"",
+    "path": "fmt::format(\"{:c}/mixer/osc1/solo\", 'a' + sc)",
+    "ctrltype": "ct_bool_solo"
+  },
+  {
+    "target": "scene[sc].route_o1",
+    "short_name": "\"route_o1\"",
+    "label": "\"Osc 1 Route\"",
+    "path": "fmt::format(\"{:c}/mixer/osc1/route\", 'a' + sc)",
+    "ctrltype": "ct_oscroute"
+  },
+  {
+    "target": "scene[sc].level_o2",
+    "short_name": "\"level_o2\"",
+    "label": "\"Osc 2 Volume\"",
+    "path": "fmt::format(\"{:c}/mixer/osc2/volume\", 'a' + sc)",
+    "ctrltype": "ct_amplitude"
+  },
+  {
+    "target": "scene[sc].mute_o2",
+    "short_name": "\"mute_o2\"",
+    "label": "\"Osc 2 Mute\"",
+    "path": "fmt::format(\"{:c}/mixer/osc2/mute\", 'a' + sc)",
+    "ctrltype": "ct_bool_mute"
+  },
+  {
+    "target": "scene[sc].solo_o2",
+    "short_name": "\"solo_o2\"",
+    "label": "\"Osc 2 Solo\"",
+    "path": "fmt::format(\"{:c}/mixer/osc2/solo\", 'a' + sc)",
+    "ctrltype": "ct_bool_solo"
+  },
+  {
+    "target": "scene[sc].route_o2",
+    "short_name": "\"route_o2\"",
+    "label": "\"Osc 2 Route\"",
+    "path": "fmt::format(\"{:c}/mixer/osc2/route\", 'a' + sc)",
+    "ctrltype": "ct_oscroute"
+  },
+  {
+    "target": "scene[sc].level_o3",
+    "short_name": "\"level_o3\"",
+    "label": "\"Osc 3 Volume\"",
+    "path": "fmt::format(\"{:c}/mixer/osc3/volume\", 'a' + sc)",
+    "ctrltype": "ct_amplitude"
+  },
+  {
+    "target": "scene[sc].mute_o3",
+    "short_name": "\"mute_o3\"",
+    "label": "\"Osc 3 Mute\"",
+    "path": "fmt::format(\"{:c}/mixer/osc3/mute\", 'a' + sc)",
+    "ctrltype": "ct_bool_mute"
+  },
+  {
+    "target": "scene[sc].solo_o3",
+    "short_name": "\"solo_o3\"",
+    "label": "\"Osc 3 Solo\"",
+    "path": "fmt::format(\"{:c}/mixer/osc3/solo\", 'a' + sc)",
+    "ctrltype": "ct_bool_solo"
+  },
+  {
+    "target": "scene[sc].route_o3",
+    "short_name": "\"route_o3\"",
+    "label": "\"Osc 3 Route\"",
+    "path": "fmt::format(\"{:c}/mixer/osc3/route\", 'a' + sc)",
+    "ctrltype": "ct_oscroute"
+  },
+  {
+    "target": "scene[sc].level_ring_12",
+    "short_name": "\"level_ring12\"",
+    "label": "\"Ring Modulation 1x2 Volume\"",
+    "path": "fmt::format(\"{:c}/mixer/rm1x2/volume\", 'a' + sc)",
+    "ctrltype": "ct_amplitude_ringmod"
+  },
+  {
+    "target": "scene[sc].mute_ring_12",
+    "short_name": "\"mute_ring12\"",
+    "label": "\"Ring Modulation 1x2 Mute\"",
+    "path": "fmt::format(\"{:c}/mixer/rm1x2/mute\", 'a' + sc)",
+    "ctrltype": "ct_bool_mute"
+  },
+  {
+    "target": "scene[sc].solo_ring_12",
+    "short_name": "\"solo_ring12\"",
+    "label": "\"Ring Modulation 1x2 Solo\"",
+    "path": "fmt::format(\"{:c}/mixer/rm1x2/solo\", 'a' + sc)",
+    "ctrltype": "ct_bool_solo"
+  },
+  {
+    "target": "scene[sc].route_ring_12",
+    "short_name": "\"route_ring12\"",
+    "label": "\"Ring Modulation 1x2 Route\"",
+    "path": "fmt::format(\"{:c}/mixer/rm1x2/route\", 'a' + sc)",
+    "ctrltype": "ct_oscroute"
+  },
+  {
+    "target": "scene[sc].level_ring_23",
+    "short_name": "\"level_ring23\"",
+    "label": "\"Ring Modulation 2x3 Volume\"",
+    "path": "fmt::format(\"{:c}/mixer/rm2x3/volume\", 'a' + sc)",
+    "ctrltype": "ct_amplitude_ringmod"
+  },
+  {
+    "target": "scene[sc].mute_ring_23",
+    "short_name": "\"mute_ring23\"",
+    "label": "\"Ring Modulation 2x3 Mute\"",
+    "path": "fmt::format(\"{:c}/mixer/rm2x3/mute\", 'a' + sc)",
+    "ctrltype": "ct_bool_mute"
+  },
+  {
+    "target": "scene[sc].solo_ring_23",
+    "short_name": "\"solo_ring23\"",
+    "label": "\"Ring Modulation 2x3 Solo\"",
+    "path": "fmt::format(\"{:c}/mixer/rm2x3/solo\", 'a' + sc)",
+    "ctrltype": "ct_bool_solo"
+  },
+  {
+    "target": "scene[sc].route_ring_23",
+    "short_name": "\"route_ring23\"",
+    "label": "\"Ring Modulation 2x3 Route\"",
+    "path": "fmt::format(\"{:c}/mixer/rm2x3/route\", 'a' + sc)",
+    "ctrltype": "ct_oscroute"
+  },
+  {
+    "target": "scene[sc].level_noise",
+    "short_name": "\"level_noise\"",
+    "label": "\"Noise Volume\"",
+    "path": "fmt::format(\"{:c}/mixer/noise/volume\", 'a' + sc)",
+    "ctrltype": "ct_amplitude"
+  },
+  {
+    "target": "scene[sc].mute_noise",
+    "short_name": "\"mute_noise\"",
+    "label": "\"Noise Mute\"",
+    "path": "fmt::format(\"{:c}/mixer/noise/mute\", 'a' + sc)",
+    "ctrltype": "ct_bool_mute"
+  },
+  {
+    "target": "scene[sc].solo_noise",
+    "short_name": "\"solo_noise\"",
+    "label": "\"Noise Solo\"",
+    "path": "fmt::format(\"{:c}/mixer/noise/solo\", 'a' + sc)",
+    "ctrltype": "ct_bool_solo"
+  },
+  {
+    "target": "scene[sc].route_noise",
+    "short_name": "\"route_noise\"",
+    "label": "\"Noise Route\"",
+    "path": "fmt::format(\"{:c}/mixer/noise/route\", 'a' + sc)",
+    "ctrltype": "ct_oscroute"
+  },
+  {
+    "target": "scene[sc].level_pfg",
+    "short_name": "\"level_pfg\"",
+    "label": "\"Pre-Filter Gain\"",
+    "path": "fmt::format(\"{:c}/mixer/prefilter_gain\", 'a' + sc)",
+    "ctrltype": "ct_decibel"
+  },
+  {
+    "target": "scene[sc].pbrange_up",
+    "short_name": "\"pbrange_up\"",
+    "label": "\"Pitch Bend Up Range\"",
+    "path": "fmt::format(\"{:c}/pitchbend_up\", 'a' + sc)",
+    "ctrltype": "ct_pbdepth"
+  },
+  {
+    "target": "scene[sc].pbrange_dn",
+    "short_name": "\"pbrange_dn\"",
+    "label": "\"Pitch Bend Down Range\"",
+    "path": "fmt::format(\"{:c}/pitchbend_down\", 'a' + sc)",
+    "ctrltype": "ct_pbdepth"
+  },
+  {
+    "target": "scene[sc].vca_level",
+    "short_name": "\"vca_level\"",
+    "label": "\"VCA Gain\"",
+    "path": "fmt::format(\"{:c}/amp/gain\", 'a' + sc)",
+    "ctrltype": "ct_decibel"
+  },
+  {
+    "target": "scene[sc].vca_velsense",
+    "short_name": "\"vca_velsense\"",
+    "label": "\"Velocity > VCA Gain\"",
+    "path": "fmt::format(\"{:c}/amp/vel_to_gain\", 'a' + sc)",
+    "ctrltype": "ct_decibel_attenuation"
+  },
+  {
+    "target": "scene[sc].feedback",
+    "short_name": "\"feedback\"",
+    "label": "\"Feedback\"",
+    "path": "fmt::format(\"{:c}/filter/feedback\", 'a' + sc)",
+    "ctrltype": "ct_filter_feedback"
+  },
+  {
+    "target": "scene[sc].filterblock_configuration",
+    "short_name": "\"fb_config\"",
+    "label": "\"Filter Configuration\"",
+    "path": "fmt::format(\"{:c}/filter/config\", 'a' + sc)",
+    "ctrltype": "ct_fbconfig"
+  },
+  {
+    "target": "scene[sc].filter_balance",
+    "short_name": "\"f_balance\"",
+    "label": "\"Filter Balance\"",
+    "path": "fmt::format(\"{:c}/filter/balance\", 'a' + sc)",
+    "ctrltype": "ct_percent_bipolar"
+  },
+  {
+    "target": "scene[sc].lowcut",
+    "short_name": "\"lowcut\"",
+    "label": "\"Highpass\"",
+    "path": "fmt::format(\"{:c}/highpass\", 'a' + sc)",
+    "ctrltype": "ct_freq_hpf"
+  },
+  {
+    "target": "scene[sc].wsunit.type",
+    "short_name": "\"ws_type\"",
+    "label": "\"Waveshaper Type\"",
+    "path": "fmt::format(\"{:c}/waveshaper/type\", 'a' + sc)",
+    "ctrltype": "ct_wstype"
+  },
+  {
+    "target": "scene[sc].wsunit.drive",
+    "short_name": "\"ws_drive\"",
+    "label": "\"Waveshaper Drive\"",
+    "path": "fmt::format(\"{:c}/waveshaper/drive\", 'a' + sc)",
+    "ctrltype": "ct_decibel_narrow_short_extendable"
+  },
+  {
+    "target": "scene[sc].filterunit[f].type",
+    "short_name": "\"type\"",
+    "label": "\"Type\"",
+    "path": "fmt::format(\"{:c}/filter/{}/type\", 'a' + sc, f + 1)",
+    "ctrltype": "ct_filtertype"
+  },
+  {
+    "target": "scene[sc].filterunit[f].subtype",
+    "short_name": "\"subtype\"",
+    "label": "\"Subtype\"",
+    "path": "fmt::format(\"{:c}/filter/{}/subtype\", 'a' + sc, f + 1)",
+    "ctrltype": "ct_filtersubtype"
+  },
+  {
+    "target": "scene[sc].filterunit[f].cutoff",
+    "short_name": "\"cutoff\"",
+    "label": "\"Cutoff\"",
+    "path": "fmt::format(\"{:c}/filter/{}/cutoff\", 'a' + sc, f + 1)",
+    "ctrltype": "ct_freq_audible_with_tunability"
+  },
+  {
+    "target": "scene[sc].f2_cutoff_is_offset",
+    "short_name": "\"f2_cf_is_offset\"",
+    "label": "\"Filter 2 Offset Mode\"",
+    "path": "fmt::format(\"{:c}/filter/2/offset_mode\", 'a' + sc)",
+    "ctrltype": "ct_bool_relative_switch"
+  },
+  {
+    "target": "scene[sc].filterunit[f].resonance",
+    "short_name": "\"resonance\"",
+    "label": "\"Resonance\"",
+    "path": "fmt::format(\"{:c}/filter/{}/resonance\", 'a' + sc, f + 1)",
+    "ctrltype": "ct_percent"
+  },
+  {
+    "target": "scene[sc].f2_link_resonance",
+    "short_name": "\"f2_link_resonance\"",
+    "label": "\"Link Resonance\"",
+    "path": "fmt::format(\"{:c}/filter/2/link_resonance\", 'a' + sc)",
+    "ctrltype": "ct_bool_link_switch"
+  },
+  {
+    "target": "scene[sc].filterunit[f].envmod",
+    "short_name": "\"envmod\"",
+    "label": "\"FEG Mod Amount\"",
+    "path": "fmt::format(\"{:c}/filter/{}/feg_amount\", 'a' + sc, f + 1)",
+    "ctrltype": "ct_freq_mod"
+  },
+  {
+    "target": "scene[sc].filterunit[f].keytrack",
+    "short_name": "\"keytrack\"",
+    "label": "\"Keytrack\"",
+    "path": "fmt::format(\"{:c}/filter/{}/keytrack\", 'a' + sc, f + 1)",
+    "ctrltype": "ct_percent_bipolar"
+  },
+  {
+    "target": "scene[sc].adsr[e].a",
+    "short_name": "\"attack\"",
+    "label": "\"Attack\"",
+    "path": "fmt::format(\"{:c}/{}/attack\", 'a' + sc, et)",
+    "ctrltype": "ct_envtime"
+  },
+  {
+    "target": "scene[sc].adsr[e].a_s",
+    "short_name": "\"attack_shape\"",
+    "label": "\"Attack Shape\"",
+    "path": "fmt::format(\"{:c}/{}/attack_shape\", 'a' + sc, et)",
+    "ctrltype": "ct_envshape_attack"
+  },
+  {
+    "target": "scene[sc].adsr[e].d",
+    "short_name": "\"decay\"",
+    "label": "\"Decay\"",
+    "path": "fmt::format(\"{:c}/{}/decay\", 'a' + sc, et)",
+    "ctrltype": "ct_envtime"
+  },
+  {
+    "target": "scene[sc].adsr[e].d_s",
+    "short_name": "\"decay_shape\"",
+    "label": "\"Decay Shape\"",
+    "path": "fmt::format(\"{:c}/{}/decay_shape\", 'a' + sc, et)",
+    "ctrltype": "ct_envshape"
+  },
+  {
+    "target": "scene[sc].adsr[e].s",
+    "short_name": "\"sustain\"",
+    "label": "\"Sustain\"",
+    "path": "fmt::format(\"{:c}/{}/sustain\", 'a' + sc, et)",
+    "ctrltype": "ct_percent"
+  },
+  {
+    "target": "scene[sc].adsr[e].r",
+    "short_name": "\"release\"",
+    "label": "\"Release\"",
+    "path": "fmt::format(\"{:c}/{}/release\", 'a' + sc, et)",
+    "ctrltype": "ctype"
+  },
+  {
+    "target": "scene[sc].adsr[e].r_s",
+    "short_name": "\"release_shape\"",
+    "label": "\"Release Shape\"",
+    "path": "fmt::format(\"{:c}/{}/release_shape\", 'a' + sc, et)",
+    "ctrltype": "ct_envshape"
+  },
+  {
+    "target": "scene[sc].adsr[e].mode",
+    "short_name": "\"mode\"",
+    "label": "\"Envelope Mode\"",
+    "path": "fmt::format(\"{:c}/{}/mode\", 'a' + sc, et)",
+    "ctrltype": "ct_envmode"
+  },
+  {
+    "target": "scene[sc].lfo[l].shape",
+    "short_name": "label",
+    "label": "\"Type\"",
+    "path": "fmt::format(\"{:c}/{}/{}/type\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_lfotype"
+  },
+  {
+    "target": "scene[sc].lfo[l].rate",
+    "short_name": "label",
+    "label": "\"Rate\"",
+    "path": "fmt::format(\"{:c}/{}/{}/rate\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_lforate_deactivatable"
+  },
+  {
+    "target": "scene[sc].lfo[l].start_phase",
+    "short_name": "label",
+    "label": "\"Phase / Shuffle\"",
+    "path": "fmt::format(\"{:c}/{}/{}/phase\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_lfophaseshuffle"
+  },
+  {
+    "target": "scene[sc].lfo[l].magnitude",
+    "short_name": "label",
+    "label": "\"Amplitude\"",
+    "path": "fmt::format(\"{:c}/{}/{}/amplitude\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_lfoamplitude"
+  },
+  {
+    "target": "scene[sc].lfo[l].deform",
+    "short_name": "label",
+    "label": "\"Deform\"",
+    "path": "fmt::format(\"{:c}/{}/{}/deform\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_lfodeform"
+  },
+  {
+    "target": "scene[sc].lfo[l].trigmode",
+    "short_name": "label",
+    "label": "\"Trigger Mode\"",
+    "path": "fmt::format(\"{:c}/{}/{}/trigger_mode\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_lfotrigmode"
+  },
+  {
+    "target": "scene[sc].lfo[l].unipolar",
+    "short_name": "label",
+    "label": "\"Unipolar\"",
+    "path": "fmt::format(\"{:c}/{}/{}/unipolar\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_bool_unipolar"
+  },
+  {
+    "target": "scene[sc].lfo[l].delay",
+    "short_name": "label",
+    "label": "\"Delay\"",
+    "path": "fmt::format(\"{:c}/{}/{}/eg/delay\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_envtime_deactivatable"
+  },
+  {
+    "target": "scene[sc].lfo[l].attack",
+    "short_name": "label",
+    "label": "\"Attack\"",
+    "path": "fmt::format(\"{:c}/{}/{}/eg/attack\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_envtime"
+  },
+  {
+    "target": "scene[sc].lfo[l].hold",
+    "short_name": "label",
+    "label": "\"Hold\"",
+    "path": "fmt::format(\"{:c}/{}/{}/eg/hold\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_envtime"
+  },
+  {
+    "target": "scene[sc].lfo[l].decay",
+    "short_name": "label",
+    "label": "\"Decay\"",
+    "path": "fmt::format(\"{:c}/{}/{}/eg/decay\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_envtime"
+  },
+  {
+    "target": "scene[sc].lfo[l].sustain",
+    "short_name": "label",
+    "label": "\"Sustain\"",
+    "path": "fmt::format(\"{:c}/{}/{}/eg/sustain\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_percent"
+  },
+  {
+    "target": "scene[sc].lfo[l].release",
+    "short_name": "label",
+    "label": "\"Release\"",
+    "path": "fmt::format(\"{:c}/{}/{}/eg/release\", 'a' + sc, lt, lid)",
+    "ctrltype": "ct_envtime_lfodecay"
+  },
+  {
+    "target": "character",
+    "short_name": "\"character\"",
+    "label": "\"Character\"",
+    "path": "\"global/character\"",
+    "ctrltype": "ct_character"
+  }
+]

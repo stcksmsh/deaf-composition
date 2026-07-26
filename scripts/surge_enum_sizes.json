@@ -1,0 +1,68 @@
+{
+  "ct_fbconfig": {
+    "n": 8,
+    "sample_index": 249,
+    "first_label": "Serial 1",
+    "last_label": "Wide"
+  },
+  "ct_filtertype": {
+    "n": 34,
+    "sample_index": 317,
+    "first_label": "Off",
+    "last_label": "MULTI Tri-pole"
+  },
+  "ct_fmconfig": {
+    "n": 4,
+    "sample_index": 232,
+    "first_label": "Off",
+    "last_label": "2 > 1 < 3"
+  },
+  "ct_fxbypass": {
+    "n": 4,
+    "sample_index": 18,
+    "first_label": "All FX",
+    "last_label": "All FX Off"
+  },
+  "ct_fxtype": {
+    "n": 30,
+    "sample_index": 19,
+    "first_label": "Off",
+    "last_label": "Audio In"
+  },
+  "ct_lfotrigmode": {
+    "n": 3,
+    "sample_index": 350,
+    "first_label": "Freerun",
+    "last_label": "Random"
+  },
+  "ct_lfotype": {
+    "n": 10,
+    "sample_index": 345,
+    "first_label": "Sine",
+    "last_label": "Formula"
+  },
+  "ct_osctype": {
+    "n": 12,
+    "sample_index": 256,
+    "first_label": "Classic",
+    "last_label": "Alias"
+  },
+  "ct_polymode": {
+    "n": 6,
+    "sample_index": 231,
+    "first_label": "Poly",
+    "last_label": "Latch (Monophonic)"
+  },
+  "ct_scenemode": {
+    "n": 4,
+    "sample_index": 14,
+    "first_label": "Single",
+    "last_label": "Channel Split"
+  },
+  "ct_wstype": {
+    "n": 43,
+    "sample_index": 252,
+    "first_label": "Off",
+    "last_label": "Soft Single Fold"
+  }
+}
