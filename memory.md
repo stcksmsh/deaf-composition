@@ -1,5 +1,41 @@
 # memory.md — deaf composition project
 
+## Session checkpoint (2026-07-26, mid-session)
+
+**Just did**: closed out stage 4's core review/fix loop for real, end-to-end, against
+a live 6-leaf drop-section tree (kick/percussion/bass rhythm section + lead/pad/noise).
+In order: fixed `save_project` hanging under Xvfb; closed override-name hallucination
+in leaf emission (real 539-name catalog, pre-flight validation); made `decompose()`
+actually recurse (real `is_leaf` judgment, tested 2 levels deep on a "drop" section);
+built `escalation.py` (retry/escalate decisions) and proved it fixes a real bug
+(silent pulse leaf, -52→-16.8 LUFS); built `mix_fix.py` (sidechain/EQ/highpass
+proposals via Sonnet) and ran **4 real fix rounds** on the backbone's kick/perc/bass
+register clash — 3 mix-fix passes (sidechain, 2 EQ notches, a highpass) that never
+fully converged, then 1 leaf-level re-emission that fixed the register conflict but
+created a new loudness gap. Built `orchestrate.py`'s `choose_fix_strategy()` from
+that exact data (switch strategy after 2 non-improving rounds) and validated it
+reproduces all 4 real decisions made by hand, 4/4 match.
+
+**Current state**: the drop section's backbone is **not fully fixed** — percussion
+(`Percussion/Verber.fxp`, re-emitted) still fails composition review on a loudness
+gap (13dB vs bass). `orchestrate.py` is built and validated against replayed
+history, but not yet wired into a live loop that calls it, executes its
+recommendation, and re-reviews automatically.
+
+**Key decision**: stopped chasing the backbone fix by hand at 4 rounds once the
+diagnostic value plateaued (evidence was complete: both fix mechanisms proven, their
+complementary nature established) rather than continuing to patch one leaf
+indefinitely — built the reusable orchestration logic instead, since that's what
+generalizes.
+
+**Immediate next steps** (see "## Next" below the most recent dated entry for full
+list): (1) run round 5 for real — `orchestrate.py` itself recommends `leaf_retry`
+again on percussion, feedback = fix the loudness this time; (2) wire
+`choose_fix_strategy()` into an actual live loop instead of replayed-history
+validation; (3) the noise leaf's total-silence failure is still untouched since the
+multi-level recursion work found it; (4) Vital param-mapping and full pipeline
+integration remain longer-standing, not-yet-started items.
+
 ## What's built (plan §11 build order)
 
 **Stage 1 — return channel: done.** `src/return_channel/` — `.RPP` parser, headless
