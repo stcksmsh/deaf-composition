@@ -943,19 +943,73 @@ found.
 
 Re-rendered `song_so_far.wav` at its new full length (0-48s: intro, build, drop).
 
+## Composition-level fixes (sidechain/EQ), closing a real architecture gap (2026-07-26)
+User's own diagnosis of the backbone's spectral-overlap failure -- "we probably
+need sidechaining" -- was correct and surfaced a real gap: `review_composition`
+could detect siblings clashing but had no way to *act* on it beyond re-emitting
+one leaf's content, the wrong tool for a genuinely relational (two-sibling)
+mixing problem.
+
+**`src/planner/mix_fix.py`** -- `propose_composition_fix()`, a real Sonnet call
+(a mixing judgment, not mechanical translation) given a failed
+`review_composition` verdict's actual reasons plus the siblings' own
+`own_purpose`/track_index/LUFS/centroid, proposing 1-3 concrete fixes from two
+real REAPER tool families: sidechain (`setup_sidechain_compression`, ducks
+target when trigger plays -- right for transient masking) or `eq_cut`
+(`add_eq`+`set_eq_band`, permanently carves a band -- right for constant
+register crowding regardless of timing). **Deliberately not hardcoded to
+"kick+bass always means sidechain"** -- and that mattered: the model correctly
+read that the *actual* reported overlaps were kick-percussion and
+percussion-bass, not kick-bass directly, and proposed a mixed sidechain+EQ
+response instead of reflexively reaching for the textbook technique. Hit the
+same double-encoded-JSON-string API quirk `decompose.py` already
+root-caused and fixed -- applied the identical string-recovery fix here rather
+than rediscovering it.
+
+**Executed live against the real backbone failure**: sidechain (kick ducks
+percussion, -5dB) + EQ notch on percussion (200Hz, -3.5dB, Q1.2) + EQ notch on
+bass (150Hz, -3dB, Q1.3) -- `track_fx_add_by_name`/`add_eq`'s real returned
+`fx_index` read live before each follow-up call, not assumed.
+
+**Real, honest, mixed result** -- not a clean win, not a failure either:
+- **The originally-reported kick↔percussion overlap resolved**: percussion's
+  centroid moved from 159Hz to 115Hz, now well clear of kick's 230Hz (ratio
+  2.0, passes the 1.5 threshold).
+- **But a new overlap appeared**: percussion's centroid landed almost exactly
+  on bass's (115Hz vs 111Hz, ratio 1.03) -- worse than either original pair.
+  The EQ notch moved percussion's *median* spectral centroid further than
+  intended, into territory nothing anticipated. A real, useful finding about
+  the fix mechanism's limits: a single narrow cut on a busy signal doesn't
+  reliably relocate its aggregate centroid to a predictable place.
+- Individual leaves' own-criteria scores barely moved (expected -- those
+  measure fit against the whole "drop" reference envelope, not the specific
+  sibling relationships the fix targeted).
+- **Explicitly not claimed**: whether the sidechain actually makes the kick
+  audibly punch through. `review_composition` has no masking-clarity model
+  (already flagged in its own docstring as future work) -- that's a listen,
+  not something these numbers can confirm either way.
+
+This is exactly the kind of result this session's whole approach is built to
+produce: every real check finds something real, nothing gets waved through.
+The new percussion↔bass overlap is itself now a legitimate input to another
+`propose_composition_fix()` call -- the mechanism is real and reusable, not a
+one-shot demo.
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. Run the escalation/retry loop for real on the noise leaf's total-silence failure
+2. Feed the new percussion↔bass overlap back through `propose_composition_fix()` --
+   a second real iteration of the same mechanism, and a genuine test of whether
+   the fold can converge (fix A creates problem B, fix B needs to not re-create A)
+   rather than oscillate.
+3. Run the escalation/retry loop for real on the noise leaf's total-silence failure
    -- a natural second real test of `src/planner/escalation.py`, on a more severe
-   case than the pulse leaf's -52 LUFS (this one is *undefined* LUFS). Likely
-   surfaces another root cause worth fixing at the source, same pattern as the
-   Pads-only catalog fix did.
-3. The "two criteria conflict" escalation trigger still has no real test case or
+   case than the pulse leaf's -52 LUFS (this one is *undefined* LUFS).
+4. The "two criteria conflict" escalation trigger still has no real test case or
    conflict-detection logic — needs a genuine observed case to design against, not
    a synthetic one, consistent with how every other check this session got built.
-4. Everything built this session (leaf_proof.py through drop_tree_review.py) is
+5. Everything built this session (leaf_proof.py through backbone_fix_review.py) is
    still a chain of individually-run proof scripts, not one autonomous pipeline
    that walks a whole song's tree, executes it, and folds review end to end
    without a human running each script in sequence by hand. That's the real
