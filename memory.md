@@ -834,24 +834,48 @@ code path exists in principle (any node with multiple simultaneous FAILed review
 detecting true directional conflict (fixing A would break B) is real, undone work —
 flagged, not silently assumed solved.
 
+## Emission-quality: override-name hallucination closed at the source (2026-07-26)
+User's order: emission quality first, then multi-level recursion. Closed the
+previous entry's #3 for real, not just documented as known.
+
+**Root cause was structural, not a model-quality problem**: the model was never
+given the actual valid Surge param names anywhere -- `TOOL_CATALOG`'s
+`apply_surge_preset` description just said "param_name" with no real list, so
+"Master Volume" and "Filter Cutoff" were reasonable-sounding guesses with nothing
+to check them against. `scripts/surge_param_map.json` (built earlier this session,
+the exact source `apply_overrides()` itself checks against) already has all 539
+real, resolved param names -- it was just never surfaced to the emission model.
+
+**`leaf_emit.py`'s `_valid_override_names()`** loads that same list and now
+injects it directly into the prompt (`valid_override_names`, verbatim, with an
+explicit "omit entirely if unsure" escape hatch) -- the model gets the ground
+truth instead of having to invent plausible-sounding names.
+
+**`_validate_ops()` now checks override names against that list too**, not just
+op-sequence shape -- catches a hallucinated name *before* a live REAPER call, not
+after a ~2-minute `apply_surge_preset` round-trip fails. `emit_leaf_implementation`
+gained a real retry loop around this (same pattern as `decompose.py`'s, `retries=2`
+default): a structurally-invalid plan gets specific feedback about exactly what was
+wrong and one more shot, not just an immediate raise.
+
+**Verified against the two actual names that failed live this session**, not
+synthetic ones: confirmed `"Master Volume"` and `"Filter Cutoff"` are both
+correctly absent from the 539-name valid set (and would now be rejected pre-flight
+by `_validate_ops`), while their real equivalents exist under exact, discoverable
+names (`"A Amp EG Release"`, `"A Filter 1 Cutoff"` / `"B Filter 1 Cutoff"` / etc.).
+Re-ran `leaf_emit.py`'s original intro-texture proof end-to-end afterward to
+confirm nothing broke -- same sensible pad choice as before.
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. `decompose()` only ever returns leaves directly (documented as a deliberate
-   scope-down, not a limitation of the code) — true multi-level recursion (calling
-   decompose again on a child whose own spec still looks too broad for one leaf)
-   hasn't been exercised yet, just structurally supported. User flagged this as
-   needed (alongside escalation, now done) for the record to stop reading as
-   "2018 AI vibe."
-3. Model-emission quality: overrides are still a real cost center (2 of 6
-   leaf-implementation calls invented a nonexistent Surge param name for an
-   override, both caught by `apply_surge_preset`'s fail-loud design, not
-   silently). A curated list of known-safe override names fed into the emission
-   prompt, or an automatic retry-without-overrides fallback in the executor
-   itself (rather than handled by hand each time, as it was both times this
-   session), would close this properly.
-4. The "two criteria conflict" escalation trigger has no real test case or
-   conflict-detection logic yet (see above) — needs a genuine case to design
-   against, not a synthetic one, consistent with how every other check in this
-   session got built against real observed failures rather than guessed ones.
+2. **Multi-level recursion** — user flagged this next, alongside emission quality
+   (now done) and escalation (done), as needed for the record to stop reading as
+   "2018 AI vibe." `decompose()` only ever returns leaves directly (a deliberate
+   scope-down, not a code limitation) — calling it again on a child whose own spec
+   still looks too broad for one leaf hasn't been exercised yet, just structurally
+   supported.
+3. The "two criteria conflict" escalation trigger still has no real test case or
+   conflict-detection logic — needs a genuine observed case to design against, not
+   a synthetic one, consistent with how every other check this session got built.

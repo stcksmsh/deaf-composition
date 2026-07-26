@@ -56,6 +56,7 @@ SURGE_FACTORY_DIR = Path("/usr/share/surge-xt/patches_factory")
 # inaudible, because nothing offered was ever going to have a fast enough
 # attack for that job. Plucks/Percussion/Basses etc. are real options now.
 EXCLUDED_CATEGORIES = {"Tutorials", "Templates"}
+SURGE_PARAM_MAP = Path(__file__).resolve().parent / "surge_param_map.json"
 
 TOOL_CATALOG = [
     {
@@ -64,10 +65,14 @@ TOOL_CATALOG = [
             "Apply a Surge XT factory .fxp preset to a Surge XT instance already "
             "present at (track_index, fx_index), then optionally override named "
             "params. preset_path is relative to Surge's factory patch library, "
-            "e.g. 'Pads/Distant.fxp'. overrides is {param_name: raw_native_value}; "
-            "ct_envtime params (Attack/Decay/Release/Delay/Hold) are log2(seconds) "
-            "-- 0.0=1s, -1.0=0.5s, 1.0=2s. ct_percent params (Sustain, Resonance, "
-            "Mix, ...) are plain 0-1."
+            "e.g. 'Pads/Distant.fxp'. overrides is {param_name: raw_native_value} -- "
+            "param_name MUST be copied verbatim from the valid_override_names list "
+            "given below; there is no other way to know a real param's exact name, "
+            "and a name that isn't in that list will fail. ct_envtime params "
+            "(names ending Attack/Decay/Release/Delay/Hold) are log2(seconds) -- "
+            "0.0=1s, -1.0=0.5s, 1.0=2s. ct_percent params (Sustain, Resonance, "
+            "Mix, ...) are plain 0-1. When in doubt, omit overrides entirely -- "
+            "the preset's own defaults are always valid."
         ),
         "input_schema": {
             "type": "object",
@@ -171,11 +176,26 @@ def _factory_preset_names() -> list[str]:
     return names
 
 
-def emit_leaf_implementation(node: Node, client: anthropic.Anthropic,
-                              feedback: str | None = None) -> dict:
-    preset_names = _factory_preset_names()
+def _valid_override_names() -> set[str]:
+    """The exact same source of truth apply_overrides() itself checks
+    against (surge_param_map.json's resolved param names) -- giving the
+    model this list up front, and validating against it before ever
+    calling REAPER, closes the gap that let it invent "Master Volume" and
+    "Filter Cutoff" twice this session: apply_surge_preset correctly
+    raised both times, but only after a live ~2-minute preset-apply call
+    had already run. Catching it here is instant and doesn't burn a real
+    REAPER round-trip on a name that was never going to work."""
+    param_map = json.loads(SURGE_PARAM_MAP.read_text())
+    return {e["name"] for e in param_map if e.get("resolved")}
 
-    prompt = f"""You are planning the implementation of one leaf node in a \
+
+def emit_leaf_implementation(node: Node, client: anthropic.Anthropic,
+                              feedback: str | None = None, retries: int = 2) -> dict:
+    preset_names = _factory_preset_names()
+    valid_overrides = _valid_override_names()
+
+    def build_prompt(extra_feedback: str | None) -> str:
+        return f"""You are planning the implementation of one leaf node in a \
 recursive music-composition tree. A leaf is translation, not composition: \
 you are given a fully-specified creative decision and must express it as a \
 bounded set of deterministic tool calls -- nothing here is left to your \
@@ -192,32 +212,50 @@ exactly one of these, "<Category>/<name>.fxp" -- pick whichever category \
 actually fits the part: a rhythmic/percussive part needs a fast attack \
 (Plucks, Percussion), a sustained texture needs a slow one (Pads), etc.):
 {json.dumps(preset_names, indent=2)}
-{f"{chr(10)}{feedback}{chr(10)}" if feedback else ""}
+
+valid_override_names (apply_surge_preset's overrides keys MUST come from \
+this exact list verbatim, or be omitted entirely -- no other name will work):
+{json.dumps(sorted(valid_overrides), indent=2)}
+{f"{chr(10)}{extra_feedback}{chr(10)}" if extra_feedback else ""}
 Emit the tool calls needed to realize this leaf, in the exact order they \
 must execute: one apply_surge_preset call, one create_midi_item call, then \
 one add_midi_notes_batch call (item_index=0). Call each tool exactly once, \
 in that order, in this single turn."""
 
-    response = client.messages.create(
-        model=MODEL,
-        max_tokens=2048,
-        tools=TOOL_CATALOG,
-        tool_choice={"type": "any"},
-        messages=[{"role": "user", "content": prompt}],
+    last_error: Exception | None = None
+    running_feedback = feedback
+    for attempt in range(retries + 1):
+        response = client.messages.create(
+            model=MODEL,
+            max_tokens=2048,
+            tools=TOOL_CATALOG,
+            tool_choice={"type": "any"},
+            messages=[{"role": "user", "content": build_prompt(running_feedback)}],
+        )
+        ops = [{"tool": block.name, "args": block.input}
+               for block in response.content if block.type == "tool_use"]
+        try:
+            _validate_ops(ops, valid_overrides)
+            return {"ops": ops, "source": f"model-emitted ({MODEL})"}
+        except ValueError as e:
+            last_error = e
+            running_feedback = (
+                f"{feedback + ' ' if feedback else ''}Your previous attempt was "
+                f"structurally invalid: {e}. Fix this specific problem."
+            )
+    raise RuntimeError(
+        f"emit_leaf_implementation produced an invalid plan {retries + 1} times "
+        f"in a row: {last_error}"
     )
 
-    ops = [{"tool": block.name, "args": block.input}
-           for block in response.content if block.type == "tool_use"]
 
-    _validate_ops(ops)
-    return {"ops": ops, "source": f"model-emitted ({MODEL})"}
-
-
-def _validate_ops(ops: list[dict]) -> None:
+def _validate_ops(ops: list[dict], valid_overrides: set[str] | None = None) -> None:
     """Fail loudly on a malformed plan rather than silently patching it --
     per Leaf's own definition, a leaf has no remaining creative sub-decision,
     so there's nothing legitimate to improvise here if the model got the
-    mechanical shape wrong."""
+    mechanical shape wrong. Checking override names here (not just at
+    apply_surge_preset's own call time) catches a hallucinated name before
+    it costs a real ~2-minute REAPER round-trip, not just eventually."""
     names = [op["tool"] for op in ops]
     expected = ["apply_surge_preset", "create_midi_item", "add_midi_notes_batch"]
     if names != expected:
@@ -227,6 +265,14 @@ def _validate_ops(ops: list[dict]) -> None:
             f"add_midi_notes_batch must use item_index=0 (the placeholder for "
             f"this leaf's one MIDI item), got {ops[2]['args'].get('item_index')!r}"
         )
+    if valid_overrides is not None:
+        overrides = ops[0]["args"].get("overrides") or {}
+        invalid = set(overrides) - valid_overrides
+        if invalid:
+            raise ValueError(
+                f"apply_surge_preset overrides used unknown param name(s) "
+                f"{sorted(invalid)} -- not in valid_override_names"
+            )
 
 
 def main() -> int:
