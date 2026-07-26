@@ -114,7 +114,17 @@ def review_composition(sibling_states: dict[str, dict],
                  for node_id, s in sibling_states.items()}
     reasons = []
 
-    for (a_id, a_lufs), (b_id, b_lufs) in itertools.combinations(lufs.items(), 2):
+    # A sibling with undefined LUFS (pyloudnorm's own signal for "too short
+    # or essentially silent," per analyze.py) is already a worse problem than
+    # a loudness *gap* -- flag it directly instead of crashing on `abs(x -
+    # None)` or silently excluding it from the balance check as if it were
+    # fine.
+    silent_siblings = [node_id for node_id, v in lufs.items() if v is None]
+    for node_id in silent_siblings:
+        reasons.append(f"{node_id} has undefined LUFS (essentially silent output)")
+
+    voiced_lufs = {k: v for k, v in lufs.items() if v is not None}
+    for (a_id, a_lufs), (b_id, b_lufs) in itertools.combinations(voiced_lufs.items(), 2):
         gap = abs(a_lufs - b_lufs)
         if gap > LOUDNESS_BALANCE_THRESHOLD_DB:
             reasons.append(
@@ -122,9 +132,8 @@ def review_composition(sibling_states: dict[str, dict],
                 f"{gap:.1f} dB apart -- risk of one burying the other"
             )
 
-    for (a_id, a_c), (b_id, b_c) in itertools.combinations(centroids.items(), 2):
-        if a_c <= 0 or b_c <= 0:
-            continue
+    voiced_centroids = {k: v for k, v in centroids.items() if v is not None and v > 0}
+    for (a_id, a_c), (b_id, b_c) in itertools.combinations(voiced_centroids.items(), 2):
         ratio = max(a_c, b_c) / min(a_c, b_c)
         if ratio < SPECTRAL_OVERLAP_RATIO_THRESHOLD:
             reasons.append(
@@ -133,10 +142,12 @@ def review_composition(sibling_states: dict[str, dict],
                 f"competing for the same register"
             )
 
-    if combined_state is not None and lufs:
+    if combined_state is not None and voiced_lufs:
         combined_lufs = combined_state["measured"]["lufs"]
-        loudest_id, loudest_lufs = max(lufs.items(), key=lambda kv: kv[1])
-        if combined_lufs < loudest_lufs - COMBINED_QUIETER_THAN_LOUDEST_DB:
+        loudest_id, loudest_lufs = max(voiced_lufs.items(), key=lambda kv: kv[1])
+        if combined_lufs is None:
+            reasons.append("combined mix has undefined LUFS (essentially silent output)")
+        elif combined_lufs < loudest_lufs - COMBINED_QUIETER_THAN_LOUDEST_DB:
             reasons.append(
                 f"combined mix ({combined_lufs:.1f} LUFS) is quieter than its "
                 f"loudest solo layer {loudest_id} ({loudest_lufs:.1f} LUFS) by "

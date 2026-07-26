@@ -866,16 +866,97 @@ names (`"A Amp EG Release"`, `"A Filter 1 Cutoff"` / `"B Filter 1 Cutoff"` / etc
 Re-ran `leaf_emit.py`'s original intro-texture proof end-to-end afterward to
 confirm nothing broke -- same sensible pad choice as before.
 
+## Multi-level recursion, run for real, 2 levels deep, folded review at both (2026-07-26)
+Closed the previous entry's #2 -- the last of the three items (escalation, emission
+quality, multi-level recursion) the user named as needed together to stop
+`song_so_far.wav` reading as "2018 AI vibe."
+
+**Root cause of why nothing ever recursed before**: `decompose()`'s own prompt
+*forced* every child to be leaf-sized ("concrete enough to hand to a translation-
+only model with no remaining creative sub-decision") -- there was never a child
+marked as still-composite to recurse into, by construction. Fixed at the source:
+`DECOMPOSE_TOOL`'s schema now requires a real `is_leaf` boolean per child (plan
+§3.1's own base-case predicate, asked of the model honestly), and the prompt
+explicitly permits and explains composite children instead of assuming everything
+must resolve in one pass.
+
+**`src/planner/scheduler.py`'s `build_tree()`** is the first real recursive
+implementation: leaf children get emitted (Haiku) and assigned a track immediately;
+`is_leaf=false` children recurse into another real `decompose()` call (Sonnet), up
+to a real `max_depth` cap (`MaxDepthExceeded` on overflow) -- plan §6's own
+"every run needs max_depth... or nodes spin and credits evaporate" requirement,
+never actually enforced anywhere before this. Track allocation threads a shared
+counter through the recursion so every leaf anywhere in the tree gets a distinct
+track regardless of depth. `build_section()` (the original single-level entry
+point) kept as a thin `max_depth=1` wrapper for `build_section_proof.py`'s backward
+compatibility.
+
+**Real run** (`scripts/build_tree_proof.py`, targeting "drop" -- the album's most
+energy-dense section, deliberately not a rerun of intro/build's already-simple
+splits): root split into 4 children, **one honestly marked composite** --
+"Rhythmic backbone... kick, percussion, and bass working together as one
+interlocking groove engine" -- which recursed into 3 further leaves (kick,
+percussion, bass), while the other 3 (lead/hook, harmonic bed, noise/impact) were
+correctly judged leaf-sized directly. 6 leaves total across 2 depth levels, no
+overrides attempted this run (model played it safe per the new prompt guidance),
+every preset genuinely category-appropriate (`Basses/Attacky.fxp` for the
+interlocking bass, `Percussion/Kick 909ish.fxp` for the kick) -- the emission-
+quality fix's broadened catalog paying off immediately.
+
+**Executed live, all 6 leaves** (tracks 6-11, presets applied sequentially, MIDI
+content added, moved to timeline position 32s -- right after the build section
+ends, same seam-adjacency convention as intro→build). Hit 3 transient
+`SetParam` timeouts on the last preset apply (`FX/Crackling.fxp`) -- checked
+REAPER's health directly (432MB RSS, 13.7% CPU, empty bridge dir, nothing
+alarming) before concluding it was ordinary flakiness rather than the
+already-fixed collision bug recurring; a 4th retry succeeded clean.
+
+**Real two-level fold review** (`scripts/drop_tree_review.py`, using
+`review_leaf`/`review_composition` unmodified in logic, just called at both
+levels): all 6 leaves failed their own criteria individually (same established
+loudness-scale pattern). The composition checks are where this run earned its
+keep:
+- **Backbone (kick+percussion+bass) composition FAILED for real, useful
+  reasons**: a 12.6dB LUFS gap between kick and percussion, *and* two spectral-
+  overlap flags (kick-vs-percussion centroids at 230Hz/159Hz, ratio 1.45;
+  percussion-vs-bass at 159Hz/115Hz, ratio 1.38) -- exactly the failure mode a
+  rhythm section review should catch: three parts meant to interlock are instead
+  all crowding the same low-mid register.
+- **Root (whole drop) composition FAILED**, dominated by one clear cause: the
+  noise leaf (`FX/Crackling.fxp`) rendered at **undefined LUFS, essentially total
+  silence** (sample_peak -63.3dB) -- an FX-category preset driven by MIDI
+  note-on events the way an instrument patch would be, which it apparently isn't
+  built to respond to. A worse failure than the pulse leaf's earlier -52 LUFS
+  near-silence, and a natural candidate for the same escalation/retry loop
+  already proven to work -- not re-run here to keep this item's scope to the
+  recursion mechanism itself, flagged for whoever picks it up next.
+
+**Found and fixed a real crash while running this**: `review_composition` didn't
+handle a sibling with `LUFS: null` (pyloudnorm's own "signal too short or silent"
+case, exactly what the noise leaf hit) -- `abs(x - None)` blew up. Fixed by
+flagging an undefined-LUFS sibling directly as its own reason (a worse problem
+than a loudness *gap*, not something to silently exclude from the balance check)
+and guarding the centroid/combined-mix paths the same way. This is the kind of
+edge case that was always latent in the code but only a genuinely-failing real
+leaf could have surfaced -- consistent with how every other fix this session got
+found.
+
+Re-rendered `song_so_far.wav` at its new full length (0-48s: intro, build, drop).
+
 ## Next
 1. Decide: take on the full Vital param-mapping build (comparable scope to the whole
    Surge effort, no dependencies on anything else — can wait indefinitely), or keep
    pushing stage 4 (Pigments' macro fallback is the remaining low-priority item).
-2. **Multi-level recursion** — user flagged this next, alongside emission quality
-   (now done) and escalation (done), as needed for the record to stop reading as
-   "2018 AI vibe." `decompose()` only ever returns leaves directly (a deliberate
-   scope-down, not a code limitation) — calling it again on a child whose own spec
-   still looks too broad for one leaf hasn't been exercised yet, just structurally
-   supported.
+2. Run the escalation/retry loop for real on the noise leaf's total-silence failure
+   -- a natural second real test of `src/planner/escalation.py`, on a more severe
+   case than the pulse leaf's -52 LUFS (this one is *undefined* LUFS). Likely
+   surfaces another root cause worth fixing at the source, same pattern as the
+   Pads-only catalog fix did.
 3. The "two criteria conflict" escalation trigger still has no real test case or
    conflict-detection logic — needs a genuine observed case to design against, not
    a synthetic one, consistent with how every other check this session got built.
+4. Everything built this session (leaf_proof.py through drop_tree_review.py) is
+   still a chain of individually-run proof scripts, not one autonomous pipeline
+   that walks a whole song's tree, executes it, and folds review end to end
+   without a human running each script in sequence by hand. That's the real
+   remaining integration work.

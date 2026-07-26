@@ -8,13 +8,15 @@ each one's job is), not translation -- so it's routed at Sonnet tier
 (plan §6: "mid-tree decomposition"), a step up from Haiku's leaf-level DSL
 emission in leaf_emit.py.
 
-Scoped down for this first real run, documented not hidden: always
-returns leaves directly (no further nested splitting) -- proving
-decompose produces a sane split at all is the goal here, not an
-arbitrary-depth tree yet. Nothing about this function is depth-limited
-by construction, though -- calling it again on a child whose own spec
-still looks too broad for one leaf is the natural way to go deeper; that
-recursive call just hasn't been exercised yet.
+Each returned child now carries a real `is_leaf` verdict (plan §3.1's own
+base-case predicate, asked of the model directly rather than assumed):
+"a node is a leaf when it is expressible as a bounded set of deterministic
+DSL commands... with no remaining creative sub-decision." A child marked
+`is_leaf=False` still needs another decompose() call before it can be
+emitted -- src/planner/scheduler.py's build_tree() is what actually
+recurses on that, this function just answers the question honestly per
+child instead of forcing every child to be leaf-sized (the first version
+of this prompt did exactly that, which is why nothing ever recursed).
 """
 from __future__ import annotations
 
@@ -27,8 +29,10 @@ MODEL = "claude-sonnet-5"  # mid-tree decomposition, plan §6
 DECOMPOSE_TOOL = {
     "name": "decompose",
     "description": (
-        "Split this node into 2-4 independent leaf children, each its own "
-        "Surge XT layer within the same section."
+        "Split this node into 2-4 independent children within the same "
+        "section. Each child may itself be leaf-sized (one Surge XT layer, "
+        "ready for direct implementation) or still composite (needs further "
+        "decomposition before it's leaf-sized) -- judge each one honestly."
     ),
     "input_schema": {
         "type": "object",
@@ -47,13 +51,30 @@ DECOMPOSE_TOOL = {
                         "spec": {
                             "type": "string",
                             "description": (
-                                "What to build -- specific enough that a "
-                                "leaf-implementation model could act on it "
-                                "with no further creative decision left."
+                                "What to build. If is_leaf is true, specific "
+                                "enough that a translation-only model could "
+                                "act on it with no further creative decision "
+                                "left. If is_leaf is false, this is still a "
+                                "composite job description -- it gets "
+                                "decomposed again, not implemented directly."
+                            ),
+                        },
+                        "is_leaf": {
+                            "type": "boolean",
+                            "description": (
+                                "true: expressible as ONE deterministic Surge "
+                                "XT layer (one preset, one note pattern) with "
+                                "no remaining creative sub-decision -- ready "
+                                "for direct implementation. false: this child "
+                                "is still a composite decision -- e.g. "
+                                "multiple interacting instruments/parts, or a "
+                                "role broad enough it hides more than one "
+                                "sound-design choice -- and needs its own "
+                                "further split before anything can be built."
                             ),
                         },
                     },
-                    "required": ["own_purpose", "spec"],
+                    "required": ["own_purpose", "spec", "is_leaf"],
                 },
             },
         },
@@ -89,6 +110,8 @@ def _validate(children) -> list[dict]:
     for c in children:
         if not isinstance(c, dict) or "own_purpose" not in c or "spec" not in c:
             raise TypeError(f"malformed child: {c!r}")
+        if "is_leaf" not in c or not isinstance(c["is_leaf"], bool):
+            raise TypeError(f"child missing a real boolean is_leaf verdict: {c!r}")
     return children
 
 
@@ -110,14 +133,19 @@ spec: {node.spec}
 ancestor context (coarsest to finest): {scope_summary}
 duration: {duration_s} seconds, 120bpm, 4/4
 
-Every child will be realized on its own Surge XT instance -- you are \
-deciding how many independent layers this section needs and what each \
-one's job is, not the notes or preset (that's the next, translation-only \
-step, done separately per child). Each child's spec should be concrete \
-enough to hand to a translation-only model with no remaining creative \
-sub-decision -- but you're not naming a specific preset or note pattern \
-yourself, just describing the layer's role clearly enough that someone \
-else could."""
+You are deciding how many independent parts this section needs and what \
+each one's job is -- not the notes or preset for any of them (that's a \
+separate, later, translation-only step). For each child, judge honestly \
+whether it's already leaf-sized: a leaf is expressible as ONE Surge XT \
+layer -- one preset, one note pattern -- with no remaining creative \
+sub-decision. If a child's job still hides more than one sound-design \
+choice (e.g. "the rhythm section" covering both a percussive part AND a \
+bassline that need to interlock, or a role broad enough that "which \
+single preset" isn't yet a well-posed question), mark it is_leaf=false -- \
+it will be decomposed again before anything is built. Don't force \
+everything to be leaf-sized just to finish in one step; a genuinely \
+composite child marked as a leaf by mistake can't be fixed later, only a \
+worse translation can be attempted on it."""
 
     last_error: Exception | None = None
     for attempt in range(retries + 1):
