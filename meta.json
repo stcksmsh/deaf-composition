@@ -1,0 +1,11 @@
+{
+  "slug": "deaf-composition",
+  "title": "Deaf Composition",
+  "tagline": "An AI-directed album with full creative control but zero access to the audio — steered entirely by measurement.",
+  "status": "active",
+  "stack": ["Python", "REAPER", "CLAP embeddings"],
+  "repo": "https://github.com/stcksmsh/deaf-composition",
+  "accent": [0.6, 0.2, 280],
+  "featured": true,
+  "order": 1
+}
