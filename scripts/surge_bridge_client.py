@@ -31,7 +31,22 @@ BRIDGE_DIR = Path(os.environ.get(
 _counter = itertools.cycle(range(1200, 2000))
 
 
-def call(func, args, timeout=10.0):
+def call(func, args, timeout=10.0, retries=2):
+    """retries=2: this call has hit real, occasional bridge-side timeouts
+    across independent sessions (not concurrency -- reproduced fully
+    sequential too), most often on TrackFX_FormatParamValueNormalized during
+    enum-size probing. A single transient miss shouldn't kill a whole
+    section's build; retry the same request id fresh before giving up."""
+    last_error = None
+    for attempt in range(retries + 1):
+        try:
+            return _call_once(func, args, timeout)
+        except TimeoutError as e:
+            last_error = e
+    raise last_error
+
+
+def _call_once(func, args, timeout):
     req_id = next(_counter)
     req_path = BRIDGE_DIR / f"request_{req_id}.json"
     resp_path = BRIDGE_DIR / f"response_{req_id}.json"

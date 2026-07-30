@@ -2,7 +2,7 @@
   "mcpServers": {
     "reaper": {
       "command": "uvx",
-      "args": ["twelvetake-reaper-mcp"],
+      "args": ["--with", "mcp<2.0.0", "twelvetake-reaper-mcp"],
       "env": {
         "REAPER_BRIDGE_DIR": "${HOME}/.config/REAPER/Scripts/mcp_bridge_data"
       }

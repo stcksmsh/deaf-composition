@@ -13,6 +13,19 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
 
+# A leaf's intended mixing prominence (2026-07-29, real user finding: three
+# separate "quiet/buried" complaints across three different sections all
+# traced to the same root cause -- every leaf's track fader sat at flat 0dB
+# regardless of how loud its preset renders natively, so raw preset-loudness
+# spread governed the mix instead of musical intent). Deliberately NOT "make
+# everything equally loud" -- a background texture is SUPPOSED to sit
+# quieter than a lead; the point is that decompose.py's own role assignment
+# (foreground lead vs. midground harmonic support vs. background texture)
+# should be what determines relative level, not an accident of which Surge
+# preset happened to render hot. src/planner/gain_stage.py is what actually
+# acts on this value.
+PROMINENCE_LEVELS = ("foreground", "midground", "background")
+
 
 class ModelTier(str, Enum):
     """Routed by tree depth (plan §6) -- sparse/expensive at the root, cheap
@@ -34,12 +47,23 @@ class ReviewState:
     """plan §3.6: three checks per review -- meets own acceptance criteria,
     composes with siblings, seams hold with local neighbors. A failed review
     always carries why, so a re-split/patch/escalate decision has something
-    to act on."""
+    to act on.
+
+    `metrics` carries the real numbers a check's own `reasons` strings are
+    derived from (e.g. worst LUFS gap in dB, whether any sibling had
+    undefined LUFS) -- added after orchestrate.py's `choose_fix_strategy`
+    was found (2026-07-26) to rely on raw `len(reasons)` alone, which twice
+    missed a real severity change across rounds that didn't happen to
+    change the reason count. Optional/empty by default so old call sites
+    and replayed historical data (which never populated it) keep working;
+    a consumer that wants real magnitude comparisons should read this
+    instead of re-parsing `reasons` text."""
     status: ReviewStatus = ReviewStatus.PENDING
     reasons: tuple[str, ...] = ()
     own_criteria_met: bool | None = None
     composes_with_siblings: bool | None = None
     seams_hold: bool | None = None
+    metrics: dict = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if self.status == ReviewStatus.FAILED and not self.reasons:
@@ -149,6 +173,37 @@ class Node:
     assigned_model: ModelTier = ModelTier.HAIKU
     snapshot_ref: str | None = None    # plan §7.3: pointer to this node's versioned project state
     created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    # Arc-planning (plan §6 root tier, src/planner/arc.py): a section's own
+    # length and whether it's deliberately exempt from the ~40s soft cell
+    # cap. Optional/default-safe for the same reason as ReviewState.metrics
+    # above -- old call sites (scheduler.py, every proof script) never pass
+    # these and must keep compiling unmodified.
+    duration_s: float | None = None
+    locked_grid: bool = False
+    grid_justification: str = ""
+    # A section's position on the song timeline, in seconds -- same
+    # optional-default reasoning as duration_s above. Set by whatever
+    # assembles a full arc from multiple sections (scripts/song_plan.py);
+    # a lone section built in isolation (every prior proof script) has no
+    # timeline to place itself on, so this stays None for it.
+    timeline_start_s: float | None = None
+    # Mixing-role intent (see PROMINENCE_LEVELS above), set by decompose.py
+    # per child based on musical role. Defaults to "midground" -- the safe
+    # middle when a node predates this field (old snapshots/proof scripts)
+    # or genuinely doesn't need a strong opinion either way.
+    prominence: str = "midground"
+
+    def __post_init__(self) -> None:
+        if self.locked_grid and not self.grid_justification.strip():
+            raise ValueError(
+                f"{self.node_id}: locked_grid=True requires a non-empty "
+                f"grid_justification (a real declared reason, not a silent escape hatch)"
+            )
+        if self.prominence not in PROMINENCE_LEVELS:
+            raise ValueError(
+                f"{self.node_id}: prominence must be one of {PROMINENCE_LEVELS}, "
+                f"got {self.prominence!r}"
+            )
 
     @property
     def is_leaf(self) -> bool:
@@ -173,10 +228,16 @@ class Node:
                 "own_criteria_met": self.review_state.own_criteria_met,
                 "composes_with_siblings": self.review_state.composes_with_siblings,
                 "seams_hold": self.review_state.seams_hold,
+                "metrics": dict(self.review_state.metrics),
             },
             "assigned_model": self.assigned_model.value,
             "snapshot_ref": self.snapshot_ref,
             "created_at": self.created_at,
+            "duration_s": self.duration_s,
+            "locked_grid": self.locked_grid,
+            "grid_justification": self.grid_justification,
+            "timeline_start_s": self.timeline_start_s,
+            "prominence": self.prominence,
         }
 
     @classmethod
@@ -196,8 +257,14 @@ class Node:
                 own_criteria_met=rs["own_criteria_met"],
                 composes_with_siblings=rs["composes_with_siblings"],
                 seams_hold=rs["seams_hold"],
+                metrics=rs.get("metrics", {}),
             ),
             assigned_model=ModelTier(data["assigned_model"]),
             snapshot_ref=data["snapshot_ref"],
             created_at=data["created_at"],
+            duration_s=data.get("duration_s"),
+            locked_grid=data.get("locked_grid", False),
+            grid_justification=data.get("grid_justification", ""),
+            timeline_start_s=data.get("timeline_start_s"),
+            prominence=data.get("prominence", "midground"),
         )

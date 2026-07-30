@@ -2145,11 +2145,29 @@ local function process_request()
                         -- Primary convention (what the server sends):
                         --   (track_index, envelope_name, time, value, shape, tension, selected, noSort)
                         -- Legacy convention kept for compatibility: (envelope_userdata, time, value, ...)
+                        --
+                        -- IMPORTANT: "value" here is the REAL/display value (e.g. 1.0 = unity
+                        -- gain for a Volume envelope, matching every caller's and every MCP
+                        -- tool docstring's stated contract) -- NOT REAPER's raw internal point
+                        -- storage. For envelopes with a non-identity scaling mode (found live:
+                        -- this project's Volume envelopes are GetEnvelopeScalingMode()==1, a
+                        -- cubic-ish fader curve), passing a real value straight into
+                        -- reaper.InsertEnvelopePoint silently produces near-total silence for
+                        -- ordinary gain values (1.0 -> ~0) instead of erroring -- found by
+                        -- comparing a rendered solo track (hard 0.0 peak) against the raw .rpp
+                        -- envelope chunk, which showed the stored point value truncating to 0
+                        -- even though InsertEnvelopePoint's own diagnostic echo confirmed 1.0
+                        -- was received correctly -- i.e. REAPER's own API was silently eating
+                        -- it, not a transport bug. reaper.ScaleToEnvelopeMode(mode, value) is
+                        -- REAPER's own documented conversion for this; always applying it here
+                        -- is safe even for identity-mode (0) envelopes, where it's a no-op.
                         if type(args[1]) == "number" and type(args[2]) == "string" then
                             local env, err = resolve_envelope(args[1], args[2])
                             if env then
+                                local mode = reaper.GetEnvelopeScalingMode(env)
+                                local scaled_value = reaper.ScaleToEnvelopeMode(mode, args[4])
                                 local result = reaper.InsertEnvelopePoint(
-                                    env, args[3], args[4], args[5] or 0, args[6] or 0,
+                                    env, args[3], scaled_value, args[5] or 0, args[6] or 0,
                                     args[7] and true or false, false)
                                 reaper.Envelope_SortPoints(env)
                                 reaper.UpdateArrange()
@@ -2161,8 +2179,10 @@ local function process_request()
                                 response.ok = false
                             end
                         elseif type(args[1]) == "userdata" and #args >= 7 then
+                            local mode = reaper.GetEnvelopeScalingMode(args[1])
+                            local scaled_value = reaper.ScaleToEnvelopeMode(mode, args[3])
                             local result = reaper.InsertEnvelopePoint(
-                                args[1], args[2], args[3], args[4], args[5], args[6], args[7])
+                                args[1], args[2], scaled_value, args[4], args[5], args[6], args[7])
                             response.ok = result
                             response.ret = result
                         else
@@ -2511,9 +2531,21 @@ local function process_request()
                     
                     elseif fname == "GetTrackMediaItem" then
                         if #args >= 2 then
-                            local item = reaper.GetTrackMediaItem(args[1], args[2])
-                            response.ok = true
-                            response.ret = item
+                            local track_index = args[1]
+                            local track
+                            if track_index == -1 then
+                                track = reaper.GetMasterTrack(0)
+                            else
+                                track = reaper.GetTrack(0, track_index)
+                            end
+                            if not track then
+                                response.error = "Track not found at index " .. tostring(track_index)
+                                response.ok = false
+                            else
+                                local item = reaper.GetTrackMediaItem(track, args[2])
+                                response.ok = true
+                                response.ret = item
+                            end
                         else
                             response.error = "GetTrackMediaItem requires 2 arguments"
                         end
@@ -5672,6 +5704,28 @@ local function process_request()
                             .. "Save manually via the FX window's preset menu (+ button), or use "
                             .. "get_track_fx_chunk to capture the current FX state instead."
 
+                    elseif fname == "GetEnvelopeStateChunkRaw" then
+                        -- Diagnostic-only: args (track_index, envelope_name) -> raw chunk text.
+                        if #args >= 2 then
+                            local env, err = resolve_envelope(args[1], args[2])
+                            if env then
+                                local ok2, chunk = reaper.GetEnvelopeStateChunk(env, "", false)
+                                if ok2 then
+                                    response.chunk = chunk
+                                    response.ok = true
+                                else
+                                    response.error = "GetEnvelopeStateChunk failed"
+                                    response.ok = false
+                                end
+                            else
+                                response.error = err
+                                response.ok = false
+                            end
+                        else
+                            response.error = "GetEnvelopeStateChunkRaw requires 2 arguments (track, envelope_name)"
+                            response.ok = false
+                        end
+
                     elseif fname == "CountEnvelopePoints" then
                         -- args: track, envelope_name
                         if #args >= 2 then
@@ -5690,17 +5744,22 @@ local function process_request()
 
                     elseif fname == "GetEnvelopePoints" then
                         -- args: track, envelope_name
+                        -- Returned "value" is descaled back to the real/display value via
+                        -- ScaleFromEnvelopeMode, the inverse of InsertEnvelopePoint's scaling
+                        -- above -- keeps get/insert round-trips in the same units.
                         if #args >= 2 then
                             local env, err = resolve_envelope(args[1], args[2])
                             if env then
                                 local points = as_array({})
                                 local count = reaper.CountEnvelopePoints(env)
+                                local mode = reaper.GetEnvelopeScalingMode(env)
                                 for p = 0, count - 1 do
                                     local ok2, time, value, shape, tension, selected =
                                         reaper.GetEnvelopePoint(env, p)
                                     if ok2 then
                                         points[#points + 1] = {
-                                            index = p, time = time, value = value,
+                                            index = p, time = time,
+                                            value = reaper.ScaleFromEnvelopeMode(mode, value),
                                             shape = shape, tension = tension, selected = selected
                                         }
                                     end

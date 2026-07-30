@@ -67,7 +67,7 @@ def main() -> int:
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     root = build_root()
 
-    leaves, all_nodes = build_tree(
+    leaves, all_nodes, _ = build_tree(
         root, decompose_client=client, emit_client=client,
         target_section_type="drop", duration_s=DURATION_S,
         track_counter=TRACK_START_INDEX, max_depth=MAX_DEPTH,
